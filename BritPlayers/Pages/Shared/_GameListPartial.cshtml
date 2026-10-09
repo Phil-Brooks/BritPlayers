@@ -37,12 +37,10 @@ else
                         </td>
                         <td><code>@game.Eco</code></td>
                         <td>
-                            <!-- In Step 5, this button will load the game into the board -->
                             <button class="btn btn-sm btn-outline-primary"
-                                    hx-get="/?handler=GameViewer&gameId=@game.Id"
+                                    hx-get="/Games?handler=GameViewer&gameId=@game.Id"
                                     hx-target="#game-viewer-panel"
-                                    hx-swap="innerHTML"
-                                    data-game-id="@game.Id">
+                                    hx-swap="innerHTML">
                                 Load &amp; Play
                             </button>
                         </td>

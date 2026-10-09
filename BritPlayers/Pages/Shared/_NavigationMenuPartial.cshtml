@@ -1,8 +1,10 @@
 @{
+    var currentPath = Context.Request.Path.Value ?? "/";
+    var isGamesPage = currentPath.StartsWith("/Games", StringComparison.OrdinalIgnoreCase);
     var currentPlayer = Context.Request.Query["player"].ToString();
-    if (string.IsNullOrEmpty(currentPlayer))
+    if (isGamesPage && string.IsNullOrEmpty(currentPlayer))
     {
-        currentPlayer = "murray-chandler"; // Default selected player
+        currentPlayer = "murray-chandler";
     }
 
     var players = new (string Name, string Slug)[]
@@ -15,40 +17,45 @@
     };
 }
 
-<!-- Main -->
+<!-- Overview -->
 <div class="nav-section-title">Overview</div>
-<nav class="nav flex-column">
-    <a class="nav-link" href="/" data-bs-dismiss="offcanvas">
+<nav class="nav flex-column mb-3">
+    <a class="nav-link @(currentPath == "/" || currentPath.Equals("/Index", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
+       href="/">
         <i class="bi bi-house"></i> Home
     </a>
 </nav>
 
-<!-- Players -->
+<!-- Players (navigates to /Games?player=...) -->
 <div class="nav-section-title">Players</div>
-<nav class="nav flex-column">
+<nav class="nav flex-column mb-3">
     @foreach (var player in players)
     {
-        var isActive = string.Equals(currentPlayer, player.Slug, StringComparison.OrdinalIgnoreCase);
+        var isActive = isGamesPage && string.Equals(currentPlayer, player.Slug, StringComparison.OrdinalIgnoreCase);
         <a class="nav-link @(isActive ? "active fw-semibold" : "")"
-           href="/?player=@player.Slug">
+           href="/Games?player=@player.Slug">
             <i class="bi bi-person"></i> @player.Name
         </a>
     }
 </nav>
 
-<!-- Other -->
+<!-- Other Static Pages -->
 <div class="nav-section-title">Other</div>
 <nav class="nav flex-column">
-    <a class="nav-link" href="/Index" data-bs-dismiss="offcanvas">
+    <a class="nav-link @(currentPath.Equals("/Links", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
+       href="/Links">
         <i class="bi bi-link-45deg"></i> Links
     </a>
-    <a class="nav-link" href="/Index" data-bs-dismiss="offcanvas">
+    <a class="nav-link @(currentPath.Equals("/Corrections", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
+       href="/Corrections">
         <i class="bi bi-pencil-square"></i> Corrections
     </a>
-    <a class="nav-link" href="/Index" data-bs-dismiss="offcanvas">
+    <a class="nav-link @(currentPath.Equals("/Faq", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
+       href="/Faq">
         <i class="bi bi-question-circle"></i> FAQ
     </a>
-    <a class="nav-link" href="/Index" data-bs-dismiss="offcanvas">
+    <a class="nav-link @(currentPath.Equals("/Contact", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
+       href="/Contact">
         <i class="bi bi-envelope"></i> Contact
     </a>
 </nav>

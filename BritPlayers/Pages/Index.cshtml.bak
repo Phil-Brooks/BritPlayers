@@ -80,23 +80,4 @@
             </div>
         </div>
     </div>
-
-    <!-- Game Replay Area (Target for Step 5) -->
-    <div id="game-viewer-panel" class="mb-4">
-        <!-- Replay board will appear here when a game is loaded -->
-    </div>
-
-    <!-- Game List Container (Updated via HTMX) -->
-    <div class="card shadow-sm">
-        <div class="card-header bg-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Games</h5>
-            <!-- HTMX loading spinner indicator -->
-            <div id="loading-spinner" class="htmx-indicator spinner-border spinner-border-sm text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        <div class="card-body p-0" id="game-list-container">
-            <partial name="_GameListPartial" model="Model.Games" />
-        </div>
-    </div>
 </div>

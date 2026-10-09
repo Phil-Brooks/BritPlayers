@@ -1,52 +1,160 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BritPlayers</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] - BritBase</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BritPlayers.styles.css" asp-append-version="true" />
+    @Html.AntiForgeryToken()
+    <style>
+            body {
+                background-color: #f8f9fa;
+            }
+
+            .sidebar {
+                width: 270px;
+                min-height: 100vh;
+                background: #212529;
+                color: #dee2e6;
+            }
+
+            .sidebar-brand-img {
+                max-width: 170px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            }
+
+            .nav-section-title {
+                font-size: 0.72rem;
+                text-transform: uppercase;
+                letter-spacing: 0.08rem;
+                color: #8c98a4;
+                margin-top: 1.1rem;
+                margin-bottom: 0.35rem;
+                padding-left: 0.75rem;
+                font-weight: bold;
+            }
+
+            .sidebar .nav-link, .offcanvas .nav-link {
+                color: #ced4da;
+                padding: 0.45rem 0.75rem;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: all 0.15s ease-in-out;
+                cursor: pointer;
+            }
+
+                .sidebar .nav-link:hover, .offcanvas .nav-link:hover {
+                    background-color: #343a40;
+                    color: #ffffff;
+                    transform: translateX(2px);
+                }
+
+            .decade-badge {
+                font-size: 0.78rem;
+                padding: 0.28rem 0.55rem;
+                border-radius: 4px;
+                background-color: #2b3035;
+                color: #adb5bd;
+                text-decoration: none;
+                display: inline-block;
+                margin: 2px;
+                transition: all 0.15s;
+            }
+
+                .decade-badge:hover {
+                    background-color: #0d6efd;
+                    color: #fff;
+                }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">BritPlayers</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Mobile-Only Top Navigation Bar -->
+    <header class="d-md-none bg-dark text-white px-3 py-2 d-flex justify-content-between align-items-center shadow-sm">
+        <a href="/Home" class="d-flex align-items-center gap-2 text-white text-decoration-none">
+            <img src="~/images/cat.jpg"
+                 alt="BritBase"
+                 style="height: 42px; width: 42px; border-radius: 6px; object-fit: cover; border: 1px solid rgba(255,255,255,0.2);"
+                 onerror="this.style.display='none'" />
+            <div class="lh-sm">
+                <span class="fw-bold fs-6 d-block">BritBase</span>
+                <span class="text-secondary" style="font-size: 0.7rem;">British Chess Archive</span>
             </div>
-        </nav>
+        </a>
+        <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+            <i class="bi bi-list fs-5"></i> <span>Menu</span>
+        </button>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <div class="d-flex">
+        <!-- Desktop Sidebar Navigation -->
+        <aside class="sidebar p-3 d-none d-md-flex flex-column flex-shrink-0">
+            <div class="text-center mb-3">
+                <a href="/Home" class="d-inline-block text-decoration-none">
+                    <img src="~/images/cat.jpg"
+                         alt="BritBase Cat"
+                         class="img-fluid sidebar-brand-img mb-2"
+                         onerror="this.src='https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&auto=format&fit=crop&q=80'" />
+                    <h4 class="text-white fw-bold mb-0">BritBase</h4>
+                    <span class="badge bg-secondary">British Chess Archive</span>
+                </a>
+            </div>
+
+            <hr class="border-secondary my-2">
+
+            <div class="overflow-auto flex-grow-1 pe-1" style="max-height: calc(100vh - 250px);">
+                @await Html.PartialAsync("_NavigationMenuPartial")
+            </div>
+
+            <div class="small text-muted text-center pt-2 border-top border-secondary mt-auto">
+                &copy; 1997-2026 BritBase
+            </div>
+        </aside>
+
+        <!-- Mobile Drawer (Offcanvas Sidebar) -->
+        <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel" style="width: 280px;">
+            <div class="offcanvas-header border-bottom border-secondary d-flex justify-content-between align-items-center pb-3">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="~/images/cat.jpg" alt="Logo" style="height: 38px; width: 38px; border-radius: 6px; object-fit: cover;" />
+                    <div>
+                        <h6 class="mb-0 fw-bold text-white">BritBase</h6>
+                        <small class="text-muted" style="font-size: 0.72rem;">British Chess Archive</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-3">
+                @await Html.PartialAsync("_NavigationMenuPartial")
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow-1 p-3 p-md-4 overflow-auto" style="min-height: 100vh;">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - BritPlayers - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
 
+    <script>
+            document.addEventListener('htmx:configRequest', (evt) => {
+                let token = document.querySelector('input[name="__RequestVerificationToken"]');
+                if (token) {
+                    evt.detail.headers['RequestVerificationToken'] = token.value;
+                }
+            });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

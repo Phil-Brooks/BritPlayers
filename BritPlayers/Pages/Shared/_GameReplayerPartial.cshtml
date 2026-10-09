@@ -1,0 +1,294 @@
+﻿@model BritPlayers.Models.ChessGame
+
+<style>
+    .chess-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 0.92rem;
+    }
+
+        .chess-table tbody tr {
+            border-bottom: 1px solid #f1f3f5;
+            height: 28px;
+        }
+
+            .chess-table tbody tr:hover {
+                background-color: #f8f9fa;
+            }
+
+    .move-num {
+        width: 44px;
+        text-align: right;
+        padding-right: 12px;
+        color: #adb5bd;
+        font-weight: 600;
+        user-select: none;
+    }
+
+    .move-cell {
+        width: 45%;
+        padding: 2px 6px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.1s ease;
+    }
+
+        .move-cell:hover {
+            background-color: #e9ecef;
+        }
+
+        .move-cell.active-move {
+                background-color: #0d6efd !important;
+                color: #ffffff !important;
+                font-weight: 600;
+            }
+
+                .move-cell.active-move .piece-glyph {
+                    color: #ffffff !important;
+                }
+
+                .move-cell.active-move .eval-badge {
+                    color: rgba(255, 255, 255, 0.85) !important;
+                }
+
+        .board-controls {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 0.5rem;
+            width: min(100%, 360px);
+            margin: 1rem auto 0;
+        }
+
+            .board-controls .btn {
+                width: 100%;
+                min-height: 48px;
+                padding: 0.55rem 0.35rem;
+                font-size: 1.7rem;
+                line-height: 1;
+                border-radius: 0.8rem;
+                font-weight: 700;
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        @@media (max-width: 576px) {
+            .board-controls {
+                gap: 0.35rem;
+                width: min(100%, 310px);
+            }
+
+                .board-controls .btn {
+                    min-height: 42px;
+                    font-size: 1.45rem;
+                }
+        }
+
+        .piece-glyph {
+        font-size: 1.05rem;
+        font-weight: normal;
+        margin-right: 1px;
+        vertical-align: -1px;
+    }
+
+    .eval-badge {
+        font-size: 0.75rem;
+        color: #6c757d;
+        float: right;
+        margin-top: 2px;
+        user-select: none;
+    }
+</style>
+
+<div class="card shadow-sm border-primary">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <div>
+            <h5 class="mb-0">@Model.White vs @Model.Black</h5>
+            <small>@Model.Event (@Model.Date) &bull; Result: <strong>@Model.Result</strong> &bull; ECO: @Model.Eco</small>
+        </div>
+        <button type="button" class="btn-close btn-close-white" onclick="document.getElementById('game-viewer-panel').innerHTML = ''" aria-label="Close"></button>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <!-- Chessboard Column -->
+            <div class="col-lg-5 col-md-6 text-center">
+                <div id="board" style="width: 380px; max-width: 100%; margin: 0 auto;"></div>
+
+                <!-- Navigation Controls -->
+                <div class="board-controls" role="group" aria-label="Move controls">
+                    <button id="btn-start" class="btn btn-outline-secondary" title="First move">&laquo;</button>
+                    <button id="btn-prev" class="btn btn-outline-secondary" title="Previous move">&lsaquo;</button>
+                    <button id="btn-flip" class="btn btn-outline-secondary" title="Flip board">&#8645;</button>
+                    <button id="btn-next" class="btn btn-outline-secondary" title="Next move">&rsaquo;</button>
+                    <button id="btn-end" class="btn btn-outline-secondary" title="Last move">&raquo;</button>
+                </div>
+                <div class="text-muted small mt-1">Use Left / Right arrow keys to step moves</div>
+            </div>
+
+            <!-- Two-Column Notation Table (Lichess Style) -->
+            <div class="col-lg-7 col-md-6 mt-3 mt-md-0">
+                <div class="card h-100">
+                    <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
+                        <strong class="text-dark"><i class="bi bi-list-ol me-1"></i> Moves</strong>
+                        <span class="badge bg-secondary">Figurine SAN</span>
+                    </div>
+                    <div class="card-body p-0 overflow-auto" id="moves-container" style="max-height: 400px;">
+                        <table class="chess-table">
+                            <tbody id="moves-table-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Raw PGN moves -->
+<div id="pgn-data" class="d-none">@Model.Moves</div>
+
+<script>
+    (function () {
+        try {
+            let rawMoves = document.getElementById('pgn-data').textContent.trim();
+
+            // Clean comments, variations, NAGs
+            rawMoves = rawMoves.replace(/\{[^}]*\}/g, '');
+            rawMoves = rawMoves.replace(/\([^)]*\)/g, '');
+            rawMoves = rawMoves.replace(/\$\d+/g, '');
+
+            const chess = new Chess();
+            chess.load_pgn(rawMoves, { sloppy: true });
+
+            const history = chess.history({ verbose: true });
+
+            chess.reset();
+            const fens = [chess.fen()];
+
+            for (let i = 0; i < history.length; i++) {
+                chess.move(history[i]);
+                fens.push(chess.fen());
+            }
+
+            let currentMoveIndex = 0;
+
+            const board = Chessboard('board', {
+                position: 'start',
+                showNotation: true,
+                pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
+            });
+
+            setTimeout(() => { board.resize(); }, 50);
+
+            // Figurine replacement: Converts N, B, R, Q, K into chess glyphs
+            function toFigurine(san, color) {
+                if (!san) return '';
+                // Standard pieces (using universal/outline chess glyphs for high visibility)
+                const glyphs = {
+                    'K': '♔',
+                    'Q': '♕',
+                    'R': '♖',
+                    'B': '♗',
+                    'N': '♘'
+                };
+                const firstChar = san.charAt(0);
+                if (glyphs[firstChar]) {
+                    return `<span class="piece-glyph">${glyphs[firstChar]}</span>${san.substring(1)}`;
+                }
+                return san;
+            }
+
+            // Build Lichess-style 2-column table
+            const tbody = document.getElementById('moves-table-body');
+            tbody.innerHTML = '';
+
+            for (let i = 0; i < history.length; i += 2) {
+                const moveNum = Math.floor(i / 2) + 1;
+                const whiteMove = history[i];
+                const blackMove = history[i + 1];
+
+                const tr = document.createElement('tr');
+
+                // Move number column
+                const tdNum = document.createElement('td');
+                tdNum.className = 'move-num';
+                tdNum.textContent = moveNum;
+                tr.appendChild(tdNum);
+
+                // White move cell
+                const tdWhite = document.createElement('td');
+                tdWhite.className = 'move-cell';
+                tdWhite.setAttribute('data-move-idx', (i + 1).toString());
+                tdWhite.innerHTML = `${toFigurine(whiteMove.san, 'w')} <span class="eval-badge"></span>`;
+                tr.appendChild(tdWhite);
+
+                // Black move cell
+                const tdBlack = document.createElement('td');
+                tdBlack.className = 'move-cell';
+                if (blackMove) {
+                    tdBlack.setAttribute('data-move-idx', (i + 2).toString());
+                    tdBlack.innerHTML = `${toFigurine(blackMove.san, 'b')} <span class="eval-badge"></span>`;
+                } else {
+                    tdBlack.innerHTML = '';
+                }
+                tr.appendChild(tdBlack);
+
+                tbody.appendChild(tr);
+            }
+
+            function highlightCurrentMove() {
+                document.querySelectorAll('.move-cell').forEach(el => {
+                    const idx = parseInt(el.getAttribute('data-move-idx') || '0');
+                    if (idx === currentMoveIndex) {
+                        el.classList.add('active-move');
+                        el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                    } else {
+                        el.classList.remove('active-move');
+                    }
+                });
+            }
+
+            function goToMove(index) {
+                if (index < 0) index = 0;
+                if (index >= fens.length) index = fens.length - 1;
+                currentMoveIndex = index;
+                board.position(fens[currentMoveIndex]);
+                highlightCurrentMove();
+            }
+
+            document.getElementById('btn-start').onclick = () => goToMove(0);
+            document.getElementById('btn-prev').onclick = () => goToMove(currentMoveIndex - 1);
+            document.getElementById('btn-next').onclick = () => goToMove(currentMoveIndex + 1);
+            document.getElementById('btn-end').onclick = () => goToMove(fens.length - 1);
+            document.getElementById('btn-flip').onclick = () => board.flip();
+
+            tbody.addEventListener('click', (e) => {
+                const target = e.target.closest('.move-cell');
+                if (target && target.hasAttribute('data-move-idx')) {
+                    const moveIdx = parseInt(target.getAttribute('data-move-idx'));
+                    goToMove(moveIdx);
+                }
+            });
+
+            const keyHandler = (e) => {
+                if (e.key === 'ArrowRight') {
+                    goToMove(currentMoveIndex + 1);
+                } else if (e.key === 'ArrowLeft') {
+                    goToMove(currentMoveIndex - 1);
+                }
+            };
+            window.removeEventListener('keydown', window._chessKeyHandler);
+            window._chessKeyHandler = keyHandler;
+            window.addEventListener('keydown', keyHandler);
+
+        } catch (err) {
+            console.error("Chess replayer initialization error:", err);
+            document.getElementById('moves-table-body').innerHTML =
+                `<tr><td colspan="3" class="text-danger p-2">Error rendering moves: ${err.message}</td></tr>`;
+        }
+    })();
+</script>

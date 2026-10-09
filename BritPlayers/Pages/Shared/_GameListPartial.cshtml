@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BritPlayers.Models.ChessGame>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning my-3">
+        No games found matching your search.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>White</th>
+                    <th>Black</th>
+                    <th>Result</th>
+                    <th>Event / Site</th>
+                    <th>ECO</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var game in Model)
+                {
+                    <tr>
+                        <td class="text-nowrap"><small>@game.Date</small></td>
+                        <td class="fw-semibold">@game.White</td>
+                        <td class="fw-semibold">@game.Black</td>
+                        <td>
+                            <span class="badge bg-secondary">@game.Result</span>
+                        </td>
+                        <td>
+                            <small class="d-block">@game.Event</small>
+                            <small class="text-muted">@game.Site</small>
+                        </td>
+                        <td><code>@game.Eco</code></td>
+                        <td>
+                            <!-- In Step 5, this button will load the game into the board -->
+                            <button class="btn btn-sm btn-outline-primary"
+                                    hx-get="/Index?handler=LoadGame&id=@game.Id"
+                                    hx-target="#game-viewer-panel"
+                                    hx-swap="innerHTML"
+                                    data-game-id="@game.Id">
+                                Load &amp; Play
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

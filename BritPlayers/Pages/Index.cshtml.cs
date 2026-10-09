@@ -42,8 +42,8 @@ public class IndexModel : PageModel
         SelectedPlayer = selected;
 
         var aliases = selected.Aliases.Split(';', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        Games = _pgnService.SearchByPlayer(aliases).Take(250).ToList();
-        SelectedGame = _pgnService.GetGameById(Game);
+        Games = _pgnService.Search(aliases[aliases.Length-1],"").Take(250).ToList();
+        //SelectedGame = _pgnService.GetGameById(Game);
     }
 
     public sealed record PlayerEntry(string Name, string Slug, string Aliases);

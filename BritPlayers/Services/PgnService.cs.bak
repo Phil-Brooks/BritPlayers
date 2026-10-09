@@ -50,6 +50,9 @@ public class PgnService
     public IEnumerable<ChessGame> Search(string? query, string? year, int limit = 100)
     {
         var games = GetAllGames().AsEnumerable();
+        {
+            return Array.Empty<ChessGame>();
+        }
 
         if (!string.IsNullOrWhiteSpace(query))
         {

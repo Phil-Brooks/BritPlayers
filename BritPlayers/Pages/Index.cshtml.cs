@@ -40,20 +40,25 @@ public class IndexModel : PageModel
         SelectedPlayer = Players.FirstOrDefault(p => p.Slug.Equals(Player, StringComparison.OrdinalIgnoreCase))
             ?? Players[0];
 
-        // Search games across all player aliases without duplicates
+        // Load games for the selected player
         Games = SelectedPlayer.Aliases
             .SelectMany(alias => _pgnService.Search(alias, ""))
             .DistinctBy(g => g.Id)
             .Take(250)
             .ToList();
 
-        // Load game details if requested
+        // If a specific game was requested via ?game=..., load it; 
+        // otherwise, preload the very first game in the list
         if (!string.IsNullOrWhiteSpace(Game))
         {
             SelectedGame = _pgnService.GetGameById(Game);
         }
+        else if (Games.Count > 0)
+        {
+            // Preload first game
+            SelectedGame = _pgnService.GetGameById(Games[0].Id) ?? Games[0];
+        }
 
-        // Support HTMX partial swaps
         if (Request.Headers.ContainsKey("HX-Request"))
         {
             return Partial("_GameListPartial", Games);

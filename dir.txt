@@ -1,0 +1,1677 @@
+ Volume in drive D is DATA
+ Volume Serial Number is 8832-CA03
+
+ Directory of D:\Github\BritPlayers
+
+09/10/2026  11:22    <DIR>          .
+09/10/2026  09:31    <DIR>          ..
+09/10/2026  09:57             2,581 .gitattributes
+09/10/2026  09:57             6,585 .gitignore
+09/10/2026  10:14    <DIR>          BritPlayers
+09/10/2026  09:35                78 BritPlayers.slnx
+09/10/2026  11:22                 0 dir.txt
+               4 File(s)          9,244 bytes
+
+ Directory of D:\Github\BritPlayers\.git
+
+09/10/2026  11:22    <DIR>          ..
+09/10/2026  11:14                48 COMMIT_EDITMSG
+09/10/2026  09:57               924 config
+09/10/2026  09:57                73 description
+09/10/2026  09:57               104 FETCH_HEAD
+09/10/2026  09:57                23 HEAD
+09/10/2026  09:57    <DIR>          hooks
+09/10/2026  11:14            12,181 index
+09/10/2026  09:57    <DIR>          info
+09/10/2026  09:57    <DIR>          logs
+09/10/2026  11:14               262 ms-persist.xml
+09/10/2026  11:14    <DIR>          objects
+09/10/2026  09:57    <DIR>          refs
+               7 File(s)         13,615 bytes
+
+ Directory of D:\Github\BritPlayers\.git\hooks
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  09:57               478 applypatch-msg.sample
+09/10/2026  09:57             1,972 commit-msg.sample
+09/10/2026  09:57             4,611 fsmonitor-watchman.sample
+09/10/2026  09:57               189 post-update.sample
+09/10/2026  09:57               424 pre-applypatch.sample
+09/10/2026  09:57             1,649 pre-commit.sample
+09/10/2026  09:57               416 pre-merge-commit.sample
+09/10/2026  09:57             1,374 pre-push.sample
+09/10/2026  09:57             4,898 pre-rebase.sample
+09/10/2026  09:57               544 pre-receive.sample
+09/10/2026  09:57             1,492 prepare-commit-msg.sample
+09/10/2026  09:57             2,783 push-to-checkout.sample
+09/10/2026  09:57             2,308 sendemail-validate.sample
+09/10/2026  09:57             3,650 update.sample
+              14 File(s)         26,788 bytes
+
+ Directory of D:\Github\BritPlayers\.git\info
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  09:57               240 exclude
+               1 File(s)            240 bytes
+
+ Directory of D:\Github\BritPlayers\.git\logs
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14               689 HEAD
+09/10/2026  09:57    <DIR>          refs
+               1 File(s)            689 bytes
+
+ Directory of D:\Github\BritPlayers\.git\logs\refs
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  09:57    <DIR>          ..
+09/10/2026  09:57    <DIR>          heads
+09/10/2026  09:57    <DIR>          remotes
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.git\logs\refs\heads
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  09:57    <DIR>          ..
+09/10/2026  11:14               689 master
+               1 File(s)            689 bytes
+
+ Directory of D:\Github\BritPlayers\.git\logs\refs\remotes
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  09:57    <DIR>          ..
+09/10/2026  09:57    <DIR>          origin
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.git\logs\refs\remotes\origin
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  09:57    <DIR>          ..
+09/10/2026  11:14               450 master
+               1 File(s)            450 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  09:57    <DIR>          00
+09/10/2026  09:57    <DIR>          04
+09/10/2026  09:57    <DIR>          05
+09/10/2026  09:57    <DIR>          09
+09/10/2026  09:57    <DIR>          0b
+09/10/2026  11:14    <DIR>          0c
+09/10/2026  09:57    <DIR>          0d
+09/10/2026  09:57    <DIR>          0e
+09/10/2026  11:14    <DIR>          10
+09/10/2026  09:57    <DIR>          14
+09/10/2026  09:57    <DIR>          1a
+09/10/2026  10:19    <DIR>          1c
+09/10/2026  10:19    <DIR>          1d
+09/10/2026  09:57    <DIR>          1f
+09/10/2026  09:57    <DIR>          20
+09/10/2026  09:57    <DIR>          21
+09/10/2026  10:19    <DIR>          23
+09/10/2026  11:14    <DIR>          26
+09/10/2026  09:57    <DIR>          2d
+09/10/2026  11:14    <DIR>          31
+09/10/2026  11:14    <DIR>          33
+09/10/2026  09:57    <DIR>          34
+09/10/2026  09:57    <DIR>          35
+09/10/2026  09:57    <DIR>          36
+09/10/2026  09:57    <DIR>          37
+09/10/2026  09:57    <DIR>          38
+09/10/2026  09:57    <DIR>          39
+09/10/2026  09:57    <DIR>          3b
+09/10/2026  11:14    <DIR>          3e
+09/10/2026  09:57    <DIR>          41
+09/10/2026  09:57    <DIR>          45
+09/10/2026  09:57    <DIR>          46
+09/10/2026  09:57    <DIR>          47
+09/10/2026  09:57    <DIR>          49
+09/10/2026  09:57    <DIR>          4d
+09/10/2026  09:57    <DIR>          50
+09/10/2026  11:14    <DIR>          52
+09/10/2026  11:14    <DIR>          54
+09/10/2026  09:57    <DIR>          58
+09/10/2026  09:57    <DIR>          59
+09/10/2026  09:57    <DIR>          5a
+09/10/2026  11:14    <DIR>          5c
+09/10/2026  09:57    <DIR>          5d
+09/10/2026  09:57    <DIR>          5f
+09/10/2026  09:57    <DIR>          62
+09/10/2026  09:57    <DIR>          63
+09/10/2026  09:57    <DIR>          67
+09/10/2026  09:57    <DIR>          68
+09/10/2026  09:57    <DIR>          69
+09/10/2026  09:57    <DIR>          6c
+09/10/2026  09:57    <DIR>          6e
+09/10/2026  09:57    <DIR>          6f
+09/10/2026  11:14    <DIR>          71
+09/10/2026  09:57    <DIR>          72
+09/10/2026  10:19    <DIR>          74
+09/10/2026  09:57    <DIR>          75
+09/10/2026  09:57    <DIR>          76
+09/10/2026  09:57    <DIR>          77
+09/10/2026  11:14    <DIR>          7d
+09/10/2026  09:57    <DIR>          7e
+09/10/2026  09:57    <DIR>          7f
+09/10/2026  09:57    <DIR>          80
+09/10/2026  09:57    <DIR>          81
+09/10/2026  11:14    <DIR>          87
+09/10/2026  09:57    <DIR>          89
+09/10/2026  11:14    <DIR>          8c
+09/10/2026  09:57    <DIR>          8d
+09/10/2026  09:57    <DIR>          90
+09/10/2026  09:57    <DIR>          92
+09/10/2026  09:57    <DIR>          93
+09/10/2026  09:57    <DIR>          94
+09/10/2026  09:57    <DIR>          98
+09/10/2026  10:19    <DIR>          9d
+09/10/2026  09:57    <DIR>          9f
+09/10/2026  09:57    <DIR>          a0
+09/10/2026  10:19    <DIR>          a1
+09/10/2026  09:57    <DIR>          a3
+09/10/2026  09:57    <DIR>          a5
+09/10/2026  09:57    <DIR>          a7
+09/10/2026  11:14    <DIR>          aa
+09/10/2026  11:14    <DIR>          b0
+09/10/2026  09:57    <DIR>          b1
+09/10/2026  11:14    <DIR>          b7
+09/10/2026  09:57    <DIR>          bd
+09/10/2026  09:57    <DIR>          be
+09/10/2026  09:57    <DIR>          c1
+09/10/2026  10:19    <DIR>          c3
+09/10/2026  09:57    <DIR>          c5
+09/10/2026  09:57    <DIR>          c8
+09/10/2026  11:14    <DIR>          c9
+09/10/2026  11:14    <DIR>          cc
+09/10/2026  09:57    <DIR>          ce
+09/10/2026  09:57    <DIR>          d2
+09/10/2026  10:19    <DIR>          d4
+09/10/2026  09:57    <DIR>          d5
+09/10/2026  11:14    <DIR>          d8
+09/10/2026  09:57    <DIR>          dc
+09/10/2026  09:57    <DIR>          e3
+09/10/2026  09:57    <DIR>          e4
+09/10/2026  09:57    <DIR>          e5
+09/10/2026  09:57    <DIR>          ea
+09/10/2026  09:57    <DIR>          ed
+09/10/2026  09:57    <DIR>          f0
+09/10/2026  09:57    <DIR>          f1
+09/10/2026  09:57    <DIR>          f6
+09/10/2026  10:19    <DIR>          f7
+09/10/2026  09:57    <DIR>          info
+09/10/2026  09:57    <DIR>          pack
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\00
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             5,465 9306070a81c2db13112c4e7d5e5daa01b46f61
+               1 File(s)          5,465 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\04
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            28,358 e9185bd638bb11ef576be7b8439f2a7bdcb05e
+               1 File(s)         28,358 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\05
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                86 8f25027bfb39555fa013536b0b4b2a80bfade5
+               1 File(s)             86 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\09
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               186 376573536e4d6e7f86413c56c62b83131f45bc
+09/10/2026  09:57               104 f238b0a1c182aa8a33078e441014b6e925cec1
+               2 File(s)            290 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\0b
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                83 0adff06768280a441c18b7aa3f43f70d2709a3
+               1 File(s)             83 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\0c
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14               357 8a78166e1008cba9b06c5e2e776d8e858f3851
+               1 File(s)            357 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\0d
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               164 b0dc1f05c88b530bff8a15d79157ce1c3b3af4
+               1 File(s)            164 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\0e
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            62,765 c72722de3ccf311353e3277d29139ccd9e59f4
+               1 File(s)         62,765 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\10
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14               168 4b396b46f379fef45761dbd3ad4c20232e1a97
+09/10/2026  09:57               127 f68b8c8b4f796baf8ddeee7551b6a52b9437cc
+               2 File(s)            295 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\14
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             9,298 340cc9c9aa096b33729417ccff0fca36264a05
+               1 File(s)          9,298 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\1a
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            10,486 5d65630b24445eadf1a660c18fdbb187031c68
+09/10/2026  09:57           102,485 86433c223039bda5f68f8b6ef10d15e5e0eff7
+               2 File(s)        112,971 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\1c
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               158 623ecd7dea70fa43610b737beec6cc2b7b9792
+09/10/2026  10:19               156 865342f3657623e51054c231741980bea19e1d
+09/10/2026  09:57            19,890 926af57ec9afa95b50095264c9e02e52f601d4
+               3 File(s)         20,204 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\1d
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  10:19           165,514 d4d843b14d6d74ef0ab96838ed23c7aeefeec4
+               1 File(s)        165,514 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\1f
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               751 f0c423042b46cb1d617b81efb715defbe8054d
+               1 File(s)            751 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\20
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            15,143 d0df50a7c018efd79f39da2d98ba4d336f9496
+               1 File(s)         15,143 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\21
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             3,864 03919f4cb49080fc85bd7ed153b44e6f779bef
+               1 File(s)          3,864 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\23
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  10:19           105,036 4311ca259f9af4f586efe83035dde32d80106e
+               1 File(s)        105,036 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\26
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14             1,675 7c83bf452c4a6775f153d4ade1431446b6df4d
+               1 File(s)          1,675 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\2d
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            16,940 71422372e74337f039c2d55d303b32d2211920
+               1 File(s)         16,940 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\31
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14               188 73c2a8916ec4912a98524bbb53a536b91b619c
+09/10/2026  09:57            32,209 c8d2542df839050d8b19670950e25ee90c0e3b
+               2 File(s)         32,397 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\33
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14             1,423 e710854bcbd1ac71f20f1c9f99bb02e1f3240a
+               1 File(s)          1,423 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\34
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57           148,497 a6d2a14de8e886e38b0cf4c66d8ff06a8a09b8
+               1 File(s)        148,497 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\35
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            28,013 906b9293f7ae55f14a94d7d97d5d5df195550d
+               1 File(s)         28,013 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\36
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               354 21fb381ed1b40fb231915b951de6b54be1a738
+               1 File(s)            354 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\37
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               331 6cf80640aa451686a1706542b3406817e003cd
+               1 File(s)            331 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\38
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            10,449 82a8199be0701199474e2d943eef33e52a39ed
+               1 File(s)         10,449 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\39
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            86,292 49d7cc86d9500286817039af683b238664de67
+09/10/2026  09:57            41,737 934146ffdc3af1e17b83657576b2d21f3cbecd
+               2 File(s)        128,029 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\3b
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               298 a975c57a2f84be88b570751856a198449ead98
+               1 File(s)            298 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\3e
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            55,672 4a515e5c6674fb20d526bc77041c5ad85de7a3
+09/10/2026  11:14               360 9801798c26d50b3db3e2b85aada49ed12e8a67
+               2 File(s)         56,032 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\41
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            33,337 d4357a317438f04033183da8a3dfe8193f0a45
+               1 File(s)         33,337 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\45
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                85 151b08b454b84c82c3583de6bc93d473445655
+               1 File(s)             85 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\46
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               147 ba96612ec31c6cb9534149ef06e73d1d284b81
+               1 File(s)            147 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\47
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               103 dbbb2fe942e6be3353234b1fd5b34c63f46f17
+               1 File(s)            103 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\49
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             8,885 b843b1947c3edbfd46010e7436d69a9d395a7c
+               1 File(s)          8,885 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\4d
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            70,018 43715223124fe313a1884b0aced70e220f4442
+               1 File(s)         70,018 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\50
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            15,003 d34056b72a3a664a0055e5c7dcd9f2b6ef2b10
+               1 File(s)         15,003 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\52
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               149 1f794ebfc94a9568b4c3410a0da317b081a9cf
+09/10/2026  11:14                51 afcb64080c933887a6f7346b0c0ba914bf6ff2
+               2 File(s)            200 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\54
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14             2,439 c7a6e4f7e516d9dded0d88fa62950286f30b1b
+               1 File(s)          2,439 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\58
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                88 8659bafacf45585a570df560a1f7424f6d58ca
+09/10/2026  09:57            49,662 b7cd988998ec08c3a27359ebb23d24ba119505
+               2 File(s)         49,750 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\59
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14             1,092 508c3988d370af13d8c27ec47d8fb3ee4b2ebe
+09/10/2026  09:57               663 9bdf2c721396853b5afae210081dc776985f65
+               2 File(s)          1,755 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\5a
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            55,748 3e2bae2ce2229a1e49ce0886e8869b182e9b3c
+               1 File(s)         55,748 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\5c
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14             1,694 833475f286aebc9adae7b5ba9ddb9953e76553
+               1 File(s)          1,694 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\5d
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               103 1f685762721bac0474e642e80fcc7c4010fc79
+               1 File(s)            103 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\5f
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            32,202 e522b6d709706ef19f5d48109926709cb87699
+               1 File(s)         32,202 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\62
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            56,823 94dff3dfb3956b992065c7991d4083bc0b9d9b
+               1 File(s)         56,823 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\63
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             3,874 05410923d611e3165b5e1f7c2cf625723d76dc
+09/10/2026  09:57                58 8104a3802db999e426d2224334d69e8cb92928
+09/10/2026  09:57             2,585 e859b476eff5055e0e557aaa151ca8223fbeef
+               3 File(s)          6,517 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\67
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             8,885 2cbc2e625faf2402462ab85409ea2791984964
+               1 File(s)          8,885 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\68
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57           122,944 1f25c4ab72d272fe06dbdcd678f65cd9a07dd2
+09/10/2026  09:57            18,381 9b5b6b592e531e1330298ea4259644f0976f97
+               2 File(s)        141,325 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\69
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57           107,435 440cc7e431ed5b6f2b1fadb8376f551551d30c
+               1 File(s)        107,435 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\6c
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             2,023 24ed6f85b7edd90081e1108f02958d7c8291da
+               1 File(s)          2,023 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\6e
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                73 a21ed9750c4007fb6f26097efef56491ea6c5a
+               1 File(s)             73 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\6f
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               472 92b9565570463a840d01c6ca4f29519392b455
+               1 File(s)            472 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\71
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14             6,748 604c286624e62c5a6d2d988986dd517a138b35
+               1 File(s)          6,748 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\72
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               681 dda234edaa4d2b0e9e2c5420d8685e920ec3e5
+09/10/2026  09:57               323 f50b9e582f87f30ff193ebdec036c07047b988
+               2 File(s)          1,004 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\74
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  10:19           285,563 8fa35b3e5d1c3141bc83f170c45a51287a73f4
+               1 File(s)        285,563 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\75
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            46,868 3823c2729a6f23a5a05c2121b2c39676c161e6
+09/10/2026  09:57               387 9a42c64c86d2d98e59d3a9504ce90879aac14e
+               2 File(s)         47,255 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\76
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            14,982 41ef68b8080b9f7cdb836ddf01cedb702d1ff4
+               1 File(s)         14,982 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\77
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               128 0d3e93146b0bc84347f1353b2c41ce467b6159
+               1 File(s)            128 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\7d
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  10:19               359 00bf93ac0b200fceed7f297c15a65e3cffb6ca
+09/10/2026  09:57             1,036 3ca5f47d7652b76cc4b37ab51a81ec341f5fb0
+09/10/2026  11:14                86 ae14c21646d4f80d5e6db4a0ddffcc37f0859c
+               3 File(s)          1,481 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\7e
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                72 3814f08c79fc59e7c1a6e0dace8723fc6cfda0
+               1 File(s)             72 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\7f
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            35,431 37b5d99122b4928505d1e0ac5ca7279edd56ed
+               1 File(s)         35,431 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\80
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            41,729 2b60d0a1e37b338b6ab25a37b7bd2546be27b0
+               1 File(s)         41,729 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\81
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               317 9f61241bb31a463db66f3ade930a6350304591
+               1 File(s)            317 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\87
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14               326 7ca097b26b9ec5d30f7cc613c900d930773249
+               1 File(s)            326 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\89
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               876 fc3a81034211725b37b3ed2fee762bd0b12bd8
+               1 File(s)            876 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\8c
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            71,044 38db72cecdd51cbee934110b19ee249a004bc5
+09/10/2026  09:57            37,236 83b36f8e0a639495f4a5cdb482cccf11026e85
+09/10/2026  11:14               159 a6f1adac19a3b90f52f973f15d8e7e3c3ef6a6
+               3 File(s)        108,439 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\8d
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            42,148 f43cfcc3f0552c7ff49269dba8b94834406044
+               1 File(s)         42,148 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\90
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57           122,881 ce798738d86c6e2f6736ef86896abe542eee7e
+               1 File(s)        122,881 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\92
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               728 05675ca92c95df9ab3d445e8f4efb8e54ad545
+09/10/2026  09:57                64 a3c2fca54a14d08b5acfd82adc58a25d12a702
+               2 File(s)            792 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\93
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               138 88ba5ba23cef1e20dda00f22721534280f1931
+               1 File(s)            138 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\94
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             2,935 91a2fda28342ab358eaf234e1afe0c07a53d62
+               1 File(s)          2,935 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\98
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               677 4713a49622a96da110443c15477613bc12656b
+09/10/2026  09:57            86,595 a87052b8cb57d159dc8b342ae1e3d527dfcece
+               2 File(s)         87,272 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\9d
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  10:19           309,045 2a94664637f809faaa0af97207fb0e6139d5f3
+               1 File(s)        309,045 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\9f
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            33,148 d3e1272586bac3608607feaeb509e9ff94c055
+               1 File(s)         33,148 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\a0
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               153 293b34855a9840576fba77af54a57604db8081
+09/10/2026  09:57            20,011 db8b57a8db611e11a939692cda8f2685d889a3
+               2 File(s)         20,164 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\a1
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57           148,601 f9a1891ab1dca45f80a7dd35c53af94087aef1
+09/10/2026  10:19                45 fa027cf5eebd1d2560feb83af728ed4488cae4
+               2 File(s)        148,646 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\a3
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               150 a34b647cd28604824627d49d45eab8e809c8e1
+               1 File(s)            150 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\a5
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               123 0dc83e15f68c94e2612a08d13e0c96e6a5013d
+09/10/2026  09:57                42 f10045db97461e9565c3273fdb9252687aa4f1
+               2 File(s)            165 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\a7
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                86 3ed835e1b89a144a93de342013b3ef55b4593c
+09/10/2026  09:57           122,505 7bdfb00e5937b85bd38821e1e4c16af0fa7124
+               2 File(s)        122,591 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\aa
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               160 573fa3b44bb34663a697a287d8588406099135
+09/10/2026  09:57             3,602 8035949c6988bca5ef2eb24b4a9dff59441e78
+09/10/2026  11:14               237 9d3c481f3648506675a28d07eb4ef7cc800c48
+09/10/2026  09:57            16,980 a63792780594bf3fcbe47ad6590a18d714a404
+09/10/2026  09:57               496 ce4e8b9ce0045841620d0b92c656e6d706be34
+               5 File(s)         21,475 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\b0
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               135 96bf360db1058ef862dd8eeefea6d6bb2919cd
+09/10/2026  11:14                52 f4589c73163dd9dc8225a1bc040e22efdc29a6
+               2 File(s)            187 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\b1
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             3,637 da1a5ac85d70c10b4c6cf443043720b5efea05
+               1 File(s)          3,637 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\b7
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14               686 a88c3b645fd7257f2f6a1788be3865a1fb9867
+09/10/2026  09:57            47,044 ab57f2adb13f01d8ebbb1c37f022494db7e0c0
+               2 File(s)         47,730 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\bd
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                57 0d229498f08008450dcdcf6a2a410ba9e680cf
+               1 File(s)             57 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\be
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               145 c784ade27d2fc99ccae652ec70ed4f32325e7a
+               1 File(s)            145 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\c1
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               475 87c02e050873568d42a01ececaac425560851b
+               1 File(s)            475 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\c3
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  10:19           145,845 bb39434273fb3787e11eb457c70a8657055c18
+               1 File(s)        145,845 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\c5
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            22,821 73a34463763631ad17e6eda0ccbdfa388a6789
+               1 File(s)         22,821 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\c8
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             7,172 0681fb8fbc6a99fa336b09b37046e954ed39b5
+               1 File(s)          7,172 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\c9
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14               740 f2d2dc2002220110ac62505bc60d4a9667f1b6
+               1 File(s)            740 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\cc
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  11:14                51 6683a96237f5e176dab5dc1c405b4db084a341
+               1 File(s)             51 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\ce
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            42,175 99ec1966147d246588ebacb74ead3451318a7a
+               1 File(s)         42,175 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\d2
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               885 f77dd019635050ba9493331527a5b147af02cd
+               1 File(s)            885 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\d4
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  10:19               159 ef33a70459fb6f43ad38d013bf2c5e711051d4
+               1 File(s)            159 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\d5
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            20,052 dc5ea1f632023ca90e6941452e30d003ad4dcb
+               1 File(s)         20,052 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\d8
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               192 12c1725d4d5f3982216e524281990ca157cba3
+09/10/2026  09:57             2,411 d803c65e634d47d44b59d113b78f5bc12d29ff
+09/10/2026  11:14             3,606 dc9992bc190361be7c0781f91c7fdf9bf97665
+               3 File(s)          6,209 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\dc
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               666 377cc031064ba146e9af3cb64155522ade5cfa
+               1 File(s)            666 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\e3
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            38,600 a59e3a1c3cd659a3475fe4128e7da427c5c223
+               1 File(s)         38,600 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\e4
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            15,144 774804709fac4ef1307dbbbd37c7553407e0ed
+               1 File(s)         15,144 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\e5
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            17,155 4cd1dc48f77516b4c9aa0db4708399142c8f23
+               1 File(s)         17,155 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\ea
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57               265 526f473d70c4f7e6caf983ca4e3535a5b03d0f
+               1 File(s)            265 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\ed
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            16,292 754644b57f3cecc5e6ae840885324845fb6bd0
+               1 File(s)         16,292 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\f0
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57                89 d3a70ceaa69fb70811f58254dc738e0f939eac
+               1 File(s)             89 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\f1
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57            83,102 22b10dedbb1d0f755d5298f7ce5ed3effb1f18
+               1 File(s)         83,102 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\f6
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  09:57             2,077 eb9e634393577fb3076508971d13acff17c520
+               1 File(s)          2,077 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\f7
+
+09/10/2026  10:19    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+09/10/2026  10:19               196 165dd4096bc111efa4347e24b0a6b5d646db6a
+               1 File(s)            196 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\info
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.git\objects\pack
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.git\refs
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  11:14    <DIR>          heads
+09/10/2026  09:57    <DIR>          remotes
+09/10/2026  09:57    <DIR>          tags
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.git\refs\heads
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  09:57    <DIR>          ..
+09/10/2026  11:14                41 master
+               1 File(s)             41 bytes
+
+ Directory of D:\Github\BritPlayers\.git\refs\remotes
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  09:57    <DIR>          ..
+09/10/2026  11:14    <DIR>          origin
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.git\refs\remotes\origin
+
+09/10/2026  11:14    <DIR>          .
+09/10/2026  09:57    <DIR>          ..
+09/10/2026  11:14                41 master
+               1 File(s)             41 bytes
+
+ Directory of D:\Github\BritPlayers\.git\refs\tags
+
+09/10/2026  09:57    <DIR>          .
+09/10/2026  09:57    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs
+
+09/10/2026  11:22    <DIR>          ..
+09/10/2026  11:10    <DIR>          BritPlayers
+09/10/2026  09:59    <DIR>          BritPlayers.slnx
+09/10/2026  09:39    <DIR>          CopilotSnapshots
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers
+
+09/10/2026  11:10    <DIR>          .
+09/10/2026  11:10    <DIR>          CopilotIndices
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers\CopilotIndices
+
+09/10/2026  11:10    <DIR>          .
+09/10/2026  11:10    <DIR>          ..
+09/10/2026  11:10    <DIR>          18.11.1013.49062
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers\CopilotIndices\18.11.1013.49062
+
+09/10/2026  11:10    <DIR>          .
+09/10/2026  11:10    <DIR>          ..
+09/10/2026  11:10            49,152 SemanticSymbols.db
+09/10/2026  11:10            32,768 SemanticSymbols.db-shm
+09/10/2026  11:10                32 SemanticSymbols.db-wal
+               3 File(s)         81,952 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers.slnx
+
+09/10/2026  09:59    <DIR>          .
+09/10/2026  09:35    <DIR>          config
+09/10/2026  09:39    <DIR>          copilot-chat
+09/10/2026  09:59    <DIR>          DesignTimeBuild
+09/10/2026  11:11    <DIR>          FileContentIndex
+09/10/2026  11:11    <DIR>          v18
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers.slnx\config
+
+09/10/2026  09:35    <DIR>          .
+09/10/2026  09:59    <DIR>          ..
+07/10/2026  12:19            83,665 applicationhost.config
+               1 File(s)         83,665 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers.slnx\copilot-chat
+
+09/10/2026  09:39    <DIR>          .
+09/10/2026  09:59    <DIR>          ..
+09/10/2026  09:39    <DIR>          ebc5b4cc
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers.slnx\copilot-chat\ebc5b4cc
+
+09/10/2026  09:39    <DIR>          .
+09/10/2026  09:39    <DIR>          ..
+09/10/2026  09:39    <DIR>          sessions
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers.slnx\copilot-chat\ebc5b4cc\sessions
+
+09/10/2026  09:39    <DIR>          .
+09/10/2026  09:39    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers.slnx\DesignTimeBuild
+
+09/10/2026  09:59    <DIR>          .
+09/10/2026  09:59    <DIR>          ..
+09/10/2026  10:51           193,421 .dtbcache.v2
+               1 File(s)        193,421 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers.slnx\FileContentIndex
+
+09/10/2026  11:11    <DIR>          .
+09/10/2026  09:59    <DIR>          ..
+09/10/2026  10:16           101,286 280a4684-0780-4d44-9a98-f339ff32240c.vsidx
+09/10/2026  10:56            99,637 30c3f29f-b244-4c54-ad49-3868c84850ee.vsidx
+09/10/2026  10:56           109,858 5570254f-7b74-45e5-975f-3127a6830e9a.vsidx
+09/10/2026  11:02         1,669,090 5a2ee427-202b-4e81-866e-4042856cca74.vsidx
+09/10/2026  11:11            97,884 eb538bf9-fd6b-4248-9630-f6ba9ad587d5.vsidx
+               5 File(s)      2,077,755 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\BritPlayers.slnx\v18
+
+09/10/2026  11:11    <DIR>          .
+09/10/2026  09:59    <DIR>          ..
+09/10/2026  11:10             6,868 DocumentLayout.backup.json
+09/10/2026  11:11             6,866 DocumentLayout.json
+               2 File(s)         13,734 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\CopilotSnapshots
+
+09/10/2026  09:39    <DIR>          .
+09/10/2026  09:53    <DIR>          9118746F0D24E24CA9326C65F183CAC8
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\CopilotSnapshots\9118746F0D24E24CA9326C65F183CAC8
+
+09/10/2026  09:53    <DIR>          .
+09/10/2026  09:39    <DIR>          ..
+09/10/2026  09:53    <DIR>          3DEDC9014369074989016B68A819DDCF
+09/10/2026  09:54    <DIR>          4E9D11E8A84C8E4EB9771F3D284F701C
+09/10/2026  09:53    <DIR>          F7FBDD6FF007FE43874BA6E20E465E98
+09/10/2026  09:54            24,208 state.mpack
+               1 File(s)         24,208 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\CopilotSnapshots\9118746F0D24E24CA9326C65F183CAC8\3DEDC9014369074989016B68A819DDCF
+
+09/10/2026  09:53    <DIR>          .
+09/10/2026  09:53    <DIR>          ..
+09/10/2026  09:39             7,617 0CC75DE6FA5E68A9C60E65CCDFBE7618
+09/10/2026  09:41             8,310 1871745E50FFFFF43F513C15840534A5
+09/10/2026  09:39             8,287 1D0B83AE5AB6A634F8F25EA2FB65FADF
+09/10/2026  09:39             8,263 301BA84D91C7BCB25970A1AC612B5947
+09/10/2026  09:40             8,287 3D59C608AFE5D088993FB8FD79DE84E5
+09/10/2026  09:49             1,132 5155622B2BF2228F9AB19DB590B35320
+09/10/2026  09:43             1,551 55D5B4BCD98EBA85CE2391927839375C
+09/10/2026  09:44             8,854 5ABA000E03C952EC4B68FDE58710F591
+09/10/2026  09:45             1,551 5B8A9D32A982CD9DF8CC78E77E0A4358
+09/10/2026  09:44             8,516 5D9ABA180F320AE11BB475901575B7A3
+09/10/2026  09:40             8,310 66B4A365F4829F559A6EDB1D616A6727
+09/10/2026  09:43             1,751 6750FE94FDFBE1967F2714E09C2697F0
+09/10/2026  09:41             8,516 99E9035CA9BDD88B267D75F6D423E735
+09/10/2026  09:45             8,516 9A3898EB420D56E18B12FF5B1F05F206
+09/10/2026  09:39             7,617 A89793506C3222163EAC6010DB695CD7
+09/10/2026  09:43             1,551 AB750C6184C60B011D7DB20D7BD8289D
+09/10/2026  09:45             8,310 ADE63B66D2CDE69B0E1E935D17F1C979
+09/10/2026  09:49             2,891 B10A71EC7B6F19DDF3926C5843097C57
+09/10/2026  09:39             7,083 BBF07D508339C24A201BDDFFB5CEB5C6
+09/10/2026  09:39             8,263 CB439842C25379C54205AFE49CBE86C8
+09/10/2026  09:39             7,083 CE1233A9857D8C47E3F0DFF04D213C0E
+09/10/2026  09:45             1,751 DFFBCD5C90C04BD36CB7D15D7DA780F5
+09/10/2026  09:45             8,516 EDC7CCA8DBFCD3814E14275E35CB2858
+09/10/2026  09:45             8,854 EEA0F280064C1668DA95439FBA7063EB
+09/10/2026  09:53                 3 F32902DC1091E7ABD55CCFB68ECD8EDD
+09/10/2026  09:53                 3 FEBA21FD8D70666D26C8CBF18A97C402
+              26 File(s)        151,386 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\CopilotSnapshots\9118746F0D24E24CA9326C65F183CAC8\4E9D11E8A84C8E4EB9771F3D284F701C
+
+09/10/2026  09:54    <DIR>          .
+09/10/2026  09:53    <DIR>          ..
+09/10/2026  09:54             3,991 052F93AFCC0E38A53E35631625326E21
+09/10/2026  09:53                 3 47233DB3360BAC02674C77CF3106DB49
+09/10/2026  09:54             3,991 B10A71EC7B6F19DDF3926C5843097C57
+09/10/2026  09:53                 3 CD058D163DF14200DC3F469AC0BC3225
+09/10/2026  09:53                 3 F32902DC1091E7ABD55CCFB68ECD8EDD
+09/10/2026  09:53                 3 FEBA21FD8D70666D26C8CBF18A97C402
+               6 File(s)          7,994 bytes
+
+ Directory of D:\Github\BritPlayers\.vs\CopilotSnapshots\9118746F0D24E24CA9326C65F183CAC8\F7FBDD6FF007FE43874BA6E20E465E98
+
+09/10/2026  09:53    <DIR>          .
+09/10/2026  09:53    <DIR>          ..
+09/10/2026  09:49             1,747 114B623029CB9AB7D8FB8CCD2C4694AD
+09/10/2026  09:49             1,551 32F2E7803259220C8CB6D2ED6E5DF3A5
+09/10/2026  09:49             1,211 4A3CD407A3311FC5ACF290EDCC0C0B75
+09/10/2026  09:49             1,132 5155622B2BF2228F9AB19DB590B35320
+09/10/2026  09:49             8,571 57174813299C6F9449F7671458F6E9B8
+09/10/2026  09:49             2,891 7A6A43CDFB4C4B53DA15DE7840EA5B11
+09/10/2026  09:49             8,310 9D2C4E1DA0FC425011B99C2F93C551E1
+09/10/2026  09:49             1,551 AB750C6184C60B011D7DB20D7BD8289D
+09/10/2026  09:49             1,132 AFB3B1511BCD81DF14510DF7EC5D1414
+09/10/2026  09:49             2,891 B10A71EC7B6F19DDF3926C5843097C57
+09/10/2026  09:49             3,991 B9F22C34A5BAE1D588ECD7C60673F257
+09/10/2026  09:49             8,310 BBF07D508339C24A201BDDFFB5CEB5C6
+09/10/2026  09:53                 3 F32902DC1091E7ABD55CCFB68ECD8EDD
+09/10/2026  09:53                 3 FEBA21FD8D70666D26C8CBF18A97C402
+              14 File(s)         43,294 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers
+
+09/10/2026  10:14    <DIR>          .
+09/10/2026  11:22    <DIR>          ..
+09/10/2026  09:23               154 appsettings.Development.json
+09/10/2026  09:23               151 appsettings.json
+09/10/2026  09:24    <DIR>          bin
+09/10/2026  09:23               220 BritPlayers.csproj
+09/10/2026  09:34               238 BritPlayers.csproj.user
+09/10/2026  10:14    <DIR>          Data
+09/10/2026  09:49    <DIR>          Models
+09/10/2026  09:35    <DIR>          obj
+09/10/2026  11:02    <DIR>          Pages
+09/10/2026  09:24               640 Program.cs
+09/10/2026  09:23    <DIR>          Properties
+09/10/2026  10:30    <DIR>          Services
+09/10/2026  10:24    <DIR>          wwwroot
+               5 File(s)          1,403 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\bin
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+09/10/2026  09:24    <DIR>          Debug
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\bin\Debug
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  09:24    <DIR>          ..
+09/10/2026  11:11    <DIR>          net10.0
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\bin\Debug\net10.0
+
+09/10/2026  11:11    <DIR>          .
+09/10/2026  09:24    <DIR>          ..
+09/10/2026  09:23               154 appsettings.Development.json
+09/10/2026  09:23               151 appsettings.json
+09/10/2026  09:35               427 BritPlayers.deps.json
+09/10/2026  11:11           112,640 BritPlayers.dll
+09/10/2026  11:11           162,304 BritPlayers.exe
+09/10/2026  11:11            52,640 BritPlayers.pdb
+09/10/2026  09:35               419 BritPlayers.runtimeconfig.json
+09/10/2026  10:56           276,385 BritPlayers.staticwebassets.endpoints.json
+09/10/2026  10:56            19,503 BritPlayers.staticwebassets.runtime.json
+               9 File(s)        624,623 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\Data
+
+09/10/2026  10:14    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+09/10/2026  10:18    <DIR>          pgn
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\Data\pgn
+
+09/10/2026  10:18    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+07/10/2026  14:35         1,048,576 chandlerm.pgn
+07/10/2026  14:35           486,922 littlewoodpaul.pgn
+09/10/2026  10:17           975,331 milestony.pgn
+09/10/2026  10:18           528,613 shortn.pgn
+07/10/2026  14:35           322,345 wells_ian.pgn
+               5 File(s)      3,361,787 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\Models
+
+09/10/2026  09:49    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+09/10/2026  09:49             1,208 ChessGame.cs
+               1 File(s)          1,208 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj
+
+09/10/2026  09:35    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+09/10/2026  09:35            31,848 BritPlayers.csproj.nuget.dgspec.json
+09/10/2026  09:23             1,300 BritPlayers.csproj.nuget.g.props
+09/10/2026  09:23               150 BritPlayers.csproj.nuget.g.targets
+09/10/2026  09:24    <DIR>          Debug
+09/10/2026  09:35            31,002 project.assets.json
+09/10/2026  09:35               201 project.nuget.cache
+               5 File(s)         64,501 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  09:35    <DIR>          ..
+09/10/2026  11:11    <DIR>          net10.0
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0
+
+09/10/2026  11:11    <DIR>          .
+09/10/2026  09:24    <DIR>          ..
+09/10/2026  09:24               200 .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+09/10/2026  11:11                 2 ApiEndpoints.json
+09/10/2026  11:11           162,304 apphost.exe
+09/10/2026  11:11                 0 BritPlay.1C29C913.Up2Date
+09/10/2026  10:21             1,047 BritPlayers.AssemblyInfo.cs
+09/10/2026  10:21                66 BritPlayers.AssemblyInfoInputs.cache
+09/10/2026  09:35               227 BritPlayers.assets.cache
+09/10/2026  11:11                 0 BritPlayers.csproj.BuildWithSkipAnalyzers
+09/10/2026  09:24                66 BritPlayers.csproj.CoreCompileInputs.cache
+09/10/2026  10:56            18,866 BritPlayers.csproj.FileListAbsolute.txt
+09/10/2026  11:11           112,640 BritPlayers.dll
+09/10/2026  10:40             3,150 BritPlayers.GeneratedMSBuildEditorConfig.editorconfig
+09/10/2026  09:35                66 BritPlayers.genruntimeconfig.cache
+09/10/2026  09:24               642 BritPlayers.GlobalUsings.g.cs
+09/10/2026  09:35                 0 BritPlayers.MvcApplicationPartsAssemblyInfo.cache
+09/10/2026  11:11            52,640 BritPlayers.pdb
+09/10/2026  09:24                66 BritPlayers.RazorAssemblyInfo.cache
+09/10/2026  09:24               694 BritPlayers.RazorAssemblyInfo.cs
+09/10/2026  10:21               147 BritPlayers.sourcelink.json
+09/10/2026  10:56    <DIR>          compressed
+09/10/2026  10:56            71,102 rbcswa.dswa.cache.json
+09/10/2026  09:24    <DIR>          ref
+09/10/2026  09:24    <DIR>          refint
+09/10/2026  10:56             3,478 rjimswa.dswa.cache.json
+09/10/2026  11:11             4,572 rjsmcshtml.dswa.cache.json
+09/10/2026  11:11             4,572 rjsmrazor.dswa.cache.json
+09/10/2026  11:11            58,367 rpswa.dswa.cache.json
+09/10/2026  09:24    <DIR>          scopedcss
+09/10/2026  09:24    <DIR>          staticwebassets
+09/10/2026  10:56           276,385 staticwebassets.build.endpoints.json
+09/10/2026  10:56           419,302 staticwebassets.build.json
+09/10/2026  10:56                44 staticwebassets.build.json.cache
+09/10/2026  10:56            19,503 staticwebassets.development.json
+09/10/2026  09:35                 0 staticwebassets.references.upToDateCheck.txt
+09/10/2026  10:24               188 staticwebassets.removed.txt
+09/10/2026  11:10             8,745 staticwebassets.upToDateCheck.txt
+09/10/2026  09:24                 0 swae.build.ex.cache
+              32 File(s)      1,219,081 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\compressed
+
+09/10/2026  10:56    <DIR>          .
+09/10/2026  11:11    <DIR>          ..
+09/10/2026  09:24            64,134 0331ucacn8-{0}-kbrnm935zg-kbrnm935zg.gz
+09/10/2026  09:24             8,121 0ek4eew1b6-{0}-ag7o75518u-ag7o75518u.gz
+09/10/2026  09:24            24,360 1w6fd7yuhq-{0}-muycvpuwrr-muycvpuwrr.gz
+09/10/2026  09:24            11,063 1yyrhs981t-{0}-lcd1t2u6c8-lcd1t2u6c8.gz
+09/10/2026  09:24            23,984 2u2i94cqud-{0}-493y06b0oq-493y06b0oq.gz
+09/10/2026  09:24            92,072 36ark5s0il-{0}-6pdc2jztkx-6pdc2jztkx.gz
+09/10/2026  09:24            11,991 3lpdk22eeh-{0}-khv3u5hwcm-khv3u5hwcm.gz
+09/10/2026  09:24               189 3t3r72qoyr-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
+09/10/2026  09:24            91,715 4xk0lknend-{0}-ft3s53vfgj-ft3s53vfgj.gz
+09/10/2026  09:24             5,971 5kn91zdfga-{0}-k8d9w2qqmf-k8d9w2qqmf.gz
+09/10/2026  09:24            32,794 5tyfs5vdvb-{0}-c2jlpeoesf-c2jlpeoesf.gz
+09/10/2026  09:24            29,568 6amf53rmt6-{0}-notf2xhcfb-notf2xhcfb.gz
+09/10/2026  09:24            30,970 6k73mj6pa9-{0}-46ein0sx1k-46ein0sx1k.gz
+09/10/2026  09:24           114,959 89gnt0ltu8-{0}-hrwsygsryq-hrwsygsryq.gz
+09/10/2026  09:24             6,745 8cuqu0shwp-{0}-bqjiyaj88i-bqjiyaj88i.gz
+09/10/2026  09:24            44,353 8jpyuaphor-{0}-6cfz1n2cew-6cfz1n2cew.gz
+09/10/2026  09:24            44,124 8r68hy87hs-{0}-r4e9w2rdcm-r4e9w2rdcm.gz
+09/10/2026  09:24             5,969 9qcns9s9jc-{0}-erw9l3u2r3-erw9l3u2r3.gz
+09/10/2026  09:24            91,823 a0793fy83z-{0}-v0zj4ognzu-v0zj4ognzu.gz
+09/10/2026  09:24            14,068 bay0kr3nto-{0}-lzl9nlhx6b-lzl9nlhx6b.gz
+09/10/2026  09:24            24,308 bmvtw0piwi-{0}-nvvlpmu67g-nvvlpmu67g.gz
+09/10/2026  09:24            13,829 bxzesrm3y4-{0}-cosvhxvwiu-cosvhxvwiu.gz
+09/10/2026  09:24            15,095 bz0kpirpv0-{0}-jd9uben2k1-jd9uben2k1.gz
+09/10/2026  09:24            86,961 cfb88xiqk6-{0}-iovd86k7lj-iovd86k7lj.gz
+09/10/2026  09:24            55,850 ds7ka2xpz2-{0}-0j3bgjxly4-0j3bgjxly4.gz
+09/10/2026  09:24            68,601 e3nihe1lou-{0}-2z0ns9nrw6-2z0ns9nrw6.gz
+09/10/2026  09:24             3,367 ecyqqz8zno-{0}-rzd6atqjts-rzd6atqjts.gz
+09/10/2026  09:24            84,432 f0ypcy9mqk-{0}-0i3buxo5is-0i3buxo5is.gz
+09/10/2026  09:24            13,822 f36zizyp47-{0}-aexeepp0ev-aexeepp0ev.gz
+09/10/2026  09:24               318 fae516pkfc-{0}-b9sayid5wm-b9sayid5wm.gz
+09/10/2026  09:24            12,586 h965mod2w3-{0}-fsbi9cje9m-fsbi9cje9m.gz
+09/10/2026  09:24             2,207 hh79qi90i9-{0}-4v8eqarkd7-4v8eqarkd7.gz
+09/10/2026  09:24           115,016 ibpxr75ucv-{0}-pj5nd1wqec-pj5nd1wqec.gz
+09/10/2026  09:24             6,749 ie9rj6d54q-{0}-d7shbmvgxk-d7shbmvgxk.gz
+09/10/2026  09:24               694 jdbftjjx3i-{0}-356vix0kms-356vix0kms.gz
+09/10/2026  09:24               525 jxzdwfmfnj-{0}-84481ph2o1-84481ph2o1.gz
+09/10/2026  09:24            28,851 k4zf6abtdz-{0}-vr1egmr9el-vr1egmr9el.gz
+09/10/2026  09:24            25,833 kj9l67skxl-{0}-ee0r1s7dh0-ee0r1s7dh0.gz
+09/10/2026  09:24            30,683 krslk59erg-{0}-o1o13a6vjx-o1o13a6vjx.gz
+09/10/2026  09:24            11,933 kykd5wk645-{0}-tdbxkamptv-tdbxkamptv.gz
+09/10/2026  09:24            54,456 l96osunfs0-{0}-ttgo8qnofa-ttgo8qnofa.gz
+09/10/2026  09:24             3,246 lhucwfuto6-{0}-dxx9fxp4il-dxx9fxp4il.gz
+09/10/2026  09:24               683 lv4vb8vow7-{0}-x0q3zqp4vz-x0q3zqp4vz.gz
+09/10/2026  09:24            11,046 mh68ex31i7-{0}-06098lyss8-06098lyss8.gz
+09/10/2026  09:24             2,468 mtcoquzooa-{0}-61n19gt1b8-61n19gt1b8.gz
+09/10/2026  09:24             4,651 n0a7glag4u-{0}-47otxtyo56-47otxtyo56.gz
+09/10/2026  09:24            24,352 n4upkwbvkx-{0}-c2oey78nd0-c2oey78nd0.gz
+09/10/2026  09:24            56,670 q2knm4um7e-{0}-y7v9cxd14o-y7v9cxd14o.gz
+09/10/2026  09:24            25,822 rb4vjseb5c-{0}-fvhpjtyr6v-fvhpjtyr6v.gz
+09/10/2026  09:24               682 rfyu82mru1-{0}-mlv21k5csn-mlv21k5csn.gz
+09/10/2026  09:24            18,635 sklvb5bglu-{0}-jj8uyg4cgr-jj8uyg4cgr.gz
+09/10/2026  09:24            43,123 sv62ez2mwv-{0}-87fc7y1x7t-87fc7y1x7t.gz
+09/10/2026  09:24            33,258 t1mtkzqwh3-{0}-s35ty4nyc5-s35ty4nyc5.gz
+09/10/2026  09:24               525 tq59w6y3dx-{0}-84481ph2o1-84481ph2o1.gz
+09/10/2026  09:24            33,108 u9cb1vblzt-{0}-37tfw0ft22-37tfw0ft22.gz
+09/10/2026  09:24            14,083 uptp5yk10a-{0}-83jwlth58m-83jwlth58m.gz
+09/10/2026  09:24            32,793 uqb6u63fm5-{0}-ausgxo2sd3-ausgxo2sd3.gz
+09/10/2026  09:24             6,482 v0l85jthr3-{0}-mrlpezrjn3-mrlpezrjn3.gz
+09/10/2026  09:24            64,434 vm51m1khex-{0}-h1s4sie4z3-h1s4sie4z3.gz
+09/10/2026  09:24            16,636 ysaozvzipg-{0}-63fj8s7r0e-63fj8s7r0e.gz
+09/10/2026  09:24             3,213 zi4yz47eiz-{0}-b7pk76d08c-b7pk76d08c.gz
+09/10/2026  09:24            44,097 zi5b9ujw7h-{0}-j5mq2jizvt-j5mq2jizvt.gz
+09/10/2026  09:24            30,992 zjx2wor3h5-{0}-pk9g2wxc8p-pk9g2wxc8p.gz
+09/10/2026  09:24             3,380 zsa1zwaa12-{0}-ub07r2b239-ub07r2b239.gz
+              64 File(s)      1,879,468 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\ref
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  11:11    <DIR>          ..
+09/10/2026  10:56            24,064 BritPlayers.dll
+               1 File(s)         24,064 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\refint
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  11:11    <DIR>          ..
+09/10/2026  11:11            24,064 BritPlayers.dll
+               1 File(s)         24,064 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\scopedcss
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  11:11    <DIR>          ..
+09/10/2026  09:24    <DIR>          bundle
+09/10/2026  09:24    <DIR>          Pages
+09/10/2026  09:24    <DIR>          projectbundle
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\scopedcss\bundle
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  09:24    <DIR>          ..
+09/10/2026  09:24             1,109 BritPlayers.styles.css
+               1 File(s)          1,109 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\scopedcss\Pages
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  09:24    <DIR>          ..
+09/10/2026  09:24    <DIR>          Shared
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\scopedcss\Pages\Shared
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  09:24    <DIR>          ..
+09/10/2026  09:24             1,062 _Layout.cshtml.rz.scp.css
+               1 File(s)          1,062 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\scopedcss\projectbundle
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  09:24    <DIR>          ..
+09/10/2026  09:24             1,109 BritPlayers.bundle.scp.css
+               1 File(s)          1,109 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\obj\Debug\net10.0\staticwebassets
+
+09/10/2026  09:24    <DIR>          .
+09/10/2026  11:11    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\Pages
+
+09/10/2026  11:02    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+09/10/2026  09:23               882 Error.cshtml
+09/10/2026  09:23               524 Error.cshtml.cs
+09/10/2026  10:56             4,833 Index.cshtml
+09/10/2026  09:49             3,991 Index.cshtml.bak
+09/10/2026  11:02             1,759 Index.cshtml.cs
+09/10/2026  09:23               172 Privacy.cshtml
+09/10/2026  09:23               200 Privacy.cshtml.cs
+09/10/2026  11:11    <DIR>          Shared
+09/10/2026  09:23               107 _ViewImports.cshtml
+09/10/2026  09:23                35 _ViewStart.cshtml
+               9 File(s)         12,503 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\Pages\Shared
+
+09/10/2026  11:11    <DIR>          .
+09/10/2026  11:02    <DIR>          ..
+09/10/2026  10:56             2,082 _GameListPartial.cshtml
+09/10/2026  10:56            11,261 _GameReplayerPartial.cshtml
+08/10/2026  19:30             7,033 _Layout.cshtml
+09/10/2026  09:23               925 _Layout.cshtml.css
+09/10/2026  11:11             1,221 _NavigationMenuPartial.cshtml
+09/10/2026  09:23               181 _ValidationScriptsPartial.cshtml
+               6 File(s)         22,703 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\Properties
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+09/10/2026  09:23               639 launchSettings.json
+               1 File(s)            639 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\Services
+
+09/10/2026  10:30    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+09/10/2026  10:35             6,012 PgnService.cs
+09/10/2026  10:30             6,080 PgnService.cs.bak
+               2 File(s)         12,092 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot
+
+09/10/2026  10:24    <DIR>          .
+09/10/2026  10:14    <DIR>          ..
+09/10/2026  10:24    <DIR>          css
+09/10/2026  09:23             5,430 favicon.ico
+09/10/2026  10:24    <DIR>          images
+09/10/2026  10:23    <DIR>          js
+09/10/2026  09:23    <DIR>          lib
+               1 File(s)          5,430 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\css
+
+09/10/2026  10:24    <DIR>          .
+09/10/2026  10:24    <DIR>          ..
+09/10/2026  09:23               667 site.css
+               1 File(s)            667 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\images
+
+09/10/2026  10:24    <DIR>          .
+09/10/2026  10:24    <DIR>          ..
+08/10/2026  09:01             6,767 cat.jpg
+               1 File(s)          6,767 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\js
+
+09/10/2026  10:23    <DIR>          .
+09/10/2026  10:24    <DIR>          ..
+09/10/2026  09:23               231 site.js
+               1 File(s)            231 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  10:24    <DIR>          ..
+09/10/2026  09:23    <DIR>          bootstrap
+09/10/2026  09:23    <DIR>          jquery
+09/10/2026  09:23    <DIR>          jquery-validation
+09/10/2026  09:23    <DIR>          jquery-validation-unobtrusive
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\bootstrap
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23    <DIR>          dist
+09/10/2026  09:23             1,153 LICENSE
+               1 File(s)          1,153 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\bootstrap\dist
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23    <DIR>          css
+09/10/2026  09:23    <DIR>          js
+               0 File(s)              0 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\bootstrap\dist\css
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23            70,329 bootstrap-grid.css
+09/10/2026  09:23           203,221 bootstrap-grid.css.map
+09/10/2026  09:23            51,795 bootstrap-grid.min.css
+09/10/2026  09:23           115,986 bootstrap-grid.min.css.map
+09/10/2026  09:23            70,403 bootstrap-grid.rtl.css
+09/10/2026  09:23           203,225 bootstrap-grid.rtl.css.map
+09/10/2026  09:23            51,870 bootstrap-grid.rtl.min.css
+09/10/2026  09:23           116,063 bootstrap-grid.rtl.min.css.map
+09/10/2026  09:23            12,065 bootstrap-reboot.css
+09/10/2026  09:23           129,371 bootstrap-reboot.css.map
+09/10/2026  09:23            10,126 bootstrap-reboot.min.css
+09/10/2026  09:23            51,369 bootstrap-reboot.min.css.map
+09/10/2026  09:23            12,058 bootstrap-reboot.rtl.css
+09/10/2026  09:23           129,386 bootstrap-reboot.rtl.css.map
+09/10/2026  09:23            10,198 bootstrap-reboot.rtl.min.css
+09/10/2026  09:23            63,943 bootstrap-reboot.rtl.min.css.map
+09/10/2026  09:23           107,823 bootstrap-utilities.css
+09/10/2026  09:23           267,535 bootstrap-utilities.css.map
+09/10/2026  09:23            85,352 bootstrap-utilities.min.css
+09/10/2026  09:23           180,381 bootstrap-utilities.min.css.map
+09/10/2026  09:23           107,691 bootstrap-utilities.rtl.css
+09/10/2026  09:23           267,476 bootstrap-utilities.rtl.css.map
+09/10/2026  09:23            85,281 bootstrap-utilities.rtl.min.css
+09/10/2026  09:23           180,217 bootstrap-utilities.rtl.min.css.map
+09/10/2026  09:23           281,046 bootstrap.css
+09/10/2026  09:23           679,755 bootstrap.css.map
+09/10/2026  09:23           232,803 bootstrap.min.css
+09/10/2026  09:23           589,892 bootstrap.min.css.map
+09/10/2026  09:23           280,259 bootstrap.rtl.css
+09/10/2026  09:23           679,615 bootstrap.rtl.css.map
+09/10/2026  09:23           232,911 bootstrap.rtl.min.css
+09/10/2026  09:23           589,087 bootstrap.rtl.min.css.map
+              32 File(s)      6,148,532 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\bootstrap\dist\js
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23           207,819 bootstrap.bundle.js
+09/10/2026  09:23           444,579 bootstrap.bundle.js.map
+09/10/2026  09:23            80,721 bootstrap.bundle.min.js
+09/10/2026  09:23           332,090 bootstrap.bundle.min.js.map
+09/10/2026  09:23           135,829 bootstrap.esm.js
+09/10/2026  09:23           305,438 bootstrap.esm.js.map
+09/10/2026  09:23            73,935 bootstrap.esm.min.js
+09/10/2026  09:23           222,455 bootstrap.esm.min.js.map
+09/10/2026  09:23           145,401 bootstrap.js
+09/10/2026  09:23           306,606 bootstrap.js.map
+09/10/2026  09:23            60,635 bootstrap.min.js
+09/10/2026  09:23           220,561 bootstrap.min.js.map
+              12 File(s)      2,536,069 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\jquery
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23    <DIR>          dist
+09/10/2026  09:23             1,117 LICENSE.txt
+               1 File(s)          1,117 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\jquery\dist
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23           285,314 jquery.js
+09/10/2026  09:23            87,533 jquery.min.js
+09/10/2026  09:23           134,755 jquery.min.map
+09/10/2026  09:23           232,015 jquery.slim.js
+09/10/2026  09:23            70,264 jquery.slim.min.js
+09/10/2026  09:23           107,143 jquery.slim.min.map
+               6 File(s)        917,024 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\jquery-validation
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23    <DIR>          dist
+09/10/2026  09:23             1,117 LICENSE.md
+               1 File(s)          1,117 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\jquery-validation\dist
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23            53,033 additional-methods.js
+09/10/2026  09:23            22,125 additional-methods.min.js
+09/10/2026  09:23            52,536 jquery.validate.js
+09/10/2026  09:23            25,308 jquery.validate.min.js
+               4 File(s)        153,002 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\jquery-validation-unobtrusive
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23    <DIR>          dist
+09/10/2026  09:23             1,139 LICENSE.txt
+               1 File(s)          1,139 bytes
+
+ Directory of D:\Github\BritPlayers\BritPlayers\wwwroot\lib\jquery-validation-unobtrusive\dist
+
+09/10/2026  09:23    <DIR>          .
+09/10/2026  09:23    <DIR>          ..
+09/10/2026  09:23            19,385 jquery.validate.unobtrusive.js
+09/10/2026  09:23             5,824 jquery.validate.unobtrusive.min.js
+               2 File(s)         25,209 bytes
+
+     Total Files Listed:
+             438 File(s)     23,256,010 bytes
+             521 Dir(s)  1,844,127,100,928 bytes free

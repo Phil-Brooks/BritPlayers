@@ -39,7 +39,7 @@ else
                         <td>
                             <!-- In Step 5, this button will load the game into the board -->
                             <button class="btn btn-sm btn-outline-primary"
-                                    hx-get="/Index?handler=LoadGame&id=@game.Id"
+                                    hx-get="/?handler=GameViewer&gameId=@game.Id"
                                     hx-target="#game-viewer-panel"
                                     hx-swap="innerHTML"
                                     data-game-id="@game.Id">

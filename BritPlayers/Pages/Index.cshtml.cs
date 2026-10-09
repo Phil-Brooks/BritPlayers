@@ -16,14 +16,14 @@ public class IndexModel : PageModel
 
     public IReadOnlyList<PlayerEntry> Players { get; } =
     [
-        new("Murray Chandler", "murray-chandler", "Chandler, Murray"),
-        new("Paul Littlewood", "paul-littlewood", "Littlewood, Paul E;Littlewood, Paul"),
-        new("Anthony J Miles", "anthony-j-miles", "Miles, Anthony J;Miles, Anthony"),
-        new("Nigel Short", "nigel-short", "Short, Nigel"),
-        new("Ian D Wells", "ian-d-wells", "Wells, Ian D;Wells, Ian")
+        new("Murray Chandler", "murray-chandler", ["Chandler, Murray"]),
+        new("Paul Littlewood", "paul-littlewood", ["Littlewood, Paul E", "Littlewood, Paul"]),
+        new("Anthony J Miles", "anthony-j-miles", ["Miles, Anthony J", "Miles, Anthony"]),
+        new("Nigel Short", "nigel-short", ["Short, Nigel"]),
+        new("Ian D Wells", "ian-d-wells", ["Wells, Ian D", "Wells, Ian"])
     ];
 
-    public PlayerEntry? SelectedPlayer { get; private set; }
+    public PlayerEntry SelectedPlayer { get; private set; } = null!;
 
     public ChessGame? SelectedGame { get; private set; }
 
@@ -35,16 +35,38 @@ public class IndexModel : PageModel
     [BindProperty(SupportsGet = true)]
     public string? Game { get; set; }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        var selected = Players.FirstOrDefault(p => p.Slug.Equals(Player, StringComparison.OrdinalIgnoreCase))
+        SelectedPlayer = Players.FirstOrDefault(p => p.Slug.Equals(Player, StringComparison.OrdinalIgnoreCase))
             ?? Players[0];
-        SelectedPlayer = selected;
 
-        var aliases = selected.Aliases.Split(';', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        Games = _pgnService.Search(aliases[aliases.Length-1],"").Take(250).ToList();
-        //SelectedGame = _pgnService.GetGameById(Game);
+        // Search games across all player aliases without duplicates
+        Games = SelectedPlayer.Aliases
+            .SelectMany(alias => _pgnService.Search(alias, ""))
+            .DistinctBy(g => g.Id)
+            .Take(250)
+            .ToList();
+
+        // Load game details if requested
+        if (!string.IsNullOrWhiteSpace(Game))
+        {
+            SelectedGame = _pgnService.GetGameById(Game);
+        }
+
+        // Support HTMX partial swaps
+        if (Request.Headers.ContainsKey("HX-Request"))
+        {
+            return Partial("_GameListPartial", Games);
+        }
+
+        return Page();
+    }
+    public IActionResult OnGetGameViewer(string gameId)
+    {
+        var game = _pgnService.GetGameById(gameId);
+        if (game == null) return NotFound();
+        return Partial("_GameReplayerPartial", game);
     }
 
-    public sealed record PlayerEntry(string Name, string Slug, string Aliases);
+    public sealed record PlayerEntry(string Name, string Slug, IReadOnlyList<string> Aliases);
 }

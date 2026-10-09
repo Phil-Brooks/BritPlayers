@@ -1,22 +1,39 @@
+@{
+    var currentPlayer = Context.Request.Query["player"].ToString();
+    if (string.IsNullOrEmpty(currentPlayer))
+    {
+        currentPlayer = "murray-chandler"; // Default selected player
+    }
+
+    var players = new (string Name, string Slug)[]
+    {
+        ("Murray Chandler", "murray-chandler"),
+        ("Paul Littlewood", "paul-littlewood"),
+        ("Anthony J Miles", "anthony-j-miles"),
+        ("Nigel Short", "nigel-short"),
+        ("Ian D Wells", "ian-d-wells")
+    };
+}
+
 <!-- Main -->
 <div class="nav-section-title">Overview</div>
 <nav class="nav flex-column">
-    <a class="nav-link" href="/Home"
-       data-bs-dismiss="offcanvas"
-       onclick="window.location.href='/Home'; return false;">
+    <a class="nav-link" href="/" data-bs-dismiss="offcanvas">
         <i class="bi bi-house"></i> Home
     </a>
 </nav>
 
-
 <!-- Players -->
 <div class="nav-section-title">Players</div>
 <nav class="nav flex-column">
-    <a class="nav-link" href="/Players"
-       data-bs-dismiss="offcanvas"
-       onclick="window.location.href='/Players'; return false;">
-        <i class="bi bi-people"></i> Murray Chandler
-    </a>
+    @foreach (var player in players)
+    {
+        var isActive = string.Equals(currentPlayer, player.Slug, StringComparison.OrdinalIgnoreCase);
+        <a class="nav-link @(isActive ? "active fw-semibold" : "")"
+           href="/?player=@player.Slug">
+            <i class="bi bi-person"></i> @player.Name
+        </a>
+    }
 </nav>
 
 <!-- Other -->

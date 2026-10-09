@@ -1,0 +1,35 @@
+﻿@page
+@model BritPlayers.Pages.PlayerModel
+@{
+    ViewData["Title"] = $"{Model.CurrentPlayer.Name} - Profile";
+}
+
+<div class="container py-4">
+    <!-- Header Card -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
+            <div>
+                <span class="badge bg-primary text-uppercase mb-2">@Model.CurrentPlayer.Title</span>
+                <h1 class="display-6 fw-bold mb-1">@Model.CurrentPlayer.Name</h1>
+                <p class="text-muted mb-0">@Model.CurrentPlayer.Dates &bull; Archive collection: <strong>@Model.GameCount games</strong></p>
+            </div>
+
+            <!-- "View Games" CTA Button -->
+            <div>
+                <a class="btn btn-primary btn-lg shadow-sm" href="/Games?player=@Model.CurrentPlayer.Slug">
+                    <i class="bi bi-play-circle me-1"></i> View Games &amp; Replayer &raquo;
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Biography / Text Content Card -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3 border-bottom">
+            <h5 class="mb-0 fw-semibold"><i class="bi bi-file-text me-2 text-primary"></i>Biographical Notes &amp; History</h5>
+        </div>
+        <div class="card-body p-4 fs-6 leading-relaxed">
+            @Html.Raw(Model.CurrentPlayer.BioHtml)
+        </div>
+    </div>
+</div>

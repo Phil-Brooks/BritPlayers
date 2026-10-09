@@ -26,19 +26,18 @@
     </a>
 </nav>
 
-<!-- Players (navigates to /Games?player=...) -->
+<!-- Players -->
 <div class="nav-section-title">Players</div>
 <nav class="nav flex-column mb-3">
-    @foreach (var player in players)
+    @foreach (var player in BritPlayers.Services.PlayerCatalog.All)
     {
-        var isActive = isGamesPage && string.Equals(currentPlayer, player.Slug, StringComparison.OrdinalIgnoreCase);
+        var isActive = string.Equals(currentPlayer, player.Slug, StringComparison.OrdinalIgnoreCase);
         <a class="nav-link @(isActive ? "active fw-semibold" : "")"
-           href="/Games?player=@player.Slug">
+           href="/Player?player=@player.Slug">
             <i class="bi bi-person"></i> @player.Name
         </a>
     }
 </nav>
-
 <!-- Other Static Pages -->
 <div class="nav-section-title">Other</div>
 <nav class="nav flex-column">

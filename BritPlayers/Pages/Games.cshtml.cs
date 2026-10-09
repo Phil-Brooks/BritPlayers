@@ -16,11 +16,11 @@ public class GamesModel : PageModel
 
     public IReadOnlyList<PlayerEntry> Players { get; } =
     [
-        new("Murray Chandler", "murray-chandler", ["Chandler, Murray"]),
-        new("Paul Littlewood", "paul-littlewood", ["Littlewood, Paul E", "Littlewood, Paul"]),
-        new("Anthony J Miles", "anthony-j-miles", ["Miles, Anthony J", "Miles, Anthony"]),
-        new("Nigel Short", "nigel-short", ["Short, Nigel"]),
-        new("Ian D Wells", "ian-d-wells", ["Wells, Ian D", "Wells, Ian"])
+        new("Murray Chandler", "murray-chandler", "chandlerm.pgn"),
+    new("Paul Littlewood", "paul-littlewood", "littlewoodpaul.pgn"),
+    new("Anthony J Miles", "anthony-j-miles", "milestony.pgn"),
+    new("Nigel Short", "nigel-short", "shortn.pgn"),
+    new("Ian D Wells", "ian-d-wells", "wells_ian.pgn")
     ];
 
     public PlayerEntry SelectedPlayer { get; private set; } = null!;
@@ -38,19 +38,17 @@ public class GamesModel : PageModel
         SelectedPlayer = Players.FirstOrDefault(p => p.Slug.Equals(Player, StringComparison.OrdinalIgnoreCase))
             ?? Players[0];
 
-        Games = SelectedPlayer.Aliases
-            .SelectMany(alias => _pgnService.Search(alias, ""))
-            .DistinctBy(g => g.Id)
-            .Take(250)
-            .ToList();
+        // Load all games directly from this player's dedicated PGN file
+        Games = _pgnService.GetGamesByFile(SelectedPlayer.PgnFileName);
 
+        // Preload the requested game or default to the first one in the file
         if (!string.IsNullOrWhiteSpace(Game))
         {
-            SelectedGame = _pgnService.GetGameById(Game);
+            SelectedGame = _pgnService.GetGameById(Game) ?? Games.FirstOrDefault();
         }
         else if (Games.Count > 0)
         {
-            SelectedGame = _pgnService.GetGameById(Games[0].Id) ?? Games[0];
+            SelectedGame = Games[0];
         }
 
         if (Request.Headers.ContainsKey("HX-Request"))
@@ -60,7 +58,6 @@ public class GamesModel : PageModel
 
         return Page();
     }
-
     public IActionResult OnGetGameViewer(string gameId)
     {
         var game = _pgnService.GetGameById(gameId);
@@ -69,5 +66,5 @@ public class GamesModel : PageModel
         return Partial("_GameReplayerPartial", game);
     }
 
-    public sealed record PlayerEntry(string Name, string Slug, IReadOnlyList<string> Aliases);
+    public sealed record PlayerEntry(string Name, string Slug, string PgnFileName);
 }

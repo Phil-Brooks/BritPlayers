@@ -1,13 +1,14 @@
+using BritPlayers.Models;
+using System.Collections.Concurrent;
 using System.Text;
 using System.Text.RegularExpressions;
-using BritPlayers.Models;
 
 namespace BritPlayers.Services;
 
 public class PgnService
 {
     private readonly IWebHostEnvironment _env;
-    private readonly List<ChessGame> _cachedGames = new();
+    private readonly ConcurrentDictionary<string, List<ChessGame>> _fileCache = new();
     private bool _isLoaded = false;
     private readonly object _lock = new();
 
@@ -16,57 +17,30 @@ public class PgnService
         _env = env;
     }
 
-    public IReadOnlyList<ChessGame> GetAllGames()
+    public IReadOnlyList<ChessGame> GetGamesByFile(string fileName)
     {
-        if (_isLoaded) return _cachedGames;
-
-        lock (_lock)
+        return _fileCache.GetOrAdd(fileName, file =>
         {
-            if (_isLoaded) return _cachedGames;
-
-            var pgnDir = Path.Combine(_env.ContentRootPath, "Data", "pgn");
-            if (!Directory.Exists(pgnDir))
+            var filePath = Path.Combine(_env.ContentRootPath, "Data", "pgn", file);
+            if (!File.Exists(filePath))
             {
-                Directory.CreateDirectory(pgnDir);
+                return new List<ChessGame>();
             }
 
-            var files = Directory.GetFiles(pgnDir, "*.pgn", SearchOption.AllDirectories);
-            foreach (var file in files)
-            {
-                var games = ParsePgnFile(file);
-                _cachedGames.AddRange(games);
-            }
-
-            _isLoaded = true;
-            return _cachedGames;
-        }
+            return ParsePgnFile(filePath); // Use your existing PGN parsing method
+        });
     }
 
-    public ChessGame? GetGameById(string id)
+    public ChessGame? GetGameById(string gameId)
     {
-        return GetAllGames().FirstOrDefault(g => g.Id == id);
-    }
-
-    public IEnumerable<ChessGame> Search(string? query, string? year, int limit = 100)
-    {
-        var games = GetAllGames().AsEnumerable();
-
-        if (!string.IsNullOrWhiteSpace(query))
+        // Search across loaded games by ID
+        foreach (var gameList in _fileCache.Values)
         {
-            var q = query.Trim();
-            games = games.Where(g =>
-                g.White.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                g.Black.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                g.Event.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                g.Site.Contains(q, StringComparison.OrdinalIgnoreCase));
+            var match = gameList.FirstOrDefault(g => g.Id == gameId);
+            if (match != null) return match;
         }
 
-        if (!string.IsNullOrWhiteSpace(year))
-        {
-            games = games.Where(g => g.Date.StartsWith(year.Trim(), StringComparison.OrdinalIgnoreCase));
-        }
-
-        return games.Take(limit);
+        return null;
     }
 
     private static List<ChessGame> ParsePgnFile(string filePath)

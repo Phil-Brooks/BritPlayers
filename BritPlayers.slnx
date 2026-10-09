@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="BritPlayers.Tools/BritPlayers.Tools.pyproj" Type="888888a0-9f3d-457c-b088-3a5042f75d52" Id="eadf2407-37e3-4caa-a7e6-016a9dcafafc">
+    <Build Project="false" />
+  </Project>
   <Project Path="BritPlayers/BritPlayers.csproj" />
 </Solution>

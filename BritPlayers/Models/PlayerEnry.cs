@@ -5,6 +5,5 @@ public sealed record PlayerEntry(
     string Slug,
     string PgnFileName,
     string Title,
-    string Dates,
-    string BioHtml
+    string Dates
 );

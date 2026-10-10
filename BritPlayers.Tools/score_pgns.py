@@ -6,8 +6,8 @@ from pathlib import Path
 
 # Paths
 STOCKFISH_PATH = r"D:\scid\stockfish-windows-x86-64-universal\stockfish\stockfish-windows-x86-64-universal.exe" # Update this path!
-PGN_DIR = Path(r"D:\Github\BritPlayers\BritPlayers\Data\pgn")
-OUTPUT_DIR = Path(r"D:\Github\BritPlayers\BritPlayers\Data\pgn_annotated")
+PGN_DIR = Path(r"D:\Github\BritPlayers\BritPlayers\Data\pgn_tmp")
+OUTPUT_DIR = Path(r"D:\Github\BritPlayers\BritPlayers\Data\pgn_scr")
 
 # Engine settings: depth 10-12 gives fast, high-quality evals (~0.02s per move)
 EVAL_DEPTH = 12

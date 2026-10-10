@@ -1,66 +1,47 @@
 ﻿@page
 @model BritPlayers.Pages.GamesModel
 @{
-    ViewData["Title"] = $"{Model.SelectedPlayer?.Name} - Games";
+    ViewData["Title"] = $"{Model.SelectedPlayer.Name} - Games";
 }
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container-fluid px-3">
-        <a class="navbar-brand fw-bold me-3" asp-page="/Index">BritPlayers</a>
+
+<!-- Compact Top Bar with Player Title & Navigation -->
+<nav class="navbar navbar-dark bg-dark sticky-top px-3 py-2 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+        <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-sm btn-outline-light" href="/Player?player=@Model.SelectedPlayer.Slug" title="Back to Profile">
+                <i class="bi bi-arrow-left"></i> Profile
+            </a>
+            <span class="navbar-brand mb-0 h6 fw-bold">@Model.SelectedPlayer.Name</span>
+            @if (!string.IsNullOrEmpty(Model.SelectedPlayer.Title))
+            {
+                <span class="badge bg-secondary">@Model.SelectedPlayer.Title</span>
+            }
+        </div>
+        <div>
+            <span class="badge bg-primary">@Model.Games.Count games</span>
+        </div>
     </div>
 </nav>
 
-<div class="container py-4">
-    @if (Model.SelectedPlayer == null)
-    {
-        <div class="alert alert-info shadow-sm">
-            Please select a player from the navigation bar above to view their archive.
-        </div>
-    }
-    else
-    {
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <a class="btn btn-outline-secondary btn-sm" href="/Player?player=@Model.SelectedPlayer.Slug">
-                &laquo; Back to Player Profile
-            </a>
-            <span class="text-muted small">@Model.Games.Count games in archive</span>
-        </div>
-        
-        <div class="row justify-content-center mb-4">
-            <div class="col-12">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <h1 class="display-6 fw-bold mb-2">@Model.SelectedPlayer.Name</h1>
-                        <p class="text-muted mb-4">Games collection from this archive.</p>
+<div class="container-fluid px-3 py-3">
+    <!-- Game Replay Area (Board + Narrow Moves + Comments & Variations) -->
+    <div id="game-viewer-panel" class="mb-3">
+        @if (Model.SelectedGame != null)
+        {
+            <partial name="_GameReplayerPartial" model="Model.SelectedGame" />
+        }
+    </div>
 
-                    </div>
-                </div>
+    <!-- Games Table Container -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center py-2">
+            <h6 class="mb-0 fw-bold"><i class="bi bi-collection me-1"></i> Games Archive</h6>
+            <div id="loading-spinner" class="htmx-indicator spinner-border spinner-border-sm text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-
-        <!-- Game Replay Area (Always visible) -->
-        <div id="game-viewer-panel" class="mb-4">
-            @if (Model.SelectedGame != null)
-            {
-                <partial name="_GameReplayerPartial" model="Model.SelectedGame" />
-            }
-            else
-            {
-                <div class="card shadow-sm border-0 text-center py-5 text-muted">
-                    <p class="mb-0"><i class="bi bi-info-circle me-1"></i> No games available to display for this player.</p>
-                </div>
-            }
+        <div class="card-body p-0" id="game-list-container">
+            <partial name="_GameListPartial" model="Model.Games" />
         </div>
-        <!-- Game List Container (Updated via HTMX) -->
-        <div class="card shadow-sm">
-            <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                <h2 class="h5 mb-0">Games</h2>
-                <div id="loading-spinner" class="htmx-indicator spinner-border spinner-border-sm text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-            <div class="card-body p-0" id="game-list-container">
-                <partial name="_GameListPartial" model="Model.Games" />
-            </div>
-        </div>
-    }
+    </div>
 </div>

@@ -3,150 +3,142 @@
 <style>
     .chess-table {
         width: 100%;
+        table-layout: fixed; /* Guarantees strict 50/50 column widths */
         border-collapse: collapse;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 0.92rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 0.88rem;
     }
 
         .chess-table tbody tr {
             border-bottom: 1px solid #f1f3f5;
-            height: 32px;
+            height: 30px;
         }
 
             .chess-table tbody tr:hover {
                 background-color: #f8f9fa;
             }
 
+    /* Move Number Column */
     .move-num {
-        width: 44px;
+        width: 42px;
         text-align: right;
-        padding-right: 12px;
+        padding-right: 10px;
         color: #adb5bd;
         font-weight: 600;
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         user-select: none;
-        vertical-align: middle;
     }
 
+    /* Move Cell */
     .move-cell {
-        width: 45%;
-        padding: 2px 4px;
+        width: calc((100% - 42px) / 2);
+        padding: 2px 8px;
         cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.1s ease;
         vertical-align: middle;
     }
 
-    /* Flex wrapper inside cell for perfect alignment */
-    .move-inner {
+    /* Subtle separator between White and Black moves */
+    .chess-table td:nth-child(2) {
+        border-right: 1px solid #edf2f7;
+    }
+
+    .move-cell:hover {
+        background-color: #e9ecef;
+    }
+
+    /* Flex container inside cell: Move on left, Eval on right */
+    .move-cell-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 3px 8px;
-        border-radius: 4px;
-        transition: background-color 0.1s ease;
+        gap: 6px;
+        min-height: 24px;
     }
 
-        .move-inner:hover {
-            background-color: #e9ecef;
-        }
+    .move-san {
+        display: inline-flex;
+        align-items: center;
+        font-weight: 500;
+        white-space: nowrap;
+    }
 
-    /* Active move styling */
-    .active-move .move-inner {
+    .move-cell.active-move {
         background-color: #0d6efd !important;
         color: #ffffff !important;
         font-weight: 600;
     }
 
-    .active-move .piece-glyph {
-        color: #ffffff !important;
-    }
+        .move-cell.active-move .piece-glyph {
+            color: #ffffff !important;
+        }
 
-    .active-move .eval-pill {
-        background-color: rgba(255, 255, 255, 0.22) !important;
-        color: #ffffff !important;
-        border-color: transparent !important;
-    }
+        .move-cell.active-move .eval-badge {
+            background-color: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+        }
 
-    /* Modern Evaluation Pill Badge */
-    .eval-pill {
-        display: inline-block;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    .eval-badge {
         font-size: 0.72rem;
         font-weight: 600;
-        font-variant-numeric: tabular-nums;
-        text-align: right;
-        min-width: 48px;
-        padding: 1px 6px;
-        border-radius: 12px;
-        background-color: #f1f3f5;
-        color: #495057;
-        border: 1px solid #e9ecef;
+        padding: 1px 5px;
+        border-radius: 4px;
         user-select: none;
-        letter-spacing: -0.2px;
+        white-space: nowrap;
+        background-color: #e8f5e9;
+        color: #2e7d32;
     }
 
-        /* Subtle advantage tints */
-        .eval-pill.eval-white {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            border-color: #c8e6c9;
+        .eval-badge.eval-neg {
+            background-color: #f1f3f5;
+            color: #495057;
         }
 
-        .eval-pill.eval-black {
-            background-color: #ffebee;
-            color: #c62828;
-            border-color: #ffcdd2;
-        }
-
-        .eval-pill.eval-mate {
+        .eval-badge.eval-mate {
             background-color: #fff3e0;
             color: #e65100;
-            border-color: #ffe0b2;
-            font-weight: 700;
         }
 
     .piece-glyph {
         font-size: 1.05rem;
+        font-weight: normal;
         margin-right: 2px;
-        vertical-align: -1px;
     }
 
     .board-controls {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 0.5rem;
-        width: min(100%, 360px);
-        margin: 1rem auto 0;
+        gap: 0.35rem;
+        width: min(100%, 340px);
+        margin: 0.75rem auto 0;
     }
 
         .board-controls .btn {
-            width: 100%;
-            min-height: 46px;
-            font-size: 1.6rem;
+            min-height: 40px;
+            padding: 0.4rem;
+            font-size: 1.4rem;
             line-height: 1;
-            border-radius: 0.6rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 0.5rem;
         }
 </style>
 
 <div class="card shadow-sm border-primary">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-        <div>
-            <h5 class="mb-0">@Model.White vs @Model.Black</h5>
-            <small>@Model.Event (@Model.Date) &bull; Result: <strong>@Model.Result</strong> &bull; ECO: @Model.Eco</small>
+    <!-- Header -->
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-2">
+        <div class="d-flex flex-wrap align-items-center gap-2">
+            <h6 class="mb-0 fw-bold">@Model.White vs @Model.Black</h6>
+            <small class="opacity-75">(@Model.Date) &bull; @Model.Event &bull; <strong>@Model.Result</strong> &bull; ECO: @Model.Eco</small>
         </div>
-        <button type="button" class="btn-close btn-close-white" onclick="document.getElementById('game-viewer-panel').innerHTML = ''" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white btn-sm" onclick="document.getElementById('game-viewer-panel').innerHTML = ''" aria-label="Close"></button>
     </div>
 
-    <div class="card-body">
-        <div class="row">
-            <!-- Chessboard Column -->
-            <div class="col-lg-5 col-md-6 text-center">
-                <div id="board" style="width: 380px; max-width: 100%; margin: 0 auto;"></div>
+    <div class="card-body p-3">
+        <div class="row g-3">
+            <!-- 1. Chessboard Column -->
+            <div class="col-xl-4 col-lg-5 col-md-12 text-center">
+                <div id="board" style="width: 350px; max-width: 100%; margin: 0 auto;"></div>
 
-                <!-- Navigation Controls -->
                 <div class="board-controls" role="group" aria-label="Move controls">
                     <button id="btn-start" class="btn btn-outline-secondary" title="First move">&laquo;</button>
                     <button id="btn-prev" class="btn btn-outline-secondary" title="Previous move">&lsaquo;</button>
@@ -154,22 +146,47 @@
                     <button id="btn-next" class="btn btn-outline-secondary" title="Next move">&rsaquo;</button>
                     <button id="btn-end" class="btn btn-outline-secondary" title="Last move">&raquo;</button>
                 </div>
-                <div class="text-muted small mt-2">Use Left / Right arrow keys to step moves</div>
+                <div class="text-muted small mt-1">Use Left / Right arrow keys to step moves</div>
             </div>
 
-            <!-- Two-Column Notation Table -->
-            <div class="col-lg-7 col-md-6 mt-3 mt-md-0">
-                <div class="card h-100 shadow-sm border">
+            <!-- 2. Narrower Moves Table Column -->
+            <div class="col-xl-4 col-lg-3 col-md-6">
+                <div class="card h-100 shadow-none border">
                     <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
-                        <strong class="text-dark"><i class="bi bi-list-ol me-1"></i> Moves</strong>
-                        <span class="badge bg-secondary">Figurine SAN &bull; Eval</span>
+                        <strong class="small text-dark"><i class="bi bi-list-ol me-1"></i> Moves</strong>
+                        <span class="badge bg-secondary" style="font-size: 0.65rem;">SAN &bull; Eval</span>
                     </div>
-                    <div class="card-body p-0 overflow-auto" id="moves-container" style="max-height: 420px;">
+                    <div class="card-body p-0 overflow-auto" id="moves-container" style="max-height: 380px;">
                         <table class="chess-table">
                             <tbody id="moves-table-body">
                                 <!-- Populated dynamically -->
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Stacked Comments and Variations Column -->
+            <div class="col-xl-4 col-lg-4 col-md-6 d-flex flex-column gap-2">
+                <!-- Top Box: Move Comments -->
+                <div class="card shadow-none border flex-fill" style="min-height: 185px; max-height: 190px;">
+                    <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
+                        <strong class="small text-dark"><i class="bi bi-chat-left-text me-1"></i> Comments</strong>
+                        <span id="comment-move-badge" class="badge bg-primary-subtle text-primary" style="font-size: 0.7rem;">Start</span>
+                    </div>
+                    <div class="card-body p-2 overflow-auto" id="move-comments-panel" style="font-size: 0.85rem; line-height: 1.4;">
+                        <span class="text-muted fst-italic">No comments for this move.</span>
+                    </div>
+                </div>
+
+                <!-- Bottom Box: Move Variations (RAV) -->
+                <div class="card shadow-none border flex-fill" style="min-height: 185px; max-height: 190px;">
+                    <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
+                        <strong class="small text-dark"><i class="bi bi-diagram-3 me-1"></i> Variations</strong>
+                        <span id="variation-move-badge" class="badge bg-secondary-subtle text-secondary" style="font-size: 0.7rem;">Start</span>
+                    </div>
+                    <div class="card-body p-2 overflow-auto" id="move-variations-panel" style="font-size: 0.85rem; line-height: 1.4;">
+                        <span class="text-muted fst-italic">No variations recorded.</span>
                     </div>
                 </div>
             </div>
@@ -182,178 +199,298 @@
 
 <script>
     (function () {
-        function initReplayer() {
-            if (typeof Chess === 'undefined' || typeof Chessboard === 'undefined') {
-                setTimeout(initReplayer, 50);
-                return;
-            }
+        try {
+            const rawPgn = document.getElementById('pgn-data').textContent.trim();
 
-            try {
-                const rawPgnText = document.getElementById('pgn-data').textContent.trim();
+            // 1. Parse PGN annotations (evals, comments, variations) per ply
+            function parsePgnAnnotations(text) {
+                const annotations = { 0: { eval: null, comment: '', variations: [] } };
+                let index = 0;
+                const n = text.length;
+                let currentPly = 0;
 
-                // 1. Extract all [%eval ...] scores
-                const evalMatches = [];
-                const evalRegex = /\[%eval\s+([#+-]?\d+(?:\.\d+)?)[^\]]*\]/g;
-                let match;
-                while ((match = evalRegex.exec(rawPgnText)) !== null) {
-                    evalMatches.push(match[1]);
+                function skipWs() {
+                    while (index < n && /\s/.test(text[index])) index++;
                 }
 
-                // 2. Strip comments, variations, NAGs for chess.js
-                let cleanMoves = rawPgnText
-                    .replace(/\{[^}]*\}/gs, '')
-                    .replace(/\([^)]*\)/g, '')
-                    .replace(/\$\d+/g, '');
+                while (index < n) {
+                    skipWs();
+                    if (index >= n) break;
 
-                const chess = new Chess();
-                chess.load_pgn(cleanMoves, { sloppy: true });
+                    const ch = text[index];
 
-                const history = chess.history({ verbose: true });
-
-                chess.reset();
-                const fens = [chess.fen()];
-                for (let i = 0; i < history.length; i++) {
-                    chess.move(history[i]);
-                    fens.push(chess.fen());
-                }
-
-                let currentMoveIndex = 0;
-
-                const board = Chessboard('board', {
-                    position: 'start',
-                    showNotation: true,
-                    pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
-                });
-
-                setTimeout(() => { board.resize(); }, 50);
-
-                function toFigurine(san) {
-                    if (!san) return '';
-                    const glyphs = { 'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘' };
-                    const firstChar = san.charAt(0);
-                    if (glyphs[firstChar]) {
-                        return `<span class="piece-glyph">${glyphs[firstChar]}</span>${san.substring(1)}`;
-                    }
-                    return san;
-                }
-
-                // Format eval badge with subtle advantage coloring
-                function renderEvalBadge(val) {
-                    if (!val) return '';
-                    let extraClass = '';
-                    const num = parseFloat(val);
-
-                    if (val.startsWith('#')) {
-                        extraClass = 'eval-mate';
-                    } else if (!isNaN(num)) {
-                        if (num >= 2.0) extraClass = 'eval-white';
-                        else if (num <= -2.0) extraClass = 'eval-black';
-                    }
-
-                    return `<span class="eval-pill ${extraClass}">${val}</span>`;
-                }
-
-                // 3. Build notation table
-                const tbody = document.getElementById('moves-table-body');
-                tbody.innerHTML = '';
-
-                for (let i = 0; i < history.length; i += 2) {
-                    const moveNum = Math.floor(i / 2) + 1;
-                    const whiteMove = history[i];
-                    const blackMove = history[i + 1];
-
-                    const whiteEval = evalMatches[i] || '';
-                    const blackEval = evalMatches[i + 1] || '';
-
-                    const tr = document.createElement('tr');
-
-                    // Move number
-                    const tdNum = document.createElement('td');
-                    tdNum.className = 'move-num';
-                    tdNum.textContent = moveNum;
-                    tr.appendChild(tdNum);
-
-                    // White move
-                    const tdWhite = document.createElement('td');
-                    tdWhite.className = 'move-cell';
-                    tdWhite.setAttribute('data-move-idx', (i + 1).toString());
-                    tdWhite.innerHTML = `
-                            <div class="move-inner">
-                                <span>${toFigurine(whiteMove.san)}</span>
-                                ${renderEvalBadge(whiteEval)}
-                            </div>`;
-                    tr.appendChild(tdWhite);
-
-                    // Black move
-                    const tdBlack = document.createElement('td');
-                    tdBlack.className = 'move-cell';
-                    if (blackMove) {
-                        tdBlack.setAttribute('data-move-idx', (i + 2).toString());
-                        tdBlack.innerHTML = `
-                                <div class="move-inner">
-                                    <span>${toFigurine(blackMove.san)}</span>
-                                    ${renderEvalBadge(blackEval)}
-                                </div>`;
-                    } else {
-                        tdBlack.innerHTML = '';
-                    }
-                    tr.appendChild(tdBlack);
-
-                    tbody.appendChild(tr);
-                }
-
-                function highlightCurrentMove() {
-                    document.querySelectorAll('.move-cell').forEach(el => {
-                        const idx = parseInt(el.getAttribute('data-move-idx') || '0');
-                        if (idx === currentMoveIndex) {
-                            el.classList.add('active-move');
-                            el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-                        } else {
-                            el.classList.remove('active-move');
+                    // Comment { ... }
+                    if (ch === '{') {
+                        let start = index + 1;
+                        let depth = 1;
+                        index++;
+                        while (index < n && depth > 0) {
+                            if (text[index] === '{') depth++;
+                            else if (text[index] === '}') depth--;
+                            index++;
                         }
+                        const rawComment = text.substring(start, index - 1).trim();
+                        const evalMatch = rawComment.match(/\[%eval\s+([^\]]+)\]/i);
+                        const evalVal = evalMatch ? evalMatch[1].trim() : null;
+                        const cleanComment = rawComment.replace(/\[%eval\s+[^\]]+\]/gi, '').trim();
+
+                        if (!annotations[currentPly]) {
+                            annotations[currentPly] = { eval: null, comment: '', variations: [] };
+                        }
+                        if (evalVal) annotations[currentPly].eval = evalVal;
+                        if (cleanComment) {
+                            annotations[currentPly].comment = annotations[currentPly].comment
+                                ? annotations[currentPly].comment + ' ' + cleanComment
+                                : cleanComment;
+                        }
+                        continue;
+                    }
+
+                    // Variation ( ... )
+                    if (ch === '(') {
+                        let start = index + 1;
+                        let depth = 1;
+                        index++;
+                        while (index < n && depth > 0) {
+                            if (text[index] === '(') depth++;
+                            else if (text[index] === ')') depth--;
+                            index++;
+                        }
+                        const varText = text.substring(start, index - 1).trim();
+                        if (!annotations[currentPly]) {
+                            annotations[currentPly] = { eval: null, comment: '', variations: [] };
+                        }
+                        annotations[currentPly].variations.push(varText);
+                        continue;
+                    }
+
+                    // NAG $12
+                    if (ch === '$') {
+                        index++;
+                        while (index < n && /\d/.test(text[index])) index++;
+                        continue;
+                    }
+
+                    // Token: Move number or Move SAN
+                    let token = '';
+                    while (index < n && !/\s/.test(text[index]) && text[index] !== '{' && text[index] !== '(') {
+                        token += text[index];
+                        index++;
+                    }
+
+                    if (!token) continue;
+                    if (/^\d+\.+$/.test(token)) continue;
+                    if (/^(1-0|0-1|1\/2-1\/2|\*)$/.test(token)) continue;
+
+                    const moveSan = token.replace(/^\d+\.+/, '').trim();
+                    if (!moveSan) continue;
+
+                    currentPly++;
+                    if (!annotations[currentPly]) {
+                        annotations[currentPly] = { eval: null, comment: '', variations: [] };
+                    }
+                }
+                return annotations;
+            }
+
+            const annotations = parsePgnAnnotations(rawPgn);
+
+            // Clean moves for chess.js engine
+            let cleanMoves = rawPgn
+                .replace(/\{[^}]*\}/g, ' ')
+                .replace(/\([^)]*\)/g, ' ')
+                .replace(/\$\d+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            const chess = new Chess();
+            chess.load_pgn(cleanMoves, { sloppy: true });
+
+            const history = chess.history({ verbose: true });
+            chess.reset();
+            const fens = [chess.fen()];
+
+            for (let i = 0; i < history.length; i++) {
+                chess.move(history[i]);
+                fens.push(chess.fen());
+            }
+
+            let currentMoveIndex = 0;
+
+            const board = Chessboard('board', {
+                position: 'start',
+                showNotation: true,
+                pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
+            });
+
+            setTimeout(() => { board.resize(); }, 50);
+
+            function toFigurine(san) {
+                if (!san) return '';
+                const glyphs = { 'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘' };
+                const first = san.charAt(0);
+                return glyphs[first] ? `<span class="piece-glyph">${glyphs[first]}</span>${san.substring(1)}` : san;
+            }
+
+            function formatEvalBadge(evalVal) {
+                if (!evalVal) return '';
+                let cssClass = 'eval-badge';
+                if (evalVal.startsWith('#')) cssClass += ' eval-mate';
+                else if (evalVal.startsWith('-')) cssClass += ' eval-neg';
+                return `<span class="${cssClass}">${evalVal}</span>`;
+            }
+
+            // Build 2-column moves table with flexbox inner containers
+            const tbody = document.getElementById('moves-table-body');
+            tbody.innerHTML = '';
+
+            for (let i = 0; i < history.length; i += 2) {
+                const moveNum = Math.floor(i / 2) + 1;
+                const whiteMove = history[i];
+                const blackMove = history[i + 1];
+
+                const whitePly = i + 1;
+                const blackPly = i + 2;
+
+                const whiteEval = annotations[whitePly]?.eval;
+                const blackEval = annotations[blackPly]?.eval;
+
+                const tr = document.createElement('tr');
+
+                // Move Number Column
+                const tdNum = document.createElement('td');
+                tdNum.className = 'move-num';
+                tdNum.textContent = moveNum;
+                tr.appendChild(tdNum);
+
+                // White Move Column
+                const tdWhite = document.createElement('td');
+                tdWhite.className = 'move-cell';
+                tdWhite.setAttribute('data-move-idx', whitePly.toString());
+                tdWhite.innerHTML = `
+            <div class="move-cell-inner">
+                <span class="move-san">${toFigurine(whiteMove.san)}</span>
+                ${formatEvalBadge(whiteEval)}
+            </div>
+        `;
+                tr.appendChild(tdWhite);
+
+                // Black Move Column
+                const tdBlack = document.createElement('td');
+                tdBlack.className = 'move-cell';
+                if (blackMove) {
+                    tdBlack.setAttribute('data-move-idx', blackPly.toString());
+                    tdBlack.innerHTML = `
+                <div class="move-cell-inner">
+                    <span class="move-san">${toFigurine(blackMove.san)}</span>
+                    ${formatEvalBadge(blackEval)}
+                </div>
+            `;
+                } else {
+                    tdBlack.innerHTML = `<div class="move-cell-inner"></div>`;
+                }
+                tr.appendChild(tdBlack);
+
+                tbody.appendChild(tr);
+            }
+
+            function escapeHtml(str) {
+                return str.replace(/[&<>"']/g, m => ({
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+                }[m]));
+            }
+
+            function updateSidePanels(index) {
+                const commentEl = document.getElementById('move-comments-panel');
+                const commentBadge = document.getElementById('comment-move-badge');
+                const variationEl = document.getElementById('move-variations-panel');
+                const variationBadge = document.getElementById('variation-move-badge');
+
+                const anno = annotations[index] || {};
+                const moveInfo = index > 0 && history[index - 1] ? history[index - 1] : null;
+
+                let moveLabel = 'Start';
+                if (moveInfo) {
+                    const moveNum = Math.floor((index - 1) / 2) + 1;
+                    const isWhite = (index % 2 === 1);
+                    moveLabel = isWhite ? `${moveNum}. ${moveInfo.san}` : `${moveNum}... ${moveInfo.san}`;
+                }
+
+                if (commentBadge) commentBadge.textContent = moveLabel;
+                if (variationBadge) variationBadge.textContent = moveLabel;
+
+                // Update Comment
+                if (anno.comment && anno.comment.trim()) {
+                    commentEl.innerHTML = `<div class="text-dark">${escapeHtml(anno.comment)}</div>`;
+                } else {
+                    commentEl.innerHTML = '<span class="text-muted fst-italic">No comments for this move.</span>';
+                }
+
+                // Update Variations
+                if (anno.variations && anno.variations.length > 0) {
+                    let html = '';
+                    anno.variations.forEach(v => {
+                        html += `<div class="p-2 mb-2 rounded bg-light border font-monospace small">${escapeHtml(v)}</div>`;
                     });
+                    variationEl.innerHTML = html;
+                } else {
+                    variationEl.innerHTML = '<span class="text-muted fst-italic">No variations recorded.</span>';
                 }
+            }
 
-                function goToMove(index) {
-                    if (index < 0) index = 0;
-                    if (index >= fens.length) index = fens.length - 1;
-                    currentMoveIndex = index;
-                    board.position(fens[currentMoveIndex]);
-                    highlightCurrentMove();
-                }
-
-                document.getElementById('btn-start').onclick = () => goToMove(0);
-                document.getElementById('btn-prev').onclick = () => goToMove(currentMoveIndex - 1);
-                document.getElementById('btn-next').onclick = () => goToMove(currentMoveIndex + 1);
-                document.getElementById('btn-end').onclick = () => goToMove(fens.length - 1);
-                document.getElementById('btn-flip').onclick = () => board.flip();
-
-                tbody.addEventListener('click', (e) => {
-                    const target = e.target.closest('.move-cell');
-                    if (target && target.hasAttribute('data-move-idx')) {
-                        const moveIdx = parseInt(target.getAttribute('data-move-idx'));
-                        goToMove(moveIdx);
+            function highlightMove() {
+                document.querySelectorAll('.move-cell').forEach(el => {
+                    const idx = parseInt(el.getAttribute('data-move-idx') || '0');
+                    if (idx === currentMoveIndex) {
+                        el.classList.add('active-move');
+                        el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                    } else {
+                        el.classList.remove('active-move');
                     }
                 });
-
-                const keyHandler = (e) => {
-                    if (e.key === 'ArrowRight') {
-                        goToMove(currentMoveIndex + 1);
-                    } else if (e.key === 'ArrowLeft') {
-                        goToMove(currentMoveIndex - 1);
-                    }
-                };
-                window.removeEventListener('keydown', window._chessKeyHandler);
-                window._chessKeyHandler = keyHandler;
-                window.addEventListener('keydown', keyHandler);
-
-            } catch (err) {
-                console.error("Chess replayer initialization error:", err);
-                document.getElementById('moves-table-body').innerHTML =
-                    `<tr><td colspan="3" class="text-danger p-2">Error rendering moves: ${err.message}</td></tr>`;
             }
-        }
 
-        initReplayer();
+            function goToMove(index) {
+                if (index < 0) index = 0;
+                if (index >= fens.length) index = fens.length - 1;
+                currentMoveIndex = index;
+                board.position(fens[currentMoveIndex]);
+                highlightMove();
+                updateSidePanels(currentMoveIndex);
+            }
+
+            document.getElementById('btn-start').onclick = () => goToMove(0);
+            document.getElementById('btn-prev').onclick = () => goToMove(currentMoveIndex - 1);
+            document.getElementById('btn-next').onclick = () => goToMove(currentMoveIndex + 1);
+            document.getElementById('btn-end').onclick = () => goToMove(fens.length - 1);
+            document.getElementById('btn-flip').onclick = () => board.flip();
+
+            tbody.addEventListener('click', (e) => {
+                const target = e.target.closest('.move-cell');
+                if (target && target.hasAttribute('data-move-idx')) {
+                    const moveIdx = parseInt(target.getAttribute('data-move-idx'));
+                    goToMove(moveIdx);
+                }
+            });
+
+            const keyHandler = (e) => {
+                if (e.key === 'ArrowRight') {
+                    goToMove(currentMoveIndex + 1);
+                } else if (e.key === 'ArrowLeft') {
+                    goToMove(currentMoveIndex - 1);
+                }
+            };
+            window.removeEventListener('keydown', window._chessKeyHandler);
+            window._chessKeyHandler = keyHandler;
+            window.addEventListener('keydown', keyHandler);
+
+            // Initialize on start position
+            updateSidePanels(0);
+
+        } catch (err) {
+            console.error("Chess replayer error:", err);
+            document.getElementById('moves-table-body').innerHTML =
+                `<tr><td colspan="3" class="text-danger p-2">Error rendering moves: ${err.message}</td></tr>`;
+        }
     })();
 </script>

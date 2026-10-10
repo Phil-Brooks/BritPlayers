@@ -9,7 +9,6 @@ public class PgnService
 {
     private readonly IWebHostEnvironment _env;
     private readonly ConcurrentDictionary<string, List<ChessGame>> _fileCache = new();
-    private bool _isLoaded = false;
     private readonly object _lock = new();
 
     public PgnService(IWebHostEnvironment env)

@@ -9,5 +9,13 @@
   <ItemGroup>
     <PackageReference Include="Markdig" Version="1.4.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Data\**" />
+    <Content Include="Data\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 
 </Project>

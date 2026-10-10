@@ -3,7 +3,7 @@
 <style>
     .chess-table {
         width: 100%;
-        table-layout: fixed; /* Guarantees strict 50/50 column widths */
+        table-layout: fixed;
         border-collapse: collapse;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         font-size: 0.88rem;
@@ -18,7 +18,6 @@
                 background-color: #f8f9fa;
             }
 
-    /* Move Number Column */
     .move-num {
         width: 42px;
         text-align: right;
@@ -29,7 +28,6 @@
         user-select: none;
     }
 
-    /* Move Cell */
     .move-cell {
         width: calc((100% - 42px) / 2);
         padding: 2px 8px;
@@ -39,7 +37,6 @@
         vertical-align: middle;
     }
 
-    /* Subtle separator between White and Black moves */
     .chess-table td:nth-child(2) {
         border-right: 1px solid #edf2f7;
     }
@@ -48,7 +45,6 @@
         background-color: #e9ecef;
     }
 
-    /* Flex container inside cell: Move on left, Eval on right */
     .move-cell-inner {
         display: flex;
         align-items: center;
@@ -121,6 +117,33 @@
             line-height: 1;
             border-radius: 0.5rem;
         }
+
+    /* Variation Interactive Styling */
+    .var-move-btn {
+        cursor: pointer;
+        padding: 1px 4px;
+        margin: 0 1px;
+        border-radius: 3px;
+        color: #0d6efd;
+        font-weight: 600;
+        display: inline-block;
+        user-select: none;
+        transition: all 0.1s ease;
+    }
+
+        .var-move-btn:hover {
+            background-color: #cfe2ff;
+            color: #084298;
+        }
+
+        .var-move-btn.active-var-move {
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+        }
+
+            .var-move-btn.active-var-move .piece-glyph {
+                color: #ffffff !important;
+            }
 </style>
 
 <div class="card shadow-sm border-primary">
@@ -179,13 +202,18 @@
                     </div>
                 </div>
 
-                <!-- Bottom Box: Move Variations (RAV) -->
+                <!-- Bottom Box: Move Variations (Playable) -->
                 <div class="card shadow-none border flex-fill" style="min-height: 185px; max-height: 190px;">
                     <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
                         <strong class="small text-dark"><i class="bi bi-diagram-3 me-1"></i> Variations</strong>
-                        <span id="variation-move-badge" class="badge bg-secondary-subtle text-secondary" style="font-size: 0.7rem;">Start</span>
+                        <div class="d-flex align-items-center gap-1">
+                            <span id="variation-move-badge" class="badge bg-secondary-subtle text-secondary" style="font-size: 0.7rem;">Start</span>
+                            <button id="btn-return-mainline" class="btn btn-xs btn-outline-primary py-0 px-2 d-none" style="font-size: 0.7rem;" title="Return to Mainline Game">
+                                Resume Game
+                            </button>
+                        </div>
                     </div>
-                    <div class="card-body p-2 overflow-auto" id="move-variations-panel" style="font-size: 0.85rem; line-height: 1.4;">
+                    <div class="card-body p-2 overflow-auto" id="move-variations-panel" style="font-size: 0.85rem; line-height: 1.6;">
                         <span class="text-muted fst-italic">No variations recorded.</span>
                     </div>
                 </div>
@@ -202,9 +230,34 @@
         try {
             const rawPgn = document.getElementById('pgn-data').textContent.trim();
 
-            // 1. Parse PGN annotations (evals, comments, variations) per ply
+            const NAG_MAP = {
+                '$1': '!', '$2': '?', '$3': '!!', '$4': '??', '$5': '!?', '$6': '?!',
+                '$10': '=', '$11': '=', '$13': '∞', '$14': '⩲', '$15': '⩱', '$16': '±',
+                '$17': '∓', '$18': '+-', '$19': '-+', '$201': ''
+            };
+            const MOVE_NAGS = { '$1': '!', '$2': '?', '$3': '!!', '$4': '??', '$5': '!?', '$6': '?!' };
+            const POS_NAGS = { '$10': '=', '$11': '=', '$13': '∞', '$14': '⩲', '$15': '⩱', '$16': '±', '$17': '∓', '$18': '+-', '$19': '-+' };
+
+            function formatNagsInText(text) {
+                return text.replace(/\$(\d+)/g, (match) => {
+                    return NAG_MAP[match] !== undefined ? NAG_MAP[match] : match;
+                }).replace(/\s+/g, ' ').trim();
+            }
+
+            function stripBalanced(str, openCh, closeCh) {
+                let res = '';
+                let depth = 0;
+                for (let i = 0; i < str.length; i++) {
+                    if (str[i] === openCh) depth++;
+                    else if (str[i] === closeCh) { if (depth > 0) depth--; }
+                    else if (depth === 0) res += str[i];
+                }
+                return res;
+            }
+
+            // 1. Parse PGN annotations
             function parsePgnAnnotations(text) {
-                const annotations = { 0: { eval: null, comment: '', variations: [] } };
+                const annotations = { 0: { eval: null, comment: '', variations: [], moveNag: '', posNag: '' } };
                 let index = 0;
                 const n = text.length;
                 let currentPly = 0;
@@ -219,7 +272,12 @@
 
                     const ch = text[index];
 
-                    // Comment { ... }
+                    if (ch === '[' && index + 1 < n && text[index + 1] !== '%') {
+                        while (index < n && text[index] !== ']') index++;
+                        if (index < n) index++;
+                        continue;
+                    }
+
                     if (ch === '{') {
                         let start = index + 1;
                         let depth = 1;
@@ -230,12 +288,23 @@
                             index++;
                         }
                         const rawComment = text.substring(start, index - 1).trim();
-                        const evalMatch = rawComment.match(/\[%eval\s+([^\]]+)\]/i);
-                        const evalVal = evalMatch ? evalMatch[1].trim() : null;
-                        const cleanComment = rawComment.replace(/\[%eval\s+[^\]]+\]/gi, '').trim();
+
+                        let evalVal = null;
+                        const evalTagMatch = rawComment.match(/\[%eval\s+([^\]]+)\]/i);
+                        if (evalTagMatch) {
+                            evalVal = evalTagMatch[1].trim();
+                        } else {
+                            const sfMatch = rawComment.match(/^([+-]?\d+(?:\.\d+)?)\s*(?:\/\s*[+-]?\d+(?:\.\d+)?)?$/);
+                            if (sfMatch) evalVal = sfMatch[1].trim();
+                        }
+
+                        const cleanComment = rawComment
+                            .replace(/\[%eval\s+[^\]]+\]/gi, '')
+                            .replace(/^([+-]?\d+(?:\.\d+)?)\s*(?:\/\s*[+-]?\d+(?:\.\d+)?)?$/, '')
+                            .trim();
 
                         if (!annotations[currentPly]) {
-                            annotations[currentPly] = { eval: null, comment: '', variations: [] };
+                            annotations[currentPly] = { eval: null, comment: '', variations: [], moveNag: '', posNag: '' };
                         }
                         if (evalVal) annotations[currentPly].eval = evalVal;
                         if (cleanComment) {
@@ -246,7 +315,6 @@
                         continue;
                     }
 
-                    // Variation ( ... )
                     if (ch === '(') {
                         let start = index + 1;
                         let depth = 1;
@@ -256,38 +324,49 @@
                             else if (text[index] === ')') depth--;
                             index++;
                         }
-                        const varText = text.substring(start, index - 1).trim();
+                        const varText = text.substring(start, index - 1).replace(/\s+/g, ' ').trim();
                         if (!annotations[currentPly]) {
-                            annotations[currentPly] = { eval: null, comment: '', variations: [] };
+                            annotations[currentPly] = { eval: null, comment: '', variations: [], moveNag: '', posNag: '' };
                         }
                         annotations[currentPly].variations.push(varText);
                         continue;
                     }
 
-                    // NAG $12
                     if (ch === '$') {
-                        index++;
-                        while (index < n && /\d/.test(text[index])) index++;
+                        let nagToken = '';
+                        while (index < n && /[\$\d]/.test(text[index])) {
+                            nagToken += text[index];
+                            index++;
+                        }
+                        if (currentPly > 0) {
+                            if (!annotations[currentPly]) {
+                                annotations[currentPly] = { eval: null, comment: '', variations: [], moveNag: '', posNag: '' };
+                            }
+                            if (MOVE_NAGS[nagToken]) {
+                                annotations[currentPly].moveNag = (annotations[currentPly].moveNag || '') + MOVE_NAGS[nagToken];
+                            } else if (POS_NAGS[nagToken]) {
+                                annotations[currentPly].posNag = POS_NAGS[nagToken];
+                            }
+                        }
                         continue;
                     }
 
-                    // Token: Move number or Move SAN
                     let token = '';
-                    while (index < n && !/\s/.test(text[index]) && text[index] !== '{' && text[index] !== '(') {
+                    while (index < n && !/\s/.test(text[index]) && text[index] !== '{' && text[index] !== '(' && text[index] !== '[') {
                         token += text[index];
                         index++;
                     }
 
                     if (!token) continue;
-                    if (/^\d+\.+$/.test(token)) continue;
+                    if (/^(\d+\.+|\.+)$/.test(token)) continue;
                     if (/^(1-0|0-1|1\/2-1\/2|\*)$/.test(token)) continue;
 
-                    const moveSan = token.replace(/^\d+\.+/, '').trim();
+                    const moveSan = token.replace(/^(\d+\.+|\.+)/, '').trim();
                     if (!moveSan) continue;
 
                     currentPly++;
                     if (!annotations[currentPly]) {
-                        annotations[currentPly] = { eval: null, comment: '', variations: [] };
+                        annotations[currentPly] = { eval: null, comment: '', variations: [], moveNag: '', posNag: '' };
                     }
                 }
                 return annotations;
@@ -295,10 +374,9 @@
 
             const annotations = parsePgnAnnotations(rawPgn);
 
-            // Clean moves for chess.js engine
-            let cleanMoves = rawPgn
-                .replace(/\{[^}]*\}/g, ' ')
-                .replace(/\([^)]*\)/g, ' ')
+            // Clean moves for chess.js
+            let cleanMoves = stripBalanced(stripBalanced(rawPgn, '{', '}'), '(', ')')
+                .replace(/^\s*\[[a-zA-Z][^\]]*\]\s*$/gm, ' ')
                 .replace(/\$\d+/g, ' ')
                 .replace(/\s+/g, ' ')
                 .trim();
@@ -316,6 +394,8 @@
             }
 
             let currentMoveIndex = 0;
+            // Tracks active variation exploration: { fens: [], currentIdx: 0, vIdx: 0 }
+            let activeVarState = null;
 
             const board = Chessboard('board', {
                 position: 'start',
@@ -334,13 +414,25 @@
 
             function formatEvalBadge(evalVal) {
                 if (!evalVal) return '';
+                let display = evalVal;
                 let cssClass = 'eval-badge';
-                if (evalVal.startsWith('#')) cssClass += ' eval-mate';
-                else if (evalVal.startsWith('-')) cssClass += ' eval-neg';
-                return `<span class="${cssClass}">${evalVal}</span>`;
+
+                const num = parseFloat(evalVal);
+                if (!isNaN(num)) {
+                    if (num > 0) {
+                        cssClass += ' eval-pos';
+                        if (!display.startsWith('+')) display = '+' + display;
+                    } else if (num < 0) {
+                        cssClass += ' eval-neg';
+                    }
+                } else if (evalVal.startsWith('#')) {
+                    cssClass += ' eval-mate';
+                }
+
+                return `<span class="${cssClass}">${display}</span>`;
             }
 
-            // Build 2-column moves table with flexbox inner containers
+            // Build 2-column moves table
             const tbody = document.getElementById('moves-table-body');
             tbody.innerHTML = '';
 
@@ -352,40 +444,37 @@
                 const whitePly = i + 1;
                 const blackPly = i + 2;
 
-                const whiteEval = annotations[whitePly]?.eval;
-                const blackEval = annotations[blackPly]?.eval;
+                const whiteAnno = annotations[whitePly] || {};
+                const blackAnno = annotations[blackPly] || {};
 
                 const tr = document.createElement('tr');
 
-                // Move Number Column
                 const tdNum = document.createElement('td');
                 tdNum.className = 'move-num';
                 tdNum.textContent = moveNum;
                 tr.appendChild(tdNum);
 
-                // White Move Column
                 const tdWhite = document.createElement('td');
                 tdWhite.className = 'move-cell';
                 tdWhite.setAttribute('data-move-idx', whitePly.toString());
                 tdWhite.innerHTML = `
-            <div class="move-cell-inner">
-                <span class="move-san">${toFigurine(whiteMove.san)}</span>
-                ${formatEvalBadge(whiteEval)}
-            </div>
-        `;
+                        <div class="move-cell-inner">
+                            <span class="move-san">${toFigurine(whiteMove.san)}<strong>${whiteAnno.moveNag || ''}</strong></span>
+                            ${formatEvalBadge(whiteAnno.eval)}
+                        </div>
+                    `;
                 tr.appendChild(tdWhite);
 
-                // Black Move Column
                 const tdBlack = document.createElement('td');
                 tdBlack.className = 'move-cell';
                 if (blackMove) {
                     tdBlack.setAttribute('data-move-idx', blackPly.toString());
                     tdBlack.innerHTML = `
-                <div class="move-cell-inner">
-                    <span class="move-san">${toFigurine(blackMove.san)}</span>
-                    ${formatEvalBadge(blackEval)}
-                </div>
-            `;
+                            <div class="move-cell-inner">
+                                <span class="move-san">${toFigurine(blackMove.san)}<strong>${blackAnno.moveNag || ''}</strong></span>
+                                ${formatEvalBadge(blackAnno.eval)}
+                            </div>
+                        `;
                 } else {
                     tdBlack.innerHTML = `<div class="move-cell-inner"></div>`;
                 }
@@ -400,7 +489,43 @@
                 }[m]));
             }
 
+            // Variation Interactive Player
+            function playVariationMove(vIdx, stepIdx) {
+                const varData = window._currentVariationsData?.[vIdx];
+                if (!varData || !varData.fens[stepIdx]) return;
+
+                activeVarState = {
+                    vIdx: vIdx,
+                    fens: varData.fens,
+                    currentIdx: stepIdx,
+                    totalMoves: varData.totalMoves
+                };
+
+                board.position(varData.fens[stepIdx]);
+
+                // Highlight active move in variation panel
+                document.querySelectorAll(`.var-move-btn[data-vidx="${vIdx}"]`).forEach(el => {
+                    const idx = parseInt(el.getAttribute('data-step-idx') || '0');
+                    if (idx === stepIdx) {
+                        el.classList.add('active-var-move');
+                    } else {
+                        el.classList.remove('active-var-move');
+                    }
+                });
+
+                // Show "Resume Game" button
+                const returnBtn = document.getElementById('btn-return-mainline');
+                if (returnBtn) returnBtn.classList.remove('d-none');
+
+                // Dim mainline highlight while exploring variation
+                document.querySelectorAll('.move-cell.active-move').forEach(el => el.classList.remove('active-move'));
+            }
+
             function updateSidePanels(index) {
+                activeVarState = null;
+                const returnBtn = document.getElementById('btn-return-mainline');
+                if (returnBtn) returnBtn.classList.add('d-none');
+
                 const commentEl = document.getElementById('move-comments-panel');
                 const commentBadge = document.getElementById('comment-move-badge');
                 const variationEl = document.getElementById('move-variations-panel');
@@ -413,7 +538,8 @@
                 if (moveInfo) {
                     const moveNum = Math.floor((index - 1) / 2) + 1;
                     const isWhite = (index % 2 === 1);
-                    moveLabel = isWhite ? `${moveNum}. ${moveInfo.san}` : `${moveNum}... ${moveInfo.san}`;
+                    const nag = anno.moveNag || '';
+                    moveLabel = isWhite ? `${moveNum}. ${moveInfo.san}${nag}` : `${moveNum}... ${moveInfo.san}${nag}`;
                 }
 
                 if (commentBadge) commentBadge.textContent = moveLabel;
@@ -421,24 +547,95 @@
 
                 // Update Comment
                 if (anno.comment && anno.comment.trim()) {
-                    commentEl.innerHTML = `<div class="text-dark">${escapeHtml(anno.comment)}</div>`;
+                    commentEl.innerHTML = `<div class="text-dark">${escapeHtml(formatNagsInText(anno.comment))}</div>`;
                 } else {
                     commentEl.innerHTML = '<span class="text-muted fst-italic">No comments for this move.</span>';
                 }
 
-                // Update Variations
+                // Render Playable Variations
+                window._currentVariationsData = [];
                 if (anno.variations && anno.variations.length > 0) {
-                    let html = '';
-                    anno.variations.forEach(v => {
-                        html += `<div class="p-2 mb-2 rounded bg-light border font-monospace small">${escapeHtml(v)}</div>`;
+                    let containerHtml = '';
+                    // The variation branches from the position prior to the current mainline move
+                    const branchFen = (index > 0 && fens[index - 1]) ? fens[index - 1] : fens[0];
+
+                    anno.variations.forEach((vText, vIdx) => {
+                        const formatted = formatNagsInText(vText);
+                        const tokens = formatted.split(/\s+/);
+
+                        const branchChess = new Chess(branchFen);
+                        const varFens = [branchFen]; // index 0 is branch start
+                        let varHtml = '';
+                        let pendingNum = '';
+                        let moveCounter = 0;
+
+                        tokens.forEach(token => {
+                            if (!token) return;
+
+                            // Move numbers like 4. or ... or 4...
+                            if (/^(\d+\.+|\.+)$/.test(token)) {
+                                pendingNum = pendingNum ? (pendingNum + ' ' + token) : token;
+                                return;
+                            }
+
+                            // Positional symbols: ⩲, ±, +-, =, etc.
+                            if (/^[=\u2260\u2A72\u2A71\u00B1\u2213\u221E\u2A80\+\-]+$/.test(token)) {
+                                varHtml += `<span class="fw-bold text-secondary ms-1">${escapeHtml(token)}</span> `;
+                                return;
+                            }
+
+                            let m = token.match(/^(\d+\.+|\.+)(.*)$/);
+                            let numPart = '';
+                            let san = token;
+                            if (m && m[2]) {
+                                numPart = m[1];
+                                san = m[2];
+                            }
+
+                            if (pendingNum || numPart) {
+                                varHtml += `<span class="text-muted small">${escapeHtml((pendingNum ? pendingNum + ' ' : '') + numPart)} </span>`;
+                                pendingNum = '';
+                            }
+
+                            // Clean SAN and attempt move
+                            const cleanSan = san.replace(/[!?]+$/, '');
+                            const moveRes = branchChess.move(cleanSan, { sloppy: true });
+
+                            if (moveRes) {
+                                moveCounter++;
+                                varFens.push(branchChess.fen());
+                                varHtml += `<span class="var-move-btn" data-vidx="${vIdx}" data-step-idx="${moveCounter}">${toFigurine(san)}</span> `;
+                            } else {
+                                varHtml += `<span class="text-dark">${escapeHtml(san)}</span> `;
+                            }
+                        });
+
+                        window._currentVariationsData[vIdx] = {
+                            fens: varFens,
+                            totalMoves: moveCounter
+                        };
+
+                        containerHtml += `<div class="p-2 mb-2 rounded bg-light border" style="font-family: inherit;">${varHtml}</div>`;
                     });
-                    variationEl.innerHTML = html;
+
+                    variationEl.innerHTML = containerHtml;
+
+                    // Bind click handlers to variation moves
+                    variationEl.querySelectorAll('.var-move-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const vIdx = parseInt(btn.getAttribute('data-vidx') || '0');
+                            const stepIdx = parseInt(btn.getAttribute('data-step-idx') || '0');
+                            playVariationMove(vIdx, stepIdx);
+                        });
+                    });
+
                 } else {
                     variationEl.innerHTML = '<span class="text-muted fst-italic">No variations recorded.</span>';
                 }
             }
 
-            function highlightMove() {
+            function highlightMainMove() {
                 document.querySelectorAll('.move-cell').forEach(el => {
                     const idx = parseInt(el.getAttribute('data-move-idx') || '0');
                     if (idx === currentMoveIndex) {
@@ -454,17 +651,62 @@
                 if (index < 0) index = 0;
                 if (index >= fens.length) index = fens.length - 1;
                 currentMoveIndex = index;
+                activeVarState = null;
                 board.position(fens[currentMoveIndex]);
-                highlightMove();
+                highlightMainMove();
                 updateSidePanels(currentMoveIndex);
             }
 
-            document.getElementById('btn-start').onclick = () => goToMove(0);
-            document.getElementById('btn-prev').onclick = () => goToMove(currentMoveIndex - 1);
-            document.getElementById('btn-next').onclick = () => goToMove(currentMoveIndex + 1);
-            document.getElementById('btn-end').onclick = () => goToMove(fens.length - 1);
+            // Navigation Handlers (Supports both Mainline and Variation stepping)
+            document.getElementById('btn-start').onclick = () => {
+                if (activeVarState) {
+                    playVariationMove(activeVarState.vIdx, 1);
+                } else {
+                    goToMove(0);
+                }
+            };
+
+            document.getElementById('btn-prev').onclick = () => {
+                if (activeVarState) {
+                    if (activeVarState.currentIdx > 1) {
+                        playVariationMove(activeVarState.vIdx, activeVarState.currentIdx - 1);
+                    } else {
+                        // Return to branch start position
+                        board.position(activeVarState.fens[0]);
+                        document.querySelectorAll('.var-move-btn').forEach(el => el.classList.remove('active-var-move'));
+                        activeVarState.currentIdx = 0;
+                    }
+                } else {
+                    goToMove(currentMoveIndex - 1);
+                }
+            };
+
+            document.getElementById('btn-next').onclick = () => {
+                if (activeVarState) {
+                    if (activeVarState.currentIdx < activeVarState.totalMoves) {
+                        playVariationMove(activeVarState.vIdx, activeVarState.currentIdx + 1);
+                    }
+                } else {
+                    goToMove(currentMoveIndex + 1);
+                }
+            };
+
+            document.getElementById('btn-end').onclick = () => {
+                if (activeVarState) {
+                    playVariationMove(activeVarState.vIdx, activeVarState.totalMoves);
+                } else {
+                    goToMove(fens.length - 1);
+                }
+            };
+
             document.getElementById('btn-flip').onclick = () => board.flip();
 
+            // Resume Mainline Game button
+            document.getElementById('btn-return-mainline').onclick = () => {
+                goToMove(currentMoveIndex);
+            };
+
+            // Mainline table click
             tbody.addEventListener('click', (e) => {
                 const target = e.target.closest('.move-cell');
                 if (target && target.hasAttribute('data-move-idx')) {
@@ -473,11 +715,28 @@
                 }
             });
 
+            // Keyboard navigation (Left / Right Arrow)
             const keyHandler = (e) => {
                 if (e.key === 'ArrowRight') {
-                    goToMove(currentMoveIndex + 1);
+                    if (activeVarState) {
+                        if (activeVarState.currentIdx < activeVarState.totalMoves) {
+                            playVariationMove(activeVarState.vIdx, activeVarState.currentIdx + 1);
+                        }
+                    } else {
+                        goToMove(currentMoveIndex + 1);
+                    }
                 } else if (e.key === 'ArrowLeft') {
-                    goToMove(currentMoveIndex - 1);
+                    if (activeVarState) {
+                        if (activeVarState.currentIdx > 1) {
+                            playVariationMove(activeVarState.vIdx, activeVarState.currentIdx - 1);
+                        } else {
+                            board.position(activeVarState.fens[0]);
+                            document.querySelectorAll('.var-move-btn').forEach(el => el.classList.remove('active-var-move'));
+                            activeVarState.currentIdx = 0;
+                        }
+                    } else {
+                        goToMove(currentMoveIndex - 1);
+                    }
                 }
             };
             window.removeEventListener('keydown', window._chessKeyHandler);

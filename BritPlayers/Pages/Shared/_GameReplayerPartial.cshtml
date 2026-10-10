@@ -278,6 +278,7 @@
                         continue;
                     }
 
+                    // Comment Block { ... }
                     if (ch === '{') {
                         let start = index + 1;
                         let depth = 1;
@@ -289,18 +290,27 @@
                         }
                         const rawComment = text.substring(start, index - 1).trim();
 
+                        // 1. Extract eval: [%eval ...] OR Stockfish "+6.37 / +1.35" OR leading "+6.37"
                         let evalVal = null;
                         const evalTagMatch = rawComment.match(/\[%eval\s+([^\]]+)\]/i);
                         if (evalTagMatch) {
                             evalVal = evalTagMatch[1].trim();
                         } else {
-                            const sfMatch = rawComment.match(/^([+-]?\d+(?:\.\d+)?)\s*(?:\/\s*[+-]?\d+(?:\.\d+)?)?$/);
-                            if (sfMatch) evalVal = sfMatch[1].trim();
+                            const sfSlashMatch = rawComment.match(/([+-]?\d+(?:\.\d+)?)\s*\/\s*[+-]?\d+(?:\.\d+)?/);
+                            if (sfSlashMatch) {
+                                evalVal = sfSlashMatch[1].trim();
+                            } else {
+                                const sfNumMatch = rawComment.match(/^[+-]\d+(?:\.\d+)?(?=\s|$)/);
+                                if (sfNumMatch) evalVal = sfNumMatch[0].trim();
+                            }
                         }
 
+                        // 2. Clean out all eval numbers and separators from the comment text
                         const cleanComment = rawComment
                             .replace(/\[%eval\s+[^\]]+\]/gi, '')
-                            .replace(/^([+-]?\d+(?:\.\d+)?)\s*(?:\/\s*[+-]?\d+(?:\.\d+)?)?$/, '')
+                            .replace(/[+-]?\d+(?:\.\d+)?\s*\/\s*[+-]?\d+(?:\.\d+)?/g, '') // Strips "+6.37 / +1.35"
+                            .replace(/^[+-]\d+(?:\.\d+)?(?=\s|$)/, '')                     // Strips leading standalone score
+                            .replace(/^[\s,;:\-]+/, '')                                     // Strips leftover leading dashes/colons/spaces
                             .trim();
 
                         if (!annotations[currentPly]) {

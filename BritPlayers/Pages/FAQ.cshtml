@@ -5,14 +5,34 @@
 <div class="container py-4">
     <h1 class="display-6 fw-bold mb-3">Frequently Asked Questions</h1>
     <div class="accordion" id="faqAccordion">
+        <!-- Question 1 -->
         <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1" aria-expanded="true" aria-controls="q1">
                     Where do these games come from?
                 </button>
             </h2>
-            <div id="q1" class="accordion-collapse collapse show">
-                <div class="accordion-body">Games are sourced from either BritBase or publicly available databases such as LumbrasGigaBase.</div>
+            <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Games are sourced from either BritBase or publicly available databases such as LumbrasGigaBase.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2" aria-expanded="false" aria-controls="q2">
+                    Can I get the backing pgn files used by this site?
+                </button>
+            </h2>
+            <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    These can be downloaded from the public GitHub repository at
+                    <a href="https://github.com/Phil-Brooks/BritPlayers/tree/master/BritPlayers/Data/pgn" target="_blank" rel="noopener">
+                        GitHub / BritPlayers / Data / pgn
+                    </a>.
+                </div>
             </div>
         </div>
     </div>

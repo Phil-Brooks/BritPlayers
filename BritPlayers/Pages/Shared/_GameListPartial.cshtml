@@ -40,7 +40,8 @@ else
                             <button class="btn btn-sm btn-outline-primary"
                                     hx-get="/Games?handler=GameViewer&gameId=@game.Id"
                                     hx-target="#game-viewer-panel"
-                                    hx-swap="innerHTML">
+                                    hx-swap="innerHTML show:top"
+                                    onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
                                 Load &amp; Play
                             </button>
                         </td>

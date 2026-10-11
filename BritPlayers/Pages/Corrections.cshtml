@@ -1,9 +1,79 @@
 ﻿@page
+@model BritPlayers.Pages.CorrectionsModel
 @{
-    ViewData["Title"] = "Corrections";
+    ViewData["Title"] = "Archive Corrections - BritPlayers";
 }
+
 <div class="container py-4">
-    <h1 class="display-6 fw-bold mb-3">Corrections &amp; Additions</h1>
-    <p class="text-muted">Notice an error in game metadata, dates, moves, or player spellings?</p>
-    <p>Please reach out via the <a href="/Contact">Contact page</a> with the game ID and details.</p>
+    <!-- Header Card -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-pencil-square fs-3 text-primary"></i>
+                <h1 class="display-6 fw-bold mb-0">Archive Corrections</h1>
+            </div>
+            <p class="text-muted mb-0">
+                Log of corrections, score adjustments, and game removals applied to the player archives.
+            </p>
+        </div>
+    </div>
+
+    <!-- Corrections Table Card -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-semibold"><i class="bi bi-clock-history me-2"></i>Change Log</h5>
+            <span class="badge bg-primary">2 entries</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 130px;">Date</th>
+                            <th style="width: 170px;">Player</th>
+                            <th style="width: 140px;">Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Correction 1: Deleted empty game -->
+                        <tr>
+                            <td class="text-nowrap fw-semibold">2026-10-10</td>
+                            <td>
+                                <span class="fw-semibold">Murray Chandler</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle">
+                                    <i class="bi bi-trash3 me-1"></i>Deleted Game
+                                </span>
+                            </td>
+                            <td>
+                                <div><strong>NZL-ch Premier Reserve 1972-73</strong> &bull; Chandler, Murray G vs Thomson, O</div>
+                                <small class="text-muted">Deleted empty placeholder game record with missing/unknown moves.</small>
+                            </td>
+                        </tr>
+
+                        <!-- Correction 2: Score correction -->
+                        <tr>
+                            <td class="text-nowrap fw-semibold">2026-10-10</td>
+                            <td>
+                                <span class="fw-semibold">Murray Chandler</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">
+                                    <i class="bi bi-arrow-left-right me-1"></i>Score Fix
+                                </span>
+                            </td>
+                            <td>
+                                <div><strong>NZL Schoolboys (1974.09.02, Round 2)</strong> &bull; Wansink, Robert vs Chandler, Murray G</div>
+                                <small class="text-muted">
+                                    Corrected game result from <span class="badge bg-secondary">1-0</span> to <span class="badge bg-success">0-1</span>.
+                                </small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

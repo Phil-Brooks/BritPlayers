@@ -2,6 +2,7 @@ using BritPlayers.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpClient(); 
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<PgnService>();
 

@@ -6,70 +6,60 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class ContactModel : PageModel
 {
-    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly IHttpClientFactory _clientFactory;
     private readonly IConfiguration _config;
 
-    public ContactModel(IHttpClientFactory httpClientFactory, IConfiguration config)
+    public ContactModel(IHttpClientFactory clientFactory, IConfiguration config)
     {
-        _httpClientFactory = httpClientFactory;
+        _clientFactory = clientFactory;
         _config = config;
     }
 
-    [BindProperty] public string? Name { get; set; }
-    [BindProperty] public string Category { get; set; } = string.Empty;
-    [BindProperty] public string Title { get; set; } = string.Empty;
-    [BindProperty] public string Message { get; set; } = string.Empty;
+    [BindProperty]
+    public string Name { get; set; } = string.Empty;
+
+    [BindProperty]
+    public string Subject { get; set; } = string.Empty;
+
+    [BindProperty]
+    public string Message { get; set; } = string.Empty;
 
     public void OnGet() { }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostSubmitAsync()
     {
-        if (string.IsNullOrWhiteSpace(Title) || string.IsNullOrWhiteSpace(Message))
+        if (string.IsNullOrWhiteSpace(Subject) || string.IsNullOrWhiteSpace(Message))
         {
-            return Content("<div class='alert alert-danger'>Please fill in all required fields.</div>");
+            return Content("<div class='alert alert-danger'>Subject and message are required.</div>", "text/html");
         }
 
-        // Configure these in appsettings.json or User Secrets
-        var githubToken = _config["GitHub:Token"]; // Fine-grained Personal Access Token with "Issues: Write" permission
-        var repoOwner = "YOUR_GITHUB_USERNAME";
-        var repoName = "YOUR_REPO";
+        var token = _config["GitHub:Token"];
+        var owner = _config["GitHub:Owner"] ?? "Phil-Brooks";
+        var repo = _config["GitHub:Repo"] ?? "BritPlayers";
 
-        var client = _httpClientFactory.CreateClient();
+        var client = _clientFactory.CreateClient();
         client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("BritPlayersApp", "1.0"));
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", githubToken);
-
-        var bodyBuilder = new StringBuilder();
-        bodyBuilder.AppendLine($"**Category:** {Category}");
-        bodyBuilder.AppendLine($"**Submitted By:** {(string.IsNullOrWhiteSpace(Name) ? "Anonymous" : Name)}");
-        bodyBuilder.AppendLine("\n---\n");
-        bodyBuilder.AppendLine(Message);
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var payload = new
         {
-            title = $"[{Category}] {Title}",
-            body = bodyBuilder.ToString(),
-            labels = new[] { "feedback", Category.ToLowerInvariant() }
+            title = $"[Contact] {Subject}",
+            body = $"**From:** {Name}\n\n**Message:**\n{Message}",
+            labels = new[] { "feedback" }
         };
 
-        var json = JsonSerializer.Serialize(payload);
-        var response = await client.PostAsync(
-            $"https://api.github.com/repos/{repoOwner}/{repoName}/issues",
-            new StringContent(json, Encoding.UTF8, "application/json")
-        );
+        var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+        var response = await client.PostAsync($"https://api.github.com/repos/{owner}/{repo}/issues", content);
 
         if (response.IsSuccessStatusCode)
         {
-            // Returns HTMX fragment confirming submission
             return Content(@"
-                <div class='alert alert-success p-4'>
-                    <h5 class='alert-heading'><i class='bi bi-check-circle me-2'></i>Message Received!</h5>
-                    <p class='mb-0'>Thank you for your feedback. An issue has been created in the repository for review.</p>
-                </div>");
+                <div class='alert alert-success' role='alert'>
+                    <h5 class='alert-heading'>Message Sent!</h5>
+                    <p class='mb-0'>Thank you for reaching out. Your feedback has been logged to our GitHub tracker.</p>
+                </div>", "text/html");
         }
 
-        return Content(@"
-            <div class='alert alert-danger'>
-                Failed to deliver message to GitHub. Please try again or open an issue directly.
-            </div>");
+        return Content("<div class='alert alert-danger'>Failed to submit issue. Please check your GitHub token permissions.</div>", "text/html");
     }
 }

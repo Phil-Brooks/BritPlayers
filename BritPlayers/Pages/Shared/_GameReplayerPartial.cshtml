@@ -767,7 +767,7 @@
             updateSidePanels(0);
 
             // --- Next Game in Archive Handler ---
-            (function setupNextGameHandler() {
+            function setupNextGameHandler() {
                 const nextGameBtn = document.getElementById('btn-next-game');
                 if (!nextGameBtn) return;
 
@@ -781,6 +781,10 @@
                     nextGameBtn.disabled = true;
                     return;
                 }
+
+                // Enable button by default if games exist
+                nextGameBtn.disabled = false;
+                nextGameBtn.classList.remove('opacity-50');
 
                 // Find index of the currently loaded game
                 let currentIndex = -1;
@@ -797,17 +801,28 @@
                     nextGameBtn.disabled = true;
                     nextGameBtn.classList.add('opacity-50');
                     nextGameBtn.title = "At the last game in archive";
+                } else {
+                    nextGameBtn.title = "Load next game from archive";
                 }
 
-                nextGameBtn.onclick = function () {
+                nextGameBtn.onclick = function (e) {
+                    e.preventDefault();
                     const nextIndex = currentIndex + 1;
                     if (nextIndex < gameButtons.length) {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
                         gameButtons[nextIndex].click();
                     }
                 };
-            })();
+            }
+            // 1. Wait until DOM is fully parsed on initial page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupNextGameHandler);
+            } else {
+                // If DOM is already ready (e.g. loaded via partial view swap)
+                setTimeout(setupNextGameHandler, 0);
+            }
 
+            // 2. If using HTMX when clicking or swapping content
+            document.addEventListener('htmx:afterSettle', setupNextGameHandler);
 
 
         } catch (err) {

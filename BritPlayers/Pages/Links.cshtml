@@ -2,11 +2,75 @@
 @{
     ViewData["Title"] = "Links";
 }
+
 <div class="container py-4">
-    <h1 class="display-6 fw-bold mb-3">Links &amp; Resources</h1>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><a href="https://www.britbase.info/" target="_blank" rel="noopener">BritBase Official Website</a></li>
-        <li class="list-group-item"><a href="https://www.englishchess.org.uk/" target="_blank" rel="noopener">English Chess Federation (ECF)</a></li>
-        <li class="list-group-item"><a href="https://www.fide.com/" target="_blank" rel="noopener">FIDE International Chess Federation</a></li>
-    </ul>
+    <h1 class="display-6 fw-bold mb-4">Links &amp; Resources</h1>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col" style="width: 45%;">Link &amp; Address</th>
+                    <th scope="col" style="width: 55%;">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="fw-semibold">BritBase Official Website</div>
+                        <a href="https://www.britbase.info/" target="_blank" rel="noopener" class="small text-break">
+                            https://www.britbase.info/
+                        </a>
+                    </td>
+                    <td class="text-muted">
+                        Archive and database of British chess games, historical tournaments, and records. An inspiration for this site and a source of some of the game data.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="fw-semibold">Scid vs. PC</div>
+                        <a href="https://scidvspc.sourceforge.net/" target="_blank" rel="noopener" class="small text-break">
+                            https://scidvspc.sourceforge.net/
+                        </a>
+                    </td>
+                    <td class="text-muted">
+                        Free and open-source chess database software and game analysis tool. Used to mange the chess game database and to generate the PGN files for the player archives.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="fw-semibold">Stockfish</div>
+                        <a href="https://stockfishchess.org/" target="_blank" rel="noopener" class="small text-break">
+                            https://stockfishchess.org/
+                        </a>
+                    </td>
+                    <td class="text-muted">
+                        Powerful open-source chess evaluation and analysis engine. Used to generate the analysis scores against each move and to show errors with alternative better lines.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="fw-semibold">English Chess Federation (ECF)</div>
+                        <a href="https://www.englishchess.org.uk/" target="_blank" rel="noopener" class="small text-break">
+                            https://www.englishchess.org.uk/
+                        </a>
+                    </td>
+                    <td class="text-muted">
+                        The national governing body for chess competition and grading in England.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="fw-semibold">FIDE</div>
+                        <a href="https://www.fide.com/" target="_blank" rel="noopener" class="small text-break">
+                            https://www.fide.com/
+                        </a>
+                    </td>
+                    <td class="text-muted">
+                        International Chess Federation, the governing body of world chess.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

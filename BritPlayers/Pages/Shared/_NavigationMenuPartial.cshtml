@@ -1,52 +1,36 @@
 @{
     var currentPath = Context.Request.Path.Value ?? "/";
-    var isGamesPage = currentPath.StartsWith("/Games", StringComparison.OrdinalIgnoreCase);
-    var currentPlayer = Context.Request.Query["player"].ToString();
-    if (isGamesPage && string.IsNullOrEmpty(currentPlayer))
-    {
-        currentPlayer = "murray-chandler";
-    }
-
 }
 
-<!-- Overview -->
-<div class="nav-section-title">Overview</div>
-<nav class="nav flex-column mb-3">
-    <a class="nav-link @(currentPath == "/" || currentPath.Equals("/Index", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
-       href="/">
-        <i class="bi bi-house"></i> Home
-    </a>
-</nav>
-
-<!-- Players -->
-<div class="nav-section-title">Players</div>
-<nav class="nav flex-column mb-3">
-    @foreach (var player in BritPlayers.Services.PlayerCatalog.All)
-    {
-        var isActive = string.Equals(currentPlayer, player.Slug, StringComparison.OrdinalIgnoreCase);
-        <a class="nav-link @(isActive ? "active fw-semibold" : "")"
-           href="/Player?player=@player.Slug">
-            <i class="bi bi-person"></i> @player.Name
+<ul class="navbar-nav align-items-md-center gap-1">
+    <li class="nav-item">
+        <a class="nav-link px-2 @(currentPath == "/" || currentPath.Equals("/Index", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold text-white" : "")"
+           href="/">
+            <i class="bi bi-house me-1"></i> Home
         </a>
-    }
-</nav>
-<!-- Other Static Pages -->
-<div class="nav-section-title">Other</div>
-<nav class="nav flex-column">
-    <a class="nav-link @(currentPath.Equals("/Links", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
-       href="/Links">
-        <i class="bi bi-link-45deg"></i> Links
-    </a>
-    <a class="nav-link @(currentPath.Equals("/Corrections", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
-       href="/Corrections">
-        <i class="bi bi-pencil-square"></i> Corrections
-    </a>
-    <a class="nav-link @(currentPath.Equals("/Faq", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
-       href="/Faq">
-        <i class="bi bi-question-circle"></i> FAQ
-    </a>
-    <a class="nav-link @(currentPath.Equals("/Contact", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
-       href="/Contact">
-        <i class="bi bi-envelope"></i> Contact
-    </a>
-</nav>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-2 @(currentPath.Equals("/Links", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold text-white" : "")"
+           href="/Links">
+            <i class="bi bi-link-45deg me-1"></i> Links
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-2 @(currentPath.Equals("/Corrections", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
+           href="/Corrections">
+            <i class="bi bi-pencil-square me-1"></i> Corrections
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-2 @(currentPath.Equals("/Faq", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
+           href="/Faq">
+            <i class="bi bi-question-circle me-1"></i> FAQ
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link px-2 @(currentPath.Equals("/Contact", StringComparison.OrdinalIgnoreCase) ? "active fw-semibold" : "")"
+           href="/Contact">
+            <i class="bi bi-envelope me-1"></i> Contact
+        </a>
+    </li>
+</ul>

@@ -87,8 +87,8 @@
     }
 
         .eval-badge.eval-neg {
-            background-color: #f1f3f5;
-            color: #495057;
+            background-color: #ffebee;
+            color: #c62828;
         }
 
         .eval-badge.eval-mate {
@@ -144,6 +144,18 @@
             .var-move-btn.active-var-move .piece-glyph {
                 color: #ffffff !important;
             }
+
+    .move-san.bad-move,
+    .move-san.bad-move strong {
+        color: #dc3545 !important;
+        font-weight: 600;
+    }
+
+    /* When the move is selected/active, ensure text stays white on the blue background */
+    .move-cell.active-move .move-san.bad-move,
+    .move-cell.active-move .move-san.bad-move strong {
+        color: #ffffff !important;
+    }
 </style>
 
 <div class="card shadow-sm border-primary">
@@ -445,12 +457,15 @@
                     } else if (num < 0) {
                         cssClass += ' eval-neg';
                     }
-                } else if (evalVal.startsWith('#')) {
-                    cssClass += ' eval-mate';
+                } else if (evalVal.includes('#')) {
+                    cssClass += evalVal.includes('-') ? ' eval-mate eval-neg' : ' eval-mate';
                 }
 
                 return `<span class="${cssClass}">${display}</span>`;
             }
+            
+            // Helper to check for doubtful / bad moves (?, ??, ?!, !?)
+            const isBadMove = (san, nag) => (nag && nag.includes('?')) || (san && san.includes('?'));
 
             // Build 2-column moves table
             const tbody = document.getElementById('moves-table-body');
@@ -474,27 +489,35 @@
                 tdNum.textContent = moveNum;
                 tr.appendChild(tdNum);
 
+                // White move
+                const whiteBad = isBadMove(whiteMove.san, whiteAnno.moveNag);
                 const tdWhite = document.createElement('td');
                 tdWhite.className = 'move-cell';
                 tdWhite.setAttribute('data-move-idx', whitePly.toString());
                 tdWhite.innerHTML = `
-                        <div class="move-cell-inner">
-                            <span class="move-san">${toFigurine(whiteMove.san)}<strong>${whiteAnno.moveNag || ''}</strong></span>
-                            ${formatEvalBadge(whiteAnno.eval)}
-                        </div>
-                    `;
+                            <div class="move-cell-inner">
+                                <span class="move-san ${whiteBad ? 'bad-move' : ''}">
+                                    ${toFigurine(whiteMove.san)}<strong>${whiteAnno.moveNag || ''}</strong>
+                                </span>
+                                ${formatEvalBadge(whiteAnno.eval)}
+                            </div>
+                        `;
                 tr.appendChild(tdWhite);
 
+                // Black move
                 const tdBlack = document.createElement('td');
                 tdBlack.className = 'move-cell';
                 if (blackMove) {
+                    const blackBad = isBadMove(blackMove.san, blackAnno.moveNag);
                     tdBlack.setAttribute('data-move-idx', blackPly.toString());
                     tdBlack.innerHTML = `
-                            <div class="move-cell-inner">
-                                <span class="move-san">${toFigurine(blackMove.san)}<strong>${blackAnno.moveNag || ''}</strong></span>
-                                ${formatEvalBadge(blackAnno.eval)}
-                            </div>
-                        `;
+                                <div class="move-cell-inner">
+                                    <span class="move-san ${blackBad ? 'bad-move' : ''}">
+                                        ${toFigurine(blackMove.san)}<strong>${blackAnno.moveNag || ''}</strong>
+                                    </span>
+                                    ${formatEvalBadge(blackAnno.eval)}
+                                </div>
+                            `;
                 } else {
                     tdBlack.innerHTML = `<div class="move-cell-inner"></div>`;
                 }
@@ -502,6 +525,7 @@
 
                 tbody.appendChild(tr);
             }
+            
 
             function escapeHtml(str) {
                 return str.replace(/[&<>"']/g, m => ({

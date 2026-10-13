@@ -27,12 +27,19 @@ public class PlayerModel : PageModel
     public PlayerEntry CurrentPlayer { get; private set; } = null!;
     public int GameCount { get; private set; }
     public string BioHtml { get; private set; } = string.Empty;
+    public string? PhotoUrl { get; private set; }
 
     public void OnGet()
     {
         CurrentPlayer = PlayerCatalog.GetBySlug(Player);
         var games = _pgnService.GetGamesByFile(CurrentPlayer.PgnFileName);
         GameCount = games.Count;
+
+        var photoPath = Path.Combine(_env.WebRootPath, "photos", $"{CurrentPlayer.Slug}.jpg");
+        if (System.IO.File.Exists(photoPath))
+        {
+            PhotoUrl = $"/photos/{CurrentPlayer.Slug}.jpg";
+        }
 
         // Path to Markdown file: Data/bios/{slug}.md
         var bioPath = Path.Combine(_env.ContentRootPath, "Data", "bios", $"{CurrentPlayer.Slug}.md");

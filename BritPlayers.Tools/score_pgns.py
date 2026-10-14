@@ -20,7 +20,7 @@ HASH_MB = 256
 EVAL_TIME_LIMIT: Optional[float] = 4.0
 
 # Game range selection (1-indexed, inclusive).
-START_GAME: Optional[int] = 101
+START_GAME: Optional[int] = 1
 END_GAME: Optional[int] = None
 
 # Annotation Settings

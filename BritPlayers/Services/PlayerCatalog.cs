@@ -6,6 +6,7 @@ public static class PlayerCatalog
 {
     public static readonly IReadOnlyList<PlayerEntry> All =
     [
+        new("Raymond D Keene", "raymond-d-keene", "Grandmaster", "b. 1948"),
         new("Murray Chandler", "murray-chandler", "Grandmaster", "b. 1960"),
         new("Paul Littlewood", "paul-littlewood", "International Master", "b. 1956"),
         new("Anthony J Miles", "anthony-j-miles", "Grandmaster", "1955 – 2001"),

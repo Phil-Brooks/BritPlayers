@@ -1,5 +1,6 @@
 ﻿@page
 @model BritPlayers.Pages.UpdatesModel
+@using BritPlayers.Models
 @{
     ViewData["Title"] = "Updates - BritPlayers";
 }
@@ -13,7 +14,7 @@
                 <h1 class="display-6 fw-bold mb-0">Updates</h1>
             </div>
             <p class="text-muted mb-0">
-                Log of additions,corrections, score adjustments, and game removals applied to the player archives.
+                Log of additions, corrections, score adjustments, and game removals applied to the player archives.
             </p>
         </div>
     </div>
@@ -22,7 +23,8 @@
     <div class="card shadow-sm border-0">
         <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
             <h5 class="mb-0 fw-semibold"><i class="bi bi-clock-history me-2"></i>Change Log</h5>
-            <span class="badge bg-primary">5 entries</span>
+            <!-- Dynamic count -->
+            <span class="badge bg-primary">@Model.Updates.Count entries</span>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -31,89 +33,44 @@
                         <tr>
                             <th style="width: 130px;">Date</th>
                             <th style="width: 170px;">Player</th>
-                            <th style="width: 140px;">Type</th>
+                            <th style="width: 150px;">Type</th>
                             <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Deleted empty games -->
-                        <tr>
-                            <td class="text-nowrap fw-semibold">2026-10-14</td>
-                            <td>
-                                <span class="fw-semibold">Paul Littlewood</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle">
-                                    <i class="bi bi-trash3 me-1"></i>Deleted Games
-                                </span>
-                            </td>
-                            <td>
-                                <div>Deleted 11 games which had no moves</div>
-                            </td>
-                        </tr>
-                        <!-- Deleted empty games -->
-                        <tr>
-                            <td class="text-nowrap fw-semibold">2026-10-14</td>
-                            <td>
-                                <span class="fw-semibold">Nigel Short</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle">
-                                    <i class="bi bi-trash3 me-1"></i>Deleted Games
-                                </span>
-                            </td>
-                            <td>
-                                <div>Deleted 19 games which had no moves</div>
-                            </td>
-                        </tr>
-                        <!-- Deleted empty games -->
-                        <tr>
-                            <td class="text-nowrap fw-semibold">2026-10-13</td>
-                            <td>
-                                <span class="fw-semibold">Tony Miles</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle">
-                                    <i class="bi bi-trash3 me-1"></i>Deleted Games
-                                </span>
-                            </td>
-                            <td>
-                                <div>Deleted 18 games which had no moves</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-nowrap fw-semibold">2026-10-10</td>
-                            <td>
-                                <span class="fw-semibold">Murray Chandler</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle">
-                                    <i class="bi bi-trash3 me-1"></i>Deleted Games
-                                </span>
-                            </td>
-                            <td>
-                                <div>Deleted 43 games which had no moves, such as the 1972 game against <strong>Thomson, O</strong></div>
-                            </td>
-                        </tr>
-
-                        <!-- Correction 2: Score correction -->
-                        <tr>
-                            <td class="text-nowrap fw-semibold">2026-10-10</td>
-                            <td>
-                                <span class="fw-semibold">Murray Chandler</span>
-                            </td>
-                            <td>
-                                <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">
-                                    <i class="bi bi-arrow-left-right me-1"></i>Score Fix
-                                </span>
-                            </td>
-                            <td>
-                                <div><strong>NZL Schoolboys (1974.09.02, Round 2)</strong> &bull; Wansink, Robert vs Chandler, Murray G</div>
-                                <small class="text-muted">
-                                    Corrected game result from <span class="badge bg-secondary">1-0</span> to <span class="badge bg-success">0-1</span>.
-                                </small>
-                            </td>
-                        </tr>
+                        @foreach (var item in Model.Updates)
+                        {
+                            var u = item.Entry;
+                            <tr>
+                                <td class="text-nowrap fw-semibold text-secondary">
+                                    @u.Date.ToString("yyyy-MM-dd")
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.PlayerSlug))
+                                    {
+                                        <a href="/Player?player=@item.PlayerSlug" class="fw-semibold text-primary text-decoration-none">
+                                            @u.PlayerName
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-semibold text-dark">@u.PlayerName</span>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge @u.Type.BadgeClass()">
+                                        <i class="bi @u.Type.IconClass() me-1"></i>@u.Type.DisplayName()
+                                    </span>
+                                </td>
+                                <td>
+                                    <div>@u.Details</div>
+                                    @if (!string.IsNullOrWhiteSpace(u.SubDetails))
+                                    {
+                                        <small class="text-muted d-block mt-1">@u.SubDetails</small>
+                                    }
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

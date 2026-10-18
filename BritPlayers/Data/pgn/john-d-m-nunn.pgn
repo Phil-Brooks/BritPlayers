@@ -127185,30 +127185,23 @@ Rxa6 {[%eval +0.00]} 42. ... Rxb3 {[%eval +0.00]} 43. a5 {[%eval +0.00]}
 [Annotator "Stockfish 19"]
 [Depth "15"]
 
-1. e4 {[%eval +0.51] [%clk 1:30:52]} 1. ... c5 {[%eval +0.49] [%clk 
-1:30:55]} 2. Nf3 {[%eval +0.42] [%clk 1:31:15]} 2. ... Nc6 {[%eval +0.48] 
-[%clk 1:31:20]} 3. Bb5 {[%eval +0.59] [%clk 1:31:31]} 3. ... g6 {[%eval 
-+0.55] [%clk 1:31:42]} 4. O-O {[%eval +0.50] [%clk 1:31:29]} 4. ... Bg7 {
-[%eval +0.61] [%clk 1:32:05]} 5. c3 {[%eval +0.55] [%clk 1:31:49]} 5. ... 
-Nf6 {[%eval +0.57] [%clk 1:31:28]} 6. Re1 {[%eval +0.52] [%clk 1:32:06]} 
-6. ... O-O {[%eval +0.55] [%clk 1:30:52]} 7. d4 {[%eval +0.62] [%clk 
-1:32:22]} 7. ... d5 {[%eval +0.63] [%clk 1:28:16]} 8. e5 {[%eval +0.57] 
-[%clk 1:32:43]} 8. ... Ne4 {[%eval +0.57] [%clk 1:28:01]} 9. Be3 {[%eval 
-+0.57] [%clk [Source "LumbrasGigaBase"] 1:33:02]} 9. ... cxd4 {[%eval 
-+0.57] [%clk 1:23:57]} 10. cxd4 {[%eval +0.51] [%clk 1:33:17]} 10. ... f6 
-{[%eval +0.66] [%clk 1:13:54]} 11. Nc3 {[%eval +0.75] [%clk 1:12:48]} 
-11. ... Nxc3 {[%eval +0.77] [%clk 1:05:13]} 12. bxc3 {[%eval +0.79] [%clk 
-1:13:03]} 12. ... Bg4 {[%eval +0.93] [%clk 1:04:30]} 13. exf6 {[%eval 
-+0.89] [%clk 1:08:25]} 13. ... exf6 {[%eval +0.95] [%clk 0:56:32]} 14. h3 
-{[%eval +0.95] [%clk 1:03:52]} 14. ... Bd7 {[%eval +0.97] [%clk 0:48:43]} 
-15. Qb3 {[%eval +0.78] [%clk 0:57:45]} 15. ... Be8 {[%eval +0.89] [%clk 
-0:45:01]} 16. Bf4 {[%eval +0.33] [%clk 0:49:13]} 16. ... Na5 {[%eval 
-+0.54] [%clk 0:44:05]} 17. Qb4 {[%eval +0.58] [%clk 0:48:30]} 17. ... Bxb5
-{[%eval +0.39] [%clk 0:44:27]} 18. Qxb5 {[%eval +0.42] [%clk 0:48:54]} 
-18. ... Rf7 {[%eval +0.58] [%clk 0:40:33]} 19. Re6 {[%eval +0.23] [%clk 
-0:46:34]} 19. ... Qd7 {[%eval +0.09] [%clk 0:38:06]} 20. Qe2 {[%eval 
-+0.23] [%clk 0:38:42]} 20. ... Nc4 {[%eval +0.11] [%clk 0:37:59]} 21. Bg3 
-{[%eval -0.01] [%clk 0:26:51]} 21. ... Ne5 {[%eval +0.34] [%clk 0:33:45]} 
+1. e4 {[%eval +0.51]} 1. ... c5 {[%eval +0.49]} 2. Nf3 {[%eval +0.42]} 2. ... Nc6 {[%eval +0.48]} 3. Bb5 {[%eval +0.59]} 3. ... g6 {[%eval 
++0.55]} 4. O-O {[%eval +0.50]} 4. ... Bg7 {
+[%eval +0.61]} 5. c3 {[%eval +0.55]} 5. ... 
+Nf6 {[%eval +0.57]} 6. Re1 {[%eval +0.52]} 
+6. ... O-O {[%eval +0.55]} 7. d4 {[%eval +0.62]} 7. ... d5 {[%eval +0.63]} 8. e5 {[%eval +0.57]} 8. ... Ne4 {[%eval +0.57]} 9. Be3 {[%eval 
++0.57] 1:33:02]} 9. ... cxd4 {[%eval 
++0.57]} 10. cxd4 {[%eval +0.51]} 10. ... f6 
+{[%eval +0.66]} 11. Nc3 {[%eval +0.75]} 
+11. ... Nxc3 {[%eval +0.77]} 12. bxc3 {[%eval +0.79]} 12. ... Bg4 {[%eval +0.93]} 13. exf6 {[%eval 
++0.89]} 13. ... exf6 {[%eval +0.95]} 14. h3 
+{[%eval +0.95]} 14. ... Bd7 {[%eval +0.97]} 
+15. Qb3 {[%eval +0.78]} 15. ... Be8 {[%eval +0.89]} 16. Bf4 {[%eval +0.33]} 16. ... Na5 {[%eval 
++0.54]} 17. Qb4 {[%eval +0.58]} 17. ... Bxb5
+{[%eval +0.39]} 18. Qxb5 {[%eval +0.42]} 
+18. ... Rf7 {[%eval +0.58]} 19. Re6 {[%eval +0.23]} 19. ... Qd7 {[%eval +0.09]} 20. Qe2 {[%eval 
++0.23]} 20. ... Nc4 {[%eval +0.11]} 21. Bg3 
+{[%eval -0.01]} 21. ... Ne5 {[%eval +0.34]} 
 1/2-1/2
 
 [Event "World Senior Teams +65"]
@@ -128144,27 +128137,19 @@ Kxd4 {[%eval -12.26]} 50. ... Bxg3 {[%eval -16.86]} 51. Ke3 {[%eval
 [Annotator "Stockfish 19"]
 [Depth "15"]
 
-1. e4 {[%eval +0.18] [%clk 1:28:23]} 1. ... c5 {[%eval +0.30] [%clk 
-1:30:53]} 2. Nf3 {[%eval +0.30] [%clk 1:28:39]} 2. ... d6 {[%eval +0.31] 
-[%clk 1:31:17]} 3. Bb5+ {[%eval +0.20] [%clk 1:28:38]} 3. ... Nd7 {[%eval 
-+0.26] [%clk 1:31:22]} 4. c3 {[%eval +0.15] [%clk 1:28:59]} 4. ... Nf6 {
-[%eval +0.10] [%clk 1:31:42]} 5. Qe2 {[%eval +0.10] [%clk 1:29:22]} 5. ...
- a6 {[%eval +0.07] [%clk 1:30:23]} 6. Ba4 {[%eval +0.08] [%clk 1:29:47]} 
-6. ... b5 {[%eval +0.05] [%clk 1:28:06]} 7. Bc2 {[%eval +0.06] [%clk 
-1:30:12]} 7. ... Bb7 {[%eval +0.13] [%clk 1:28:29]} 8. d4 {[%eval +0.11] 
-[%clk 1:27:22]} 8. ... e6 {[%eval +0.04] [%clk 1:27:44]} 9. O-O {[%eval 
-+0.05] [%clk 1:27:04]} 9. ... Be7 {[%eval +0.00] [%clk 1:24:45]} 10. Re1 {
-[%eval +0.01] [%clk 1:24:53]} 10. ... cxd4 {[%eval +0.30] [%clk 1:19:57]} 
-11. cxd4 {[%eval +0.22] [%clk 1:25:15]} 11. ... Rc8 {[%eval +0.39] [%clk 
-1:20:19]} 12. Bd3 {[%eval +0.36] [%clk 1:23:48]} 12. ... O-O {[%eval 
-+0.37] [%clk 1:19:31]} 13. Nbd2 {[%eval +0.11] [%clk 1:21:11]} 13. ... Qb6
-$6 {[%eval +0.59] Inaccuracy. e5 was best.[%clk 1:12:14]} 14. Nf1 {[%eval 
-+0.48] [%clk 1:19:25]} 14. ... Rfd8 {[%eval +0.79] [%clk 1:10:31]} 15. Ng3
-{[%eval +0.80] [%clk 1:18:59]} 15. ... Qa7 {[%eval +0.97] [%clk 1:05:37]} 
-16. h3 {[%eval +0.76] [%clk 1:11:39]} 16. ... b4 {[%eval +1.00] [%clk 
-0:58:37]} 17. Bd2 {[%eval +0.92] [%clk 1:11:23]} 17. ... a5 {[%eval +1.08]
-[%clk 0:58:45]} 18. Rec1 $6 {[%eval +0.24] Inaccuracy. a3 was best.[%clk 
-0:47:59]} 1/2-1/2
+1. e4 {[%eval +0.18]} 1. ... c5 {[%eval +0.30]} 2. Nf3 {[%eval +0.30]} 2. ... d6 {[%eval +0.31]} 3. Bb5+ {[%eval +0.20]} 3. ... Nd7 {[%eval 
++0.26]} 4. c3 {[%eval +0.15]} 4. ... Nf6 {
+[%eval +0.10]} 5. Qe2 {[%eval +0.10]} 5. ...
+ a6 {[%eval +0.07]} 6. Ba4 {[%eval +0.08]} 
+6. ... b5 {[%eval +0.05]} 7. Bc2 {[%eval +0.06]} 7. ... Bb7 {[%eval +0.13]} 8. d4 {[%eval +0.11]} 8. ... e6 {[%eval +0.04]} 9. O-O {[%eval 
++0.05]} 9. ... Be7 {[%eval +0.00]} 10. Re1 {
+[%eval +0.01]} 10. ... cxd4 {[%eval +0.30]} 
+11. cxd4 {[%eval +0.22]} 11. ... Rc8 {[%eval +0.39]} 12. Bd3 {[%eval +0.36]} 12. ... O-O {[%eval 
++0.37]} 13. Nbd2 {[%eval +0.11]} 13. ... Qb6
+$6 {[%eval +0.59] Inaccuracy. e5 was best.} 14. Nf1 {[%eval 
++0.48]} 14. ... Rfd8 {[%eval +0.79]} 15. Ng3
+{[%eval +0.80]} 15. ... Qa7 {[%eval +0.97]} 
+16. h3 {[%eval +0.76]} 16. ... b4 {[%eval +1.00]} 17. Bd2 {[%eval +0.92]} 17. ... a5 {[%eval +1.08]} 18. Rec1 $6 {[%eval +0.24] Inaccuracy. a3 was best.} 1/2-1/2
 
 [Event "FIDE World Senior Team Championships 2026 - Senior 65+"]
 [Site "Lichess"]
@@ -128187,20 +128172,14 @@ $6 {[%eval +0.59] Inaccuracy. e5 was best.[%clk 1:12:14]} 14. Nf1 {[%eval
 [Annotator "Stockfish 19"]
 [Depth "15"]
 
-1. e4 {[%eval +0.21] [%clk 1:30:56]} 1. ... e5 {[%eval +0.23] [%clk 
-1:30:53]} 2. Nf3 {[%eval +0.17] [%clk 1:31:19]} 2. ... Nf6 {[%eval +0.36] 
-[%clk 1:31:14]} 3. d4 {[%eval +0.30] [%clk 1:31:26]} 3. ... Nxe4 {[%eval 
-+0.32] [%clk 1:30:37]} 4. Bd3 {[%eval +0.33] [%clk 1:31:47]} 4. ... d5 {
-[%eval +0.26] [%clk 1:30:59]} 5. Nxe5 {[%eval +0.32] [%clk 1:32:10]} 
-5. ... Nd7 {[%eval +0.34] [%clk 1:31:12]} 6. Nxd7 {[%eval +0.34] [%clk 
-1:31:53]} 6. ... Bxd7 {[%eval +0.36] [%clk 1:31:33]} 7. O-O {[%eval +0.35]
-[%clk 1:32:08]} 7. ... Bd6 {[%eval +0.28] [%clk 1:30:08]} 8. Nc3 {[%eval 
-+0.21] [%clk 1:29:33]} 8. ... Nxc3 {[%eval +0.11] [%clk 1:26:29]} 9. bxc3 
-{[%eval +0.21] [%clk 1:29:57]} 9. ... O-O {[%eval +0.20] [%clk 1:26:21]} 
-10. Qh5 {[%eval +0.14] [%clk 1:27:51]} 10. ... f5 {[%eval +0.17] [%clk 
-1:26:11]} 11. Re1 {[%eval +0.13] [%clk 1:26:35]} 11. ... c6 {[%eval +0.18]
-[%clk 1:24:15]} 12. Bg5 {[%eval +0.07] [%clk 1:26:41]} 12. ... Qc7 {[%eval
-+0.05] [%clk 1:23:10]} 13. c4 {[%eval +0.07] [%clk 1:27:00]} 1/2-1/2
+1. e4 {[%eval +0.21]} 1. ... e5 {[%eval +0.23]} 2. Nf3 {[%eval +0.17]} 2. ... Nf6 {[%eval +0.36]} 3. d4 {[%eval +0.30]} 3. ... Nxe4 {[%eval 
++0.32]} 4. Bd3 {[%eval +0.33]} 4. ... d5 {
+[%eval +0.26]} 5. Nxe5 {[%eval +0.32]} 
+5. ... Nd7 {[%eval +0.34]} 6. Nxd7 {[%eval +0.34]} 6. ... Bxd7 {[%eval +0.36]} 7. O-O {[%eval +0.35]} 7. ... Bd6 {[%eval +0.28]} 8. Nc3 {[%eval 
++0.21]} 8. ... Nxc3 {[%eval +0.11]} 9. bxc3 
+{[%eval +0.21]} 9. ... O-O {[%eval +0.20]} 
+10. Qh5 {[%eval +0.14]} 10. ... f5 {[%eval +0.17]} 11. Re1 {[%eval +0.13]} 11. ... c6 {[%eval +0.18]} 12. Bg5 {[%eval +0.07]} 12. ... Qc7 {[%eval
++0.05]} 13. c4 {[%eval +0.07]} 1/2-1/2
 
 [Event "FIDE World Senior Team Championships 2026 - Senior 65+"]
 [Site "Lichess"]
@@ -128223,28 +128202,20 @@ $6 {[%eval +0.59] Inaccuracy. e5 was best.[%clk 1:12:14]} 14. Nf1 {[%eval
 [Annotator "Stockfish 19"]
 [Depth "15"]
 
-1. d4 {[%eval +0.20] [%clk 1:30:52]} 1. ... Nf6 {[%eval +0.14] [%clk 
-1:30:54]} 2. Nf3 {[%eval +0.19] [%clk 1:31:13]} 2. ... g6 {[%eval +0.25] 
-[%clk 1:31:17]} 3. c4 {[%eval +0.30] [%clk 1:31:33]} 3. ... Bg7 {[%eval 
-+0.25] [%clk 1:31:42]} 4. Nc3 {[%eval +0.27] [%clk 1:31:56]} 4. ... O-O {
-[%eval +0.52] [%clk 1:32:04]} 5. e4 {[%eval +0.52] [%clk 1:32:18]} 5. ... 
-d6 {[%eval +0.48] [%clk 1:32:29]} 6. Be2 {[%eval +0.52] [%clk 1:32:40]} 
-6. ... e5 {[%eval +0.44] [%clk 1:32:54]} 7. O-O {[%eval +0.41] [%clk 
-1:33:00]} 7. ... Nc6 {[%eval +0.65] [%clk 1:33:17]} 8. d5 {[%eval +0.56] 
-[%clk 1:32:59]} 8. ... Ne7 {[%eval +0.68] [%clk 1:33:40]} 9. Ne1 {[%eval 
-+0.64] [%clk 1:33:00]} 9. ... Nd7 {[%eval +0.50] [%clk 1:33:55]} 10. Nd3 {
-[%eval +0.64] [%clk 1:33:07]} 10. ... f5 {[%eval +0.66] [%clk 1:33:45]} 
-11. f3 {[%eval +0.59] [%clk 1:33:25]} 11. ... a5 {[%eval +0.59] [%clk 
-1:33:33]} 12. Be3 {[%eval +0.53] [%clk 1:33:03]} 12. ... b6 {[%eval +0.56]
-[%clk 1:33:53]} 13. a3 {[%eval +0.68] [%clk 1:32:57]} 13. ... Nc5 {[%eval 
-+0.78] [%clk 1:34:11]} 14. b4 {[%eval +0.67] [%clk 1:31:38]} 14. ... fxe4 
-{[%eval +0.53] [%clk 1:34:31]} 15. fxe4 {[%eval +0.40] [%clk 1:30:52]} 
-15. ... Rxf1+ {[%eval +0.37] [%clk 1:34:53]} 16. Bxf1 {[%eval +0.30] [%clk
-1:30:24]} 16. ... axb4 {[%eval +0.29] [%clk 1:35:01]} 17. axb4 {[%eval 
-+0.25] [%clk 1:30:23]} 17. ... Rxa1 {[%eval +0.23] [%clk 1:35:25]} 18. 
-Qxa1 {[%eval +0.18] [%clk 1:30:43]} 18. ... Nxd3 {[%eval +0.18] [%clk 
-1:35:50]} 19. Bxd3 {[%eval +0.15] [%clk 1:30:54]} 19. ... Bd7 {[%eval 
-+0.14] [%clk 1:36:11]} 20. c5 {[%eval +0.08] [%clk 1:17:58]} 1/2-1/2
+1. d4 {[%eval +0.20]} 1. ... Nf6 {[%eval +0.14]} 2. Nf3 {[%eval +0.19]} 2. ... g6 {[%eval +0.25]} 3. c4 {[%eval +0.30]} 3. ... Bg7 {[%eval 
++0.25]} 4. Nc3 {[%eval +0.27]} 4. ... O-O {
+[%eval +0.52]} 5. e4 {[%eval +0.52]} 5. ... 
+d6 {[%eval +0.48]} 6. Be2 {[%eval +0.52]} 
+6. ... e5 {[%eval +0.44]} 7. O-O {[%eval +0.41]} 7. ... Nc6 {[%eval +0.65]} 8. d5 {[%eval +0.56]} 8. ... Ne7 {[%eval +0.68]} 9. Ne1 {[%eval 
++0.64]} 9. ... Nd7 {[%eval +0.50]} 10. Nd3 {
+[%eval +0.64]} 10. ... f5 {[%eval +0.66]} 
+11. f3 {[%eval +0.59]} 11. ... a5 {[%eval +0.59]} 12. Be3 {[%eval +0.53]} 12. ... b6 {[%eval +0.56]} 13. a3 {[%eval +0.68]} 13. ... Nc5 {[%eval 
++0.78]} 14. b4 {[%eval +0.67]} 14. ... fxe4 
+{[%eval +0.53]} 15. fxe4 {[%eval +0.40]} 
+15. ... Rxf1+ {[%eval +0.37]} 16. Bxf1 {[%eval +0.30]} 16. ... axb4 {[%eval +0.29]} 17. axb4 {[%eval 
++0.25]} 17. ... Rxa1 {[%eval +0.23]} 18. 
+Qxa1 {[%eval +0.18]} 18. ... Nxd3 {[%eval +0.18]} 19. Bxd3 {[%eval +0.15]} 19. ... Bd7 {[%eval 
++0.14]} 20. c5 {[%eval +0.08]} 1/2-1/2
 
 [Event "FIDE World Senior Team Championships 2026 - Senior 65+"]
 [Site "Lichess"]
@@ -128267,62 +128238,50 @@ Qxa1 {[%eval +0.18] [%clk 1:30:43]} 18. ... Nxd3 {[%eval +0.18] [%clk
 [Annotator "Stockfish 19"]
 [Depth "15"]
 
-1. e4 {[%eval +0.19] [%clk 1:30:53]} 1. ... e6 {[%eval +0.34] [%clk 
-1:30:39]} 2. d4 {[%eval +0.36] [%clk 1:31:15]} 2. ... d5 {[%eval +0.35] 
-[%clk 1:31:04]} 3. e5 {[%eval +0.24] [%clk 1:30:58]} 3. ... b6 $6 {[%eval 
-+0.87] Inaccuracy. c5 was best.[%clk 1:30:14]} 4. c3 {[%eval +0.90] [%clk 
-1:30:28]} 4. ... Qd7 {[%eval +0.86] [%clk 1:30:23]} 5. h4 {[%eval +0.89] 
-[%clk 1:28:33]} 5. ... Ne7 {[%eval +1.05] [%clk 1:28:50]} 6. h5 {[%eval 
-+1.14] [%clk 1:28:42]} 6. ... h6 {[%eval +1.34] [%clk 1:28:59]} 7. Nd2 {
-[%eval +1.09] [%clk 1:20:46]} 7. ... c5 {[%eval +1.12] [%clk 1:24:38]} 8. 
-Ngf3 {[%eval +0.75] [%clk 1:18:50]} 8. ... cxd4 {[%eval +1.23] [%clk 
-1:21:33]} 9. Nxd4 {[%eval +1.28] [%clk 1:16:22]} 9. ... Nec6 {[%eval 
-+1.61] [%clk 1:17:59]} 10. N2f3 {[%eval +1.74] [%clk 1:16:23]} 10. ... 
-Nxd4 {[%eval +1.76] [%clk 1:15:08]} 11. Nxd4 {[%eval +1.71] [%clk 1:16:30]
-} 11. ... Ba6 {[%eval +1.60] [%clk 1:14:02]} 12. Bxa6 {[%eval +1.73] [%clk
-1:13:38]} 12. ... Nxa6 {[%eval +1.68] [%clk 1:14:23]} 13. O-O {[%eval 
-+1.65] [%clk 1:14:00]} 13. ... Nc5 {[%eval +1.79] [%clk 1:08:16]} 14. Qg4 
-{[%eval +1.90] [%clk 1:08:53]} 14. ... O-O-O $6 {[%eval +2.88] Inaccuracy.
-Nd3 was best.[%clk 0:55:05]} 15. a4 {[%eval +2.79] [%clk 1:02:08]} 15. ...
- a6 {[%eval +3.22] [%clk 0:49:33]} 16. a5 {[%eval +2.40] [%clk 0:53:17]} 
-16. ... b5 {[%eval +2.22] [%clk 0:49:17]} 17. b4 {[%eval +2.59] [%clk 
-0:53:40]} 17. ... Nd3 {[%eval +3.49] [%clk 0:42:17]} 18. f4 {[%eval +3.72]
-[%clk 0:53:33]} 18. ... Rg8 {[%eval +3.88] [%clk 0:39:37]} 19. Qh3 $6 $16 
-{+2.85 / +3.88 Inaccuracy. Ba3 was best.[%clk 0:44:04]} 
+1. e4 {[%eval +0.19]} 1. ... e6 {[%eval +0.34]} 2. d4 {[%eval +0.36]} 2. ... d5 {[%eval +0.35]} 3. e5 {[%eval +0.24]} 3. ... b6 $6 {[%eval 
++0.87] Inaccuracy. c5 was best.} 4. c3 {[%eval +0.90]} 4. ... Qd7 {[%eval +0.86]} 5. h4 {[%eval +0.89]} 5. ... Ne7 {[%eval +1.05]} 6. h5 {[%eval 
++1.14]} 6. ... h6 {[%eval +1.34]} 7. Nd2 {
+[%eval +1.09]} 7. ... c5 {[%eval +1.12]} 8. 
+Ngf3 {[%eval +0.75]} 8. ... cxd4 {[%eval +1.23]} 9. Nxd4 {[%eval +1.28]} 9. ... Nec6 {[%eval 
++1.61]} 10. N2f3 {[%eval +1.74]} 10. ... 
+Nxd4 {[%eval +1.76]} 11. Nxd4 {[%eval +1.71]
+} 11. ... Ba6 {[%eval +1.60]} 12. Bxa6 {[%eval +1.73]} 12. ... Nxa6 {[%eval +1.68]} 13. O-O {[%eval 
++1.65]} 13. ... Nc5 {[%eval +1.79]} 14. Qg4 
+{[%eval +1.90]} 14. ... O-O-O $6 {[%eval +2.88] Inaccuracy.
+Nd3 was best.} 15. a4 {[%eval +2.79]} 15. ...
+ a6 {[%eval +3.22]} 16. a5 {[%eval +2.40]} 
+16. ... b5 {[%eval +2.22]} 17. b4 {[%eval +2.59]} 17. ... Nd3 {[%eval +3.49]} 18. f4 {[%eval +3.72]} 18. ... Rg8 {[%eval +3.88]} 19. Qh3 $6 $16 
+{+2.85 / +3.88 Inaccuracy. Ba3 was best.} 
     ( 19. Be3 Nb2 20. f5 Nc4 21. fxe6 fxe6 22. Rae1 g5 23. Qxe6 Qxe6 $18 )
-19. ... Nxc1 {[%eval +3.03] [%clk 0:38:54]} 20. Raxc1 {[%eval +3.22] [%clk
-0:44:21]} 20. ... Be7 {[%eval +3.54] [%clk 0:36:29]} 21. Rc2 {[%eval 
-+3.37] [%clk 0:38:40]} 21. ... Rde8 {[%eval +3.89] [%clk 0:29:09]} 22. f5 
-{[%eval +3.85] [%clk 0:37:28]} 22. ... Bg5 $6 {[%eval +4.39] Inaccuracy. 
-exf5 was best.[%clk 0:28:18]} 23. fxe6 {[%eval +5.11] [%clk 0:37:38]} 
-23. ... fxe6 {[%eval +5.29] [%clk 0:28:40]} 24. Rcf2 {[%eval +5.40] [%clk 
-0:37:01]} 24. ... Re7 {[%eval +6.34] [%clk 0:23:25]} 25. Nb3 $6 {[%eval 
-+4.20] Inaccuracy. Rf8+ was best.[%clk 0:31:21]} 25. ... Qc7 $2 $4 $18 {
-+8.38 / +4.20 Mistake. Rge8 was best.[%clk 0:20:46]} 
+19. ... Nxc1 {[%eval +3.03]} 20. Raxc1 {[%eval +3.22]} 20. ... Be7 {[%eval +3.54]} 21. Rc2 {[%eval 
++3.37]} 21. ... Rde8 {[%eval +3.89]} 22. f5 
+{[%eval +3.85]} 22. ... Bg5 $6 {[%eval +4.39] Inaccuracy. 
+exf5 was best.} 23. fxe6 {[%eval +5.11]} 
+23. ... fxe6 {[%eval +5.29]} 24. Rcf2 {[%eval +5.40]} 24. ... Re7 {[%eval +6.34]} 25. Nb3 $6 {[%eval 
++4.20] Inaccuracy. Rf8+ was best.} 25. ... Qc7 $2 $4 $18 {
++8.38 / +4.20 Mistake. Rge8 was best.} 
     ( 25. ... Rge8 26. Nc5 Qc7 27. Qg3 Qc6 28. Kh2 Kb8 29. Rf8 Ka8 30. 
     R1f7 $18 )
-26. Nd4 $4 {[%eval +3.08] Blunder. Rf8+ was best.[%clk 0:24:48]} 26. ... 
-Qd7 $2 $4 $18 {+6.71 / +3.08 Mistake. Rge8 was best.[%clk 0:15:07]} 
+26. Nd4 $4 {[%eval +3.08] Blunder. Rf8+ was best.} 26. ... 
+Qd7 $2 $4 $18 {+6.71 / +3.08 Mistake. Rge8 was best.} 
     ( 26. ... Rge8 27. Qg3 Kb8 28. Rf8 Qd7 29. R8f3 Rc8 30. Nb3 Qa7+ 31. 
     Nc5 $18 )
-27. Kh1 $2 {[%eval +3.56] Mistake. Rf8+ was best.[%clk 0:24:45]} 27. ... 
-Kb7 $2 $6 $18 {+6.14 / +3.56 Mistake. Rge8 was best.[%clk 0:14:15]} 
+27. Kh1 $2 {[%eval +3.56] Mistake. Rf8+ was best.} 27. ... 
+Kb7 $2 $6 $18 {+6.14 / +3.56 Mistake. Rge8 was best.} 
     ( 27. ... Rge8 28. Qg3 Qc7 29. Rf8 Kb7 30. Rxe8 Rxe8 31. Kg1 Kc8 32. 
     Nb3 $18 )
-28. Nb3 $6 {[%eval +3.41] Inaccuracy. Rf8 was best.[%clk 0:24:09]} 28. ...
- Rc8 {[%eval +3.15] [%clk 0:11:58]} 29. Rf8 $6 $16 {+1.78 / +3.15 
-Inaccuracy. Qf3 was best.[%clk 0:20:49]} 
+28. Nb3 $6 {[%eval +3.41] Inaccuracy. Rf8 was best.} 28. ...
+ Rc8 {[%eval +3.15]} 29. Rf8 $6 $16 {+1.78 / +3.15 
+Inaccuracy. Qf3 was best.} 
     ( 29. Qd3 Qe8 30. Qd4 Ka8 31. Kg1 Qc6 32. Rf8 Rc7 33. Rxc8+ Rxc8 $18 )
-29. ... Rc4 $4 $18 {+5.27 / +1.78 Blunder. Rxf8 was best.[%clk 0:09:44]} 
+29. ... Rc4 $4 $18 {+5.27 / +1.78 Blunder. Rxf8 was best.} 
     ( 29. ... Rxf8 30. Rxf8 Qc7 31. Nc5+ Ka7 32. Nxe6 Qxe5 33. Nxg5 Qxg5 
     34. Rf5 $16 )
-30. Nc5+ {[%eval +6.12] [%clk 0:21:09]} 30. ... Rxc5 {[%eval +6.32] [%clk 
-0:10:07]} 31. bxc5 {[%eval +6.68] [%clk 0:21:36]} 31. ... Qc7 {[%eval 
-+6.66] [%clk 0:09:41]} 32. c4 {[%eval +6.71] [%clk 0:20:48]} 32. ... bxc4 
-$2 {[%eval +9.40] Mistake. Qxc5 was best.[%clk 0:04:48]} 33. Qa3 {[%eval 
-+12.14] [%clk 0:19:08]} 33. ... Ka7 {[%eval +15.38] [%clk 0:03:53]} 34. 
-Rb1 {[%eval +23.21] [%clk 0:17:00]} 34. ... Rf7 {[%eval +21.14] [%clk 
-0:01:23]} 35. c6 {[%eval +22.16] [%clk 0:16:57]} 1-0
+30. Nc5+ {[%eval +6.12]} 30. ... Rxc5 {[%eval +6.32]} 31. bxc5 {[%eval +6.68]} 31. ... Qc7 {[%eval 
++6.66]} 32. c4 {[%eval +6.71]} 32. ... bxc4 
+$2 {[%eval +9.40] Mistake. Qxc5 was best.} 33. Qa3 {[%eval 
++12.14]} 33. ... Ka7 {[%eval +15.38]} 34. 
+Rb1 {[%eval +23.21]} 34. ... Rf7 {[%eval +21.14]} 35. c6 {[%eval +22.16]} 1-0
 
 [Event "FIDE World Senior Team Championships 2026 - Senior 65+"]
 [Site "Lichess"]
@@ -128345,21 +128304,15 @@ Rb1 {[%eval +23.21] [%clk 0:17:00]} 34. ... Rf7 {[%eval +21.14] [%clk
 [Annotator "Stockfish 19"]
 [Depth "15"]
 
-1. e4 {[%eval +0.31] [%clk 1:30:54]} 1. ... e5 {[%eval +0.25] [%clk 
-1:30:44]} 2. Nf3 {[%eval +0.27] [%clk 1:31:15]} 2. ... Nc6 {[%eval +0.26] 
-[%clk 1:30:15]} 3. Bc4 {[%eval +0.17] [%clk 1:31:33]} 3. ... Nf6 {[%eval 
-+0.19] [%clk 1:30:29]} 4. d3 {[%eval +0.25] [%clk 1:31:55]} 4. ... Bc5 {
-[%eval +0.28] [%clk 1:27:42]} 5. c3 {[%eval +0.25] [%clk 1:31:49]} 5. ... 
-d6 {[%eval +0.24] [%clk 1:27:09]} 6. b4 {[%eval +0.15] [%clk 1:29:33]} 
-6. ... Bb6 {[%eval +0.17] [%clk 1:27:30]} 7. a4 {[%eval +0.24] [%clk 
-1:29:55]} 7. ... a5 {[%eval +0.31] [%clk 1:27:00]} 8. b5 {[%eval +0.12] 
-[%clk 1:30:11]} 8. ... Ne7 {[%eval +0.15] [%clk 1:25:56]} 9. O-O {[%eval 
-+0.13] [%clk 1:29:20]} 9. ... O-O {[%eval +0.12] [%clk 1:25:58]} 10. Nbd2 
-{[%eval +0.12] [%clk 1:27:03]} 10. ... Ng6 {[%eval +0.12] [%clk 1:23:53]} 
-11. h3 {[%eval -0.01] [%clk 1:15:31]} 11. ... c6 {[%eval +0.09] [%clk 
-1:11:18]} 12. Ba2 {[%eval -0.09] [%clk 1:13:03]} 12. ... d5 {[%eval -0.14]
-[%clk 1:03:34]} 13. Ba3 {[%eval -0.29] [%clk 1:00:26]} 13. ... Re8 {[%eval
--0.29] [%clk 1:03:42]} 14. c4 {[%eval -0.30] [%clk 0:50:07]} 1/2-1/2
+1. e4 {[%eval +0.31]} 1. ... e5 {[%eval +0.25]} 2. Nf3 {[%eval +0.27]} 2. ... Nc6 {[%eval +0.26]} 3. Bc4 {[%eval +0.17]} 3. ... Nf6 {[%eval 
++0.19]} 4. d3 {[%eval +0.25]} 4. ... Bc5 {
+[%eval +0.28]} 5. c3 {[%eval +0.25]} 5. ... 
+d6 {[%eval +0.24]} 6. b4 {[%eval +0.15]} 
+6. ... Bb6 {[%eval +0.17]} 7. a4 {[%eval +0.24]} 7. ... a5 {[%eval +0.31]} 8. b5 {[%eval +0.12]} 8. ... Ne7 {[%eval +0.15]} 9. O-O {[%eval 
++0.13]} 9. ... O-O {[%eval +0.12]} 10. Nbd2 
+{[%eval +0.12]} 10. ... Ng6 {[%eval +0.12]} 
+11. h3 {[%eval -0.01]} 11. ... c6 {[%eval +0.09]} 12. Ba2 {[%eval -0.09]} 12. ... d5 {[%eval -0.14]} 13. Ba3 {[%eval -0.29]} 13. ... Re8 {[%eval
+-0.29]} 14. c4 {[%eval -0.30]} 1/2-1/2
 
 [Event "FIDE World Senior Team Championships 2026 - Senior 65+"]
 [Site "Lichess"]
@@ -128381,59 +128334,44 @@ d6 {[%eval +0.24] [%clk 1:27:09]} 6. b4 {[%eval +0.15] [%clk 1:29:33]}
 [Annotator "Stockfish 19"]
 [Depth "15"]
 
-1. Nf3 {[%eval +0.34] [%clk 1:30:47]} 1. ... Nf6 {[%eval +0.34] [%clk 
-1:30:51]} 2. c4 {[%eval +0.31] [%clk 1:30:51]} 2. ... g6 {[%eval +0.49] 
-[%clk 1:31:10]} 3. g3 {[%eval +0.22] [%clk 1:30:51]} 3. ... Bg7 {[%eval 
-+0.22] [%clk 1:31:33]} 4. Bg2 {[%eval +0.25] [%clk 1:31:08]} 4. ... O-O {
-[%eval +0.29] [%clk 1:31:55]} 5. O-O {[%eval +0.31] [%clk 1:31:05]} 5. ...
- d6 {[%eval +0.46] [%clk 1:30:35]} 6. Nc3 {[%eval +0.45] [%clk 1:30:49]} 
-6. ... c6 {[%eval +0.44] [%clk 1:30:32]} 7. d3 {[%eval +0.20] [%clk 
-1:29:29]} 7. ... Na6 {[%eval +0.50] [%clk 1:26:55]} 8. Rb1 {[%eval +0.16] 
-[%clk 1:28:57]} 8. ... d5 {[%eval +0.25] [%clk 1:24:26]} 9. cxd5 {[%eval 
-+0.23] [%clk 1:18:01]} 9. ... cxd5 {[%eval +0.47] [%clk 1:22:42]} 10. h3 
-$6 {[%eval -0.07] Inaccuracy. e4 was best.[%clk 1:10:59]} 10. ... Re8 $6 {
-[%eval +0.41] Inaccuracy. d4 was best.[%clk 1:10:32]} 11. b4 $6 {[%eval 
-+0.05] Inaccuracy. d4 was best.[%clk 0:40:56]} 11. ... d4 {[%eval +0.05] 
-[%clk 1:05:16]} 12. Na4 {[%eval -0.51] [%clk 0:26:35]} 12. ... b5 $2 $6 
-$14 {+0.53 / -0.51 Mistake. Nc7 was best.[%clk 0:59:54]} 
+1. Nf3 {[%eval +0.34]} 1. ... Nf6 {[%eval +0.34]} 2. c4 {[%eval +0.31]} 2. ... g6 {[%eval +0.49]} 3. g3 {[%eval +0.22]} 3. ... Bg7 {[%eval 
++0.22]} 4. Bg2 {[%eval +0.25]} 4. ... O-O {
+[%eval +0.29]} 5. O-O {[%eval +0.31]} 5. ...
+ d6 {[%eval +0.46]} 6. Nc3 {[%eval +0.45]} 
+6. ... c6 {[%eval +0.44]} 7. d3 {[%eval +0.20]} 7. ... Na6 {[%eval +0.50]} 8. Rb1 {[%eval +0.16]} 8. ... d5 {[%eval +0.25]} 9. cxd5 {[%eval 
++0.23]} 9. ... cxd5 {[%eval +0.47]} 10. h3 
+$6 {[%eval -0.07] Inaccuracy. e4 was best.} 10. ... Re8 $6 {
+[%eval +0.41] Inaccuracy. d4 was best.} 11. b4 $6 {[%eval 
++0.05] Inaccuracy. d4 was best.} 11. ... d4 {[%eval +0.05]} 12. Na4 {[%eval -0.51]} 12. ... b5 $2 $6 
+$14 {+0.53 / -0.51 Mistake. Nc7 was best.} 
     ( 12. ... Nc7 13. Bf4 Nfd5 14. Be5 Bxe5 15. Nxe5 f6 16. Nf3 e5 17. Qd2
     $15 )
-13. Nc5 {[%eval +0.43] [%clk 0:16:04]} 13. ... Nd5 {[%eval +0.51] [%clk 
-0:55:28]} 14. Bd2 $6 $15 {-0.77 / +0.51 Inaccuracy. Qb3 was best.[%clk 
-0:14:33]} 
+13. Nc5 {[%eval +0.43]} 13. ... Nd5 {[%eval +0.51]} 14. Bd2 $6 $15 {-0.77 / +0.51 Inaccuracy. Qb3 was best.} 
     ( 14. Qb3 Naxb4 15. a3 Nc6 16. Nd2 e6 17. Qxb5 Bd7 18. Qb7 Ne5 $14 )
-14. ... Nxc5 {[%eval -0.81] [%clk 0:51:30]} 15. bxc5 {[%eval -0.66] [%clk 
-0:14:56]} 15. ... Rb8 {[%eval -0.45] [%clk 0:51:54]} 16. e4 $2 $6 $17 {
--1.57 / -0.45 Mistake. Qc2 was best.[%clk 0:13:36]} 
+14. ... Nxc5 {[%eval -0.81]} 15. bxc5 {[%eval -0.66]} 15. ... Rb8 {[%eval -0.45]} 16. e4 $2 $6 $17 {
+-1.57 / -0.45 Mistake. Qc2 was best.} 
     ( 16. Qc2 Nc3 17. Bxc3 dxc3 18. d4 Qa5 19. Rb3 b4 20. a3 Bf5 $15 )
-16. ... Nc3 {[%eval -1.97] [%clk 0:47:48]} 17. Bxc3 {[%eval -1.73] [%clk 
-0:14:03]} 17. ... dxc3 {[%eval -2.00] [%clk 0:48:12]} 18. d4 {[%eval 
--1.74] [%clk 0:14:12]} 18. ... b4 {[%eval -1.86] [%clk 0:48:08]} 19. d5 $2
-$6 $19 {-3.96 / -1.86 Mistake. a3 was best.[%clk 0:11:13]} 
+16. ... Nc3 {[%eval -1.97]} 17. Bxc3 {[%eval -1.73]} 17. ... dxc3 {[%eval -2.00]} 18. d4 {[%eval 
+-1.74]} 18. ... b4 {[%eval -1.86]} 19. d5 $2
+$6 $19 {-3.96 / -1.86 Mistake. a3 was best.} 
     ( 19. a3 a5 20. axb4 axb4 21. Qa4 Bd7 22. c6 Bxc6 23. Qxc6 Qa5 $17 )
-19. ... Qa5 {[%eval -4.12] [%clk 0:46:20]} 20. d6 $6 $19 {-5.82 / -4.12 
-Inaccuracy. c6 was best.[%clk 0:07:04]} 
+19. ... Qa5 {[%eval -4.12]} 20. d6 $6 $19 {-5.82 / -4.12 
+Inaccuracy. c6 was best.} 
     ( 20. c6 Qxa2 21. Ra1 Qc4 22. Qa4 Qc5 23. Rfe1 Rf8 24. Qb3 e6 $19 )
-20. ... Be6 {[%eval -4.39] [%clk 0:44:19]} 21. Nd4 $6 $19 {-6.53 / -4.39 
-Inaccuracy. Ng5 was best.[%clk 0:05:36]} 
+20. ... Be6 {[%eval -4.39]} 21. Nd4 $6 $19 {-6.53 / -4.39 
+Inaccuracy. Ng5 was best.} 
     ( 21. d7 Red8 22. c6 Qc5 23. Qa4 Rb6 24. e5 Qxc6 25. Qxc6 Rxc6 $19 )
-21. ... Qxc5 {[%eval -4.96] [%clk 0:44:15]} 22. Nxe6 {[%eval -5.25] [%clk 
-0:05:44]} 22. ... fxe6 {[%eval -5.47] [%clk 0:44:40]} 23. d7 {[%eval 
--5.44] [%clk 0:05:41]} 23. ... Red8 {[%eval -5.38] [%clk 0:44:18]} 24. Qb3
-{[%eval -5.72] [%clk 0:05:56]} 24. ... Rb6 {[%eval -5.42] [%clk 0:44:25]} 
-25. Rbd1 {[%eval -5.90] [%clk 0:04:39]} 25. ... Bd4 {[%eval -5.63] [%clk 
-0:43:00]} 26. Qa4 $6 {[%eval -6.14] Inaccuracy. Bf3 was best.[%clk 
-0:04:05]} 26. ... Rd6 {[%eval -5.82] [%clk 0:41:25]} 27. Kh2 {[%eval 
--6.52] [%clk 0:03:00]} 27. ... R8xd7 {[%eval -5.65] [%clk 0:36:00]} 28. f4
-{[%eval -6.59] [%clk 0:03:01]} 28. ... Be3 {[%eval -5.53] [%clk 0:35:49]} 
-29. Rxd6 {[%eval -5.68] [%clk 0:03:14]} 29. ... Qxd6 {[%eval -5.71] [%clk 
-0:36:14]} 30. e5 {[%eval -7.12] [%clk 0:03:31]} 30. ... Qc7 {[%eval -7.04]
-[%clk 0:34:06]} 31. Qb3 {[%eval -7.45] [%clk 0:03:18]} 31. ... c2 {[%eval 
--7.84] [%clk 0:32:45]} 32. Qxe6+ {[%eval -8.25] [%clk 0:03:28]} 32. ... 
-Kh8 {[%eval -7.14] [%clk 0:27:18]} 33. Qf7 {[%eval -8.02] [%clk 0:00:54]} 
-33. ... Rd8 {[%eval -7.75] [%clk 0:27:00]} 34. f5 $6 {[%eval -9.06] 
-Inaccuracy. h4 was best.[%clk 0:01:06]} 34. ... gxf5 {[%eval -9.12] [%clk 
-0:27:17]} 0-1
+21. ... Qxc5 {[%eval -4.96]} 22. Nxe6 {[%eval -5.25]} 22. ... fxe6 {[%eval -5.47]} 23. d7 {[%eval 
+-5.44]} 23. ... Red8 {[%eval -5.38]} 24. Qb3
+{[%eval -5.72]} 24. ... Rb6 {[%eval -5.42]} 
+25. Rbd1 {[%eval -5.90]} 25. ... Bd4 {[%eval -5.63]} 26. Qa4 $6 {[%eval -6.14] Inaccuracy. Bf3 was best.} 26. ... Rd6 {[%eval -5.82]} 27. Kh2 {[%eval 
+-6.52]} 27. ... R8xd7 {[%eval -5.65]} 28. f4
+{[%eval -6.59]} 28. ... Be3 {[%eval -5.53]} 
+29. Rxd6 {[%eval -5.68]} 29. ... Qxd6 {[%eval -5.71]} 30. e5 {[%eval -7.12]} 30. ... Qc7 {[%eval -7.04]} 31. Qb3 {[%eval -7.45]} 31. ... c2 {[%eval 
+-7.84]} 32. Qxe6+ {[%eval -8.25]} 32. ... 
+Kh8 {[%eval -7.14]} 33. Qf7 {[%eval -8.02]} 
+33. ... Rd8 {[%eval -7.75]} 34. f5 $6 {[%eval -9.06] 
+Inaccuracy. h4 was best.} 34. ... gxf5 {[%eval -9.12]} 0-1
 
 [Event "FIDE World Senior Team Championships 2026 - Senior 65+"]
 [Site "Lichess"]
@@ -128456,127 +128394,87 @@ Inaccuracy. h4 was best.[%clk 0:01:06]} 34. ... gxf5 {[%eval -9.12] [%clk
 [Annotator "Stockfish 19"]
 [Depth "15"]
 
-1. e4 {[%eval +0.19] [%clk 1:30:54]} 1. ... c5 {[%eval +0.31] [%clk 
-1:30:42]} 2. c3 {[%eval +0.12] [%clk 1:30:38]} 2. ... d5 {[%eval +0.22] 
-[%clk 1:30:28]} 3. exd5 {[%eval +0.26] [%clk 1:30:57]} 3. ... Qxd5 {[%eval
-+0.19] [%clk 1:30:50]} 4. d4 {[%eval +0.17] [%clk 1:30:47]} 4. ... Nf6 {
-[%eval +0.23] [%clk 1:31:08]} 5. Nf3 {[%eval +0.16] [%clk 1:30:40]} 5. ...
- Nc6 {[%eval +0.17] [%clk 1:30:47]} 6. Be2 {[%eval +0.18] [%clk 1:30:11]} 
-6. ... cxd4 {[%eval +0.19] [%clk 1:30:59]} 7. cxd4 {[%eval +0.14] [%clk 
-1:30:18]} 7. ... e6 {[%eval +0.11] [%clk 1:31:22]} 8. O-O {[%eval +0.09] 
-[%clk 1:29:14]} 8. ... Be7 {[%eval +0.09] [%clk 1:31:45]} 9. Nc3 {[%eval 
-+0.15] [%clk 1:29:14]} 9. ... Qd6 {[%eval +0.12] [%clk 1:32:09]} 10. Bg5 {
-[%eval +0.06] [%clk 1:18:54]} 10. ... O-O {[%eval +0.10] [%clk 1:28:31]} 
-11. Qd2 {[%eval -0.03] [%clk 1:16:04]} 11. ... Rd8 {[%eval +0.20] [%clk 
-1:23:51]} 12. Rad1 {[%eval +0.00] [%clk 1:12:40]} 12. ... Nd5 {[%eval 
-+0.00] [%clk 1:17:16]} 13. Bc4 {[%eval -0.11] [%clk 0:58:23]} 13. ... Nxc3
-{[%eval +0.13] [%clk 1:00:44]} 14. bxc3 {[%eval +0.09] [%clk 0:57:21]} 
-14. ... b6 {[%eval +0.55] [%clk 0:58:28]} 15. Bf4 {[%eval +0.49] [%clk 
-0:33:04]} 15. ... Qa3 {[%eval +0.58] [%clk 0:54:33]} 16. Bb3 $6 {[%eval 
-+0.00] Inaccuracy. Qe2 was best.[%clk 0:23:25]} 16. ... Na5 {[%eval -0.13]
-[%clk 0:50:57]} 17. Bc2 {[%eval -0.19] [%clk 0:23:29]} 17. ... Ba6 {[%eval
--0.14] [%clk 0:50:34]} 18. Rfe1 {[%eval -0.09] [%clk 0:22:33]} 18. ... 
-Rac8 {[%eval -0.06] [%clk 0:50:20]} 19. Rc1 {[%eval -0.11] [%clk 0:22:30]}
-19. ... Nc4 {[%eval +0.00] [%clk 0:44:13]} 20. Qd3 {[%eval -0.40] [%clk 
-0:22:22]} 20. ... g6 {[%eval -0.44] [%clk 0:44:35]} 21. Bb3 {[%eval -0.35]
-[%clk 0:20:28]} 21. ... Qa5 {[%eval -0.14] [%clk 0:40:46]} 22. Qe4 {[%eval
--0.49] [%clk 0:19:32]} 22. ... Qd5 {[%eval -0.37] [%clk 0:37:00]} 23. Qxd5
-{[%eval -0.70] [%clk 0:12:57]} 23. ... Rxd5 {[%eval -0.72] [%clk 0:37:15]}
-24. Ne5 {[%eval -0.73] [%clk 0:12:39]} 24. ... Rdd8 {[%eval -0.68] [%clk 
-0:29:27]} 25. h3 {[%eval -0.71] [%clk 0:11:44]} 25. ... Nxe5 {[%eval 
--0.69] [%clk 0:26:44]} 26. Bxe5 {[%eval -0.68] [%clk 0:11:33]} 26. ... Bc4
-{[%eval -0.57] [%clk 0:25:56]} 27. Red1 {[%eval -0.78] [%clk 0:09:09]} 
-27. ... f6 {[%eval -0.65] [%clk 0:24:03]} 28. Bf4 {[%eval -0.72] [%clk 
-0:09:20]} 28. ... Kf7 {[%eval -0.63] [%clk 0:24:25]} 29. g4 {[%eval -0.81]
-[%clk 0:09:04]} 29. ... b5 {[%eval -0.71] [%clk 0:24:18]} 30. f3 {[%eval 
--0.80] [%clk 0:08:00]} 30. ... g5 {[%eval -0.72] [%clk 0:19:17]} 31. Be3 {
-[%eval -0.77] [%clk 0:07:55]} 31. ... a5 {[%eval -0.52] [%clk 0:18:14]} 
-32. Kf2 {[%eval -0.52] [%clk 0:06:21]} 32. ... Rd5 {[%eval -0.37] [%clk 
-0:18:12]} 33. Bc2 $6 {[%eval -1.21] Inaccuracy. Bxc4 was best.[%clk 
-0:05:07]} 33. ... f5 $6 {[%eval -0.48] Inaccuracy. a4 was best.[%clk 
-0:18:23]} 34. a4 {[%eval -0.72] [%clk 0:05:01]} 34. ... f4 {[%eval -0.70] 
-[%clk 0:14:28]} 35. Bd2 {[%eval -0.73] [%clk 0:05:21]} 35. ... b4 {[%eval 
--0.57] [%clk 0:13:56]} 36. Bxh7 {[%eval -0.82] [%clk 0:04:34]} 36. ... Bb3
-$6 {[%eval -0.43] Inaccuracy. b3 was best.[%clk 0:10:56]} 37. cxb4 {[%eval
--0.51] [%clk 0:03:55]} 37. ... Rb8 {[%eval -0.97] [%clk 0:08:28]} 38. Bc2 
-{[%eval -0.91] [%clk 0:03:08]} 38. ... Bxc2 {[%eval -0.89] [%clk 0:08:41]}
-39. Rxc2 {[%eval -0.96] [%clk 0:03:36]} 39. ... axb4 {[%eval -0.83] [%clk 
-0:09:05]} 40. Bc1 $2 $6 $17 {-1.87 / -0.83 Mistake. Rc4 was best.[%clk 
-0:02:41]} 
+1. e4 {[%eval +0.19]} 1. ... c5 {[%eval +0.31]} 2. c3 {[%eval +0.12]} 2. ... d5 {[%eval +0.22]} 3. exd5 {[%eval +0.26]} 3. ... Qxd5 {[%eval
++0.19]} 4. d4 {[%eval +0.17]} 4. ... Nf6 {
+[%eval +0.23]} 5. Nf3 {[%eval +0.16]} 5. ...
+ Nc6 {[%eval +0.17]} 6. Be2 {[%eval +0.18]} 
+6. ... cxd4 {[%eval +0.19]} 7. cxd4 {[%eval +0.14]} 7. ... e6 {[%eval +0.11]} 8. O-O {[%eval +0.09]} 8. ... Be7 {[%eval +0.09]} 9. Nc3 {[%eval 
++0.15]} 9. ... Qd6 {[%eval +0.12]} 10. Bg5 {
+[%eval +0.06]} 10. ... O-O {[%eval +0.10]} 
+11. Qd2 {[%eval -0.03]} 11. ... Rd8 {[%eval +0.20]} 12. Rad1 {[%eval +0.00]} 12. ... Nd5 {[%eval 
++0.00]} 13. Bc4 {[%eval -0.11]} 13. ... Nxc3
+{[%eval +0.13]} 14. bxc3 {[%eval +0.09]} 
+14. ... b6 {[%eval +0.55]} 15. Bf4 {[%eval +0.49]} 15. ... Qa3 {[%eval +0.58]} 16. Bb3 $6 {[%eval 
++0.00] Inaccuracy. Qe2 was best.} 16. ... Na5 {[%eval -0.13]} 17. Bc2 {[%eval -0.19]} 17. ... Ba6 {[%eval
+-0.14]} 18. Rfe1 {[%eval -0.09]} 18. ... 
+Rac8 {[%eval -0.06]} 19. Rc1 {[%eval -0.11]}
+19. ... Nc4 {[%eval +0.00]} 20. Qd3 {[%eval -0.40]} 20. ... g6 {[%eval -0.44]} 21. Bb3 {[%eval -0.35]} 21. ... Qa5 {[%eval -0.14]} 22. Qe4 {[%eval
+-0.49]} 22. ... Qd5 {[%eval -0.37]} 23. Qxd5
+{[%eval -0.70]} 23. ... Rxd5 {[%eval -0.72]}
+24. Ne5 {[%eval -0.73]} 24. ... Rdd8 {[%eval -0.68]} 25. h3 {[%eval -0.71]} 25. ... Nxe5 {[%eval 
+-0.69]} 26. Bxe5 {[%eval -0.68]} 26. ... Bc4
+{[%eval -0.57]} 27. Red1 {[%eval -0.78]} 
+27. ... f6 {[%eval -0.65]} 28. Bf4 {[%eval -0.72]} 28. ... Kf7 {[%eval -0.63]} 29. g4 {[%eval -0.81]} 29. ... b5 {[%eval -0.71]} 30. f3 {[%eval 
+-0.80]} 30. ... g5 {[%eval -0.72]} 31. Be3 {
+[%eval -0.77]} 31. ... a5 {[%eval -0.52]} 
+32. Kf2 {[%eval -0.52]} 32. ... Rd5 {[%eval -0.37]} 33. Bc2 $6 {[%eval -1.21] Inaccuracy. Bxc4 was best.} 33. ... f5 $6 {[%eval -0.48] Inaccuracy. a4 was best.} 34. a4 {[%eval -0.72]} 34. ... f4 {[%eval -0.70]} 35. Bd2 {[%eval -0.73]} 35. ... b4 {[%eval 
+-0.57]} 36. Bxh7 {[%eval -0.82]} 36. ... Bb3
+$6 {[%eval -0.43] Inaccuracy. b3 was best.} 37. cxb4 {[%eval
+-0.51]} 37. ... Rb8 {[%eval -0.97]} 38. Bc2 
+{[%eval -0.91]} 38. ... Bxc2 {[%eval -0.89]}
+39. Rxc2 {[%eval -0.96]} 39. ... axb4 {[%eval -0.83]} 40. Bc1 $2 $6 $17 {-1.87 / -0.83 Mistake. Rc4 was best.} 
     ( 40. Rc4 e5 41. Rb1 Rxd4 42. Rxd4 exd4 43. Ke2 Ke6 44. a5 Kd5 $15 )
-40. ... b3 {[%eval -2.45] [%clk 0:06:41]} 41. Re2 {[%eval -2.42] [%clk 
-0:01:58]} 41. ... Rb4 $2 $6 $15 {-0.95 / -2.42 Mistake. e5 was best.[%clk 
-0:04:54]} 
+40. ... b3 {[%eval -2.45]} 41. Re2 {[%eval -2.42]} 41. ... Rb4 $2 $6 $15 {-0.95 / -2.42 Mistake. e5 was best.} 
     ( 41. ... e5 42. Rde1 Bb4 43. Bd2 Bd6 44. h4 gxh4 45. dxe5 Bxe5 46. 
     Kg2 $17 )
-42. Ba3 $6 $17 {-2.15 / -0.95 Inaccuracy. Bb2 was best.[%clk 0:27:27]} 
+42. Ba3 $6 $17 {-2.15 / -0.95 Inaccuracy. Bb2 was best.} 
     ( 42. Bb2 Rxa4 43. Rc1 Ra7 44. h4 gxh4 45. Kg2 Rb7 46. Rc4 Bf6 $15 )
-42. ... Rxa4 {[%eval -2.27] [%clk 0:34:48]} 43. Bxe7 $6 $19 {-5.10 / -2.27
-Inaccuracy. Bb2 was best.[%clk 0:27:43]} 
+42. ... Rxa4 {[%eval -2.27]} 43. Bxe7 $6 $19 {-5.10 / -2.27
+Inaccuracy. Bb2 was best.} 
     ( 43. Bb2 Ra2 44. Ba1 Bf6 45. Ke1 Rd7 46. Rxa2 bxa2 47. Ke2 Ra7 $17 )
-43. ... Kxe7 {[%eval -5.05] [%clk 0:35:14]} 44. Rb1 {[%eval -4.79] [%clk 
-0:26:31]} 44. ... Rb5 {[%eval -4.84] [%clk 0:33:43]} 45. d5 {[%eval -4.84]
-[%clk 0:23:43]} 45. ... Ra2 {[%eval -4.83] [%clk 0:29:53]} 46. dxe6 {
-[%eval -4.82] [%clk 0:23:08]} 46. ... Rxe2+ {[%eval -4.68] [%clk 0:29:43]}
-47. Kxe2 {[%eval -4.50] [%clk 0:23:36]} 47. ... Kxe6 {[%eval -4.45] [%clk 
-0:28:43]} 48. Kd3 {[%eval -4.45] [%clk 0:23:07]} 48. ... Kd5 {[%eval 
--4.46] [%clk 0:28:35]} 49. Rb2 {[%eval -4.43] [%clk 0:22:36]} 49. ... Rb8 
-{[%eval -4.45] [%clk 0:28:35]} 50. Kc3 {[%eval -4.46] [%clk 0:13:26]} 
-50. ... Kc5 {[%eval -4.42] [%clk 0:28:50]} 51. Rxb3 {[%eval -4.42] [%clk 
-0:12:21]} 51. ... Rxb3+ {[%eval -4.40] [%clk 0:29:11]} 52. Kxb3 {[%eval 
--4.39] [%clk 0:12:44]} 52. ... Kd4 {[%eval -4.39] [%clk 0:29:38]} 53. Kb4 
-{[%eval -4.36] [%clk 0:12:50]} 53. ... Ke3 {[%eval -4.38] [%clk 0:29:51]} 
-54. h4 {[%eval -4.42] [%clk 0:13:09]} 54. ... gxh4 {[%eval -4.42] [%clk 
-0:30:17]} 55. g5 {[%eval -4.46] [%clk 0:13:35]} 55. ... h3 {[%eval -4.48] 
-[%clk 0:30:42]} 56. g6 {[%eval -4.49] [%clk 0:13:57]} 56. ... h2 {[%eval 
--4.56] [%clk 0:31:06]} 57. g7 {[%eval -4.58] [%clk 0:14:21]} 57. ... h1=Q 
-{[%eval -4.57] [%clk 0:31:30]} 58. g8=Q {[%eval -4.71] [%clk 0:14:46]} 
-58. ... Qxf3 {[%eval -4.63] [%clk 0:31:31]} 59. Qb3+ {[%eval -4.66] [%clk 
-0:14:45]} 59. ... Kf2 {[%eval -4.66] [%clk 0:31:52]} 60. Qc2+ {[%eval 
--4.65] [%clk 0:13:50]} 60. ... Qe2 {[%eval -4.62] [%clk 0:32:12]} 61. Qc5+
-$6 {[%eval -4.67] Inaccuracy. Qf5 was best.[%clk 0:13:49]} 61. ... Kf1 {
-[%eval -4.67] [%clk 0:32:30]} 62. Ka4 $6 {[%eval -5.19] Inaccuracy. Qf5 
-was best.[%clk 0:12:45]} 62. ... Qe4+ {[%eval -5.46] [%clk 0:29:53]} 63. 
-Ka5 {[%eval -5.83] [%clk 0:12:12]} 63. ... f3 {[%eval -6.60] [%clk 
-0:30:11]} 64. Kb6 {[%eval -7.60] [%clk 0:11:49]} 64. ... f2 {[%eval -7.62]
-[%clk 0:26:37]} 65. Qc1+ $6 {[%eval -11.65] Inaccuracy. Ka7 was best.[%clk
-0:11:49]} 65. ... Ke2 {[%eval -33.83] [%clk 0:26:23]} 66. Qb2+ {[%eval 
--18.87] [%clk 0:11:55]} 66. ... Kf3 {[%eval -74.45] [%clk 0:26:28]} 67. 
-Qf6+ {[%eval -82.22] [%clk 0:12:10]} 67. ... Qf4 {[%eval -67.95] [%clk 
-0:26:52]} 68. Qc6+ {[%eval -45.41] [%clk 0:12:26]} 68. ... Kg3 {[%eval 
--68.59] [%clk 0:26:39]} 69. Qg6+ {[%eval -78.58] [%clk 0:12:06]} 69. ... 
-Kh4 {[%eval -80.07] [%clk 0:27:03]} 70. Qh7+ {[%eval -71.64] [%clk 
-0:12:22]} 70. ... Kg5 {[%eval -63.99] [%clk 0:27:28]} 71. Qg8+ {[%eval 
--66.14] [%clk 0:12:00]} 71. ... Kh5 {[%eval -47.23] [%clk 0:25:57]} 72. 
-Qe8+ {[%eval -70.93] [%clk 0:12:15]} 72. ... Kh4 {[%eval -77.03] [%clk 
-0:25:27]} 73. Qe7+ {[%eval -79.29] [%clk 0:10:52]} 73. ... Kg3 {[%eval 
--77.91] [%clk 0:24:10]} 74. Qg7+ {[%eval -69.33] [%clk 0:10:58]} 74. ... 
-Kf3 {[%eval -51.82] [%clk 0:24:07]} 75. Qb7+ {[%eval -40.36] [%clk 
-0:10:56]} 75. ... Ke3 {[%eval -77.75] [%clk 0:22:29]} 76. Qe7+ {[%eval 
--17.47] [%clk 0:11:05]} 76. ... Kd2 {[%eval -77.30] [%clk 0:22:30]} 77. 
-Qd7+ {[%eval -47.58] [%clk 0:11:09]} 77. ... Kc3 {[%eval -58.42] [%clk 
-0:21:21]} 78. Qc6+ {[%eval -76.30] [%clk 0:10:38]} 78. ... Kd2 {[%eval 
--63.41] [%clk 0:20:32]} 79. Qd5+ {[%eval -52.71] [%clk 0:10:41]} 79. ... 
-Ke1 {[%eval -75.54] [%clk 0:20:42]} 80. Qe6+ {[%eval -64.85] [%clk 
-0:09:34]} 80. ... Kf1 {[%eval -66.69] [%clk 0:21:05]} 81. Ka7 $6 {[%eval 
--55.52] Inaccuracy. Qg6 was best.[%clk 0:09:05]} 81. ... Qd4+ {[%eval 
--41.92] [%clk 0:20:30]} 82. Ka8 $4 {[%eval -32.38] Blunder. Ka6 was 
-best.[%clk 0:08:47]} 82. ... Kg2 {[%eval -49.59] [%clk 0:20:33]} 83. Qc6+ 
-{[%eval -70.65] [%clk 0:08:02]} 83. ... Kg3 {[%eval -67.31] [%clk 0:20:43]
-} 84. Qg6+ {[%eval -38.20] [%clk 0:06:41]} 84. ... Kf4 {[%eval -77.64] 
-[%clk 0:20:55]} 85. Qh6+ {[%eval -77.88] [%clk 0:06:14]} 85. ... Ke4 {
-[%eval -70.92] [%clk 0:21:10]} 86. Qe6+ {[%eval -69.82] [%clk 0:06:06]} 
-86. ... Kf3 {[%eval -8.82] [%clk 0:19:00]} 87. Qh3+ {[%eval -73.84] [%clk 
-0:05:23]} 87. ... Ke2 {[%eval -78.49] [%clk 0:19:24]} 88. Qe6+ {[%eval 
--73.50] [%clk 0:05:19]} 88. ... Qe3 {[%eval -8.96] [%clk 0:18:22]} 89. 
-Qc4+ $6 {[%eval -86.16] Inaccuracy. Qa6+ was best.[%clk 0:04:34]} 89. ... 
-Kf3 {[%eval -87.11] [%clk 0:18:12]} 90. Qf7+ {[%eval -87.35] [%clk 
-0:04:34]} 90. ... Qf4 {[%eval -77.79] [%clk 0:17:14]} 91. Qb3+ {[%eval 
--78.95] [%clk 0:03:59]} 91. ... Kg2 {[%eval -66.51] [%clk 0:17:35]} 92. 
-Qc2 {[%eval -65.17] [%clk 0:04:00]} 92. ... Qf8+ {[%eval -74.83] [%clk 
-0:16:03]} 93. Ka7 {[%eval -77.43] [%clk 0:04:17]} 93. ... Qf7+ {[%eval 
--76.54] [%clk 0:16:13]} 94. Kb8 $2 {[%eval -78.39] Mistake. Kb6 was 
-best.[%clk 0:03:50]} 94. ... Kg1 {[%eval -76.54] [%clk 0:13:56]} 95. Qc5 {
-[%eval -66.72] [%clk 0:04:08]} 95. ... Qf4+ {[%eval -61.68] [%clk 0:15:28]
+43. ... Kxe7 {[%eval -5.05]} 44. Rb1 {[%eval -4.79]} 44. ... Rb5 {[%eval -4.84]} 45. d5 {[%eval -4.84]} 45. ... Ra2 {[%eval -4.83]} 46. dxe6 {
+[%eval -4.82]} 46. ... Rxe2+ {[%eval -4.68]}
+47. Kxe2 {[%eval -4.50]} 47. ... Kxe6 {[%eval -4.45]} 48. Kd3 {[%eval -4.45]} 48. ... Kd5 {[%eval 
+-4.46]} 49. Rb2 {[%eval -4.43]} 49. ... Rb8 
+{[%eval -4.45]} 50. Kc3 {[%eval -4.46]} 
+50. ... Kc5 {[%eval -4.42]} 51. Rxb3 {[%eval -4.42]} 51. ... Rxb3+ {[%eval -4.40]} 52. Kxb3 {[%eval 
+-4.39]} 52. ... Kd4 {[%eval -4.39]} 53. Kb4 
+{[%eval -4.36]} 53. ... Ke3 {[%eval -4.38]} 
+54. h4 {[%eval -4.42]} 54. ... gxh4 {[%eval -4.42]} 55. g5 {[%eval -4.46]} 55. ... h3 {[%eval -4.48]} 56. g6 {[%eval -4.49]} 56. ... h2 {[%eval 
+-4.56]} 57. g7 {[%eval -4.58]} 57. ... h1=Q 
+{[%eval -4.57]} 58. g8=Q {[%eval -4.71]} 
+58. ... Qxf3 {[%eval -4.63]} 59. Qb3+ {[%eval -4.66]} 59. ... Kf2 {[%eval -4.66]} 60. Qc2+ {[%eval 
+-4.65]} 60. ... Qe2 {[%eval -4.62]} 61. Qc5+
+$6 {[%eval -4.67] Inaccuracy. Qf5 was best.} 61. ... Kf1 {
+[%eval -4.67]} 62. Ka4 $6 {[%eval -5.19] Inaccuracy. Qf5 
+was best.} 62. ... Qe4+ {[%eval -5.46]} 63. 
+Ka5 {[%eval -5.83]} 63. ... f3 {[%eval -6.60]} 64. Kb6 {[%eval -7.60]} 64. ... f2 {[%eval -7.62]} 65. Qc1+ $6 {[%eval -11.65] Inaccuracy. Ka7 was best.} 65. ... Ke2 {[%eval -33.83]} 66. Qb2+ {[%eval 
+-18.87]} 66. ... Kf3 {[%eval -74.45]} 67. 
+Qf6+ {[%eval -82.22]} 67. ... Qf4 {[%eval -67.95]} 68. Qc6+ {[%eval -45.41]} 68. ... Kg3 {[%eval 
+-68.59]} 69. Qg6+ {[%eval -78.58]} 69. ... 
+Kh4 {[%eval -80.07]} 70. Qh7+ {[%eval -71.64]} 70. ... Kg5 {[%eval -63.99]} 71. Qg8+ {[%eval 
+-66.14]} 71. ... Kh5 {[%eval -47.23]} 72. 
+Qe8+ {[%eval -70.93]} 72. ... Kh4 {[%eval -77.03]} 73. Qe7+ {[%eval -79.29]} 73. ... Kg3 {[%eval 
+-77.91]} 74. Qg7+ {[%eval -69.33]} 74. ... 
+Kf3 {[%eval -51.82]} 75. Qb7+ {[%eval -40.36]} 75. ... Ke3 {[%eval -77.75]} 76. Qe7+ {[%eval 
+-17.47]} 76. ... Kd2 {[%eval -77.30]} 77. 
+Qd7+ {[%eval -47.58]} 77. ... Kc3 {[%eval -58.42]} 78. Qc6+ {[%eval -76.30]} 78. ... Kd2 {[%eval 
+-63.41]} 79. Qd5+ {[%eval -52.71]} 79. ... 
+Ke1 {[%eval -75.54]} 80. Qe6+ {[%eval -64.85]} 80. ... Kf1 {[%eval -66.69]} 81. Ka7 $6 {[%eval 
+-55.52] Inaccuracy. Qg6 was best.} 81. ... Qd4+ {[%eval 
+-41.92]} 82. Ka8 $4 {[%eval -32.38] Blunder. Ka6 was 
+best.} 82. ... Kg2 {[%eval -49.59]} 83. Qc6+ 
+{[%eval -70.65]} 83. ... Kg3 {[%eval -67.31]
+} 84. Qg6+ {[%eval -38.20]} 84. ... Kf4 {[%eval -77.64]} 85. Qh6+ {[%eval -77.88]} 85. ... Ke4 {
+[%eval -70.92]} 86. Qe6+ {[%eval -69.82]} 
+86. ... Kf3 {[%eval -8.82]} 87. Qh3+ {[%eval -73.84]} 87. ... Ke2 {[%eval -78.49]} 88. Qe6+ {[%eval 
+-73.50]} 88. ... Qe3 {[%eval -8.96]} 89. 
+Qc4+ $6 {[%eval -86.16] Inaccuracy. Qa6+ was best.} 89. ... 
+Kf3 {[%eval -87.11]} 90. Qf7+ {[%eval -87.35]} 90. ... Qf4 {[%eval -77.79]} 91. Qb3+ {[%eval 
+-78.95]} 91. ... Kg2 {[%eval -66.51]} 92. 
+Qc2 {[%eval -65.17]} 92. ... Qf8+ {[%eval -74.83]} 93. Ka7 {[%eval -77.43]} 93. ... Qf7+ {[%eval 
+-76.54]} 94. Kb8 $2 {[%eval -78.39] Mistake. Kb6 was 
+best.} 94. ... Kg1 {[%eval -76.54]} 95. Qc5 {
+[%eval -66.72]} 95. ... Qf4+ {[%eval -61.68]
 } 0-1
 

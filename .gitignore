@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BritPlayers/Data/base/LumbrasGigaBase_OTB.sg4
+/BritPlayers/Data/base/LumbrasGigaBase_OTB.si4
+/BritPlayers/Data/base/LumbrasGigaBase_OTB.sn4

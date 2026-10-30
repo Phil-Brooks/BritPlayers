@@ -17,6 +17,260 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Data\base\anthony-c-kosten.sg4" />
+    <Content Remove="Data\base\anthony-c-kosten.si4" />
+    <Content Remove="Data\base\anthony-c-kosten.sn4" />
+    <Content Remove="Data\base\anthony-j-miles.sg4" />
+    <Content Remove="Data\base\anthony-j-miles.si4" />
+    <Content Remove="Data\base\anthony-j-miles.sn4" />
+    <Content Remove="Data\base\daniel-j-king.sg4" />
+    <Content Remove="Data\base\daniel-j-king.si4" />
+    <Content Remove="Data\base\daniel-j-king.sn4" />
+    <Content Remove="Data\base\david-r-norwood.sg4" />
+    <Content Remove="Data\base\david-r-norwood.si4" />
+    <Content Remove="Data\base\david-r-norwood.sn4" />
+    <Content Remove="Data\base\glenn-c-flear.sg4" />
+    <Content Remove="Data\base\glenn-c-flear.si4" />
+    <Content Remove="Data\base\glenn-c-flear.sn4" />
+    <Content Remove="Data\base\ian-d-wells.sg4" />
+    <Content Remove="Data\base\ian-d-wells.si4" />
+    <Content Remove="Data\base\ian-d-wells.sn4" />
+    <Content Remove="Data\base\james-h-plaskett.sg4" />
+    <Content Remove="Data\base\james-h-plaskett.si4" />
+    <Content Remove="Data\base\james-h-plaskett.sn4" />
+    <Content Remove="Data\base\john-d-m-nunn.sg4" />
+    <Content Remove="Data\base\john-d-m-nunn.si4" />
+    <Content Remove="Data\base\john-d-m-nunn.sn4" />
+    <Content Remove="Data\base\jon-s-speelman.sg4" />
+    <Content Remove="Data\base\jon-s-speelman.si4" />
+    <Content Remove="Data\base\jon-s-speelman.sn4" />
+    <Content Remove="Data\base\jonathan-a-mestel.sg4" />
+    <Content Remove="Data\base\jonathan-a-mestel.si4" />
+    <Content Remove="Data\base\jonathan-a-mestel.sn4" />
+    <Content Remove="Data\base\joseph-g-gallagher.sg4" />
+    <Content Remove="Data\base\joseph-g-gallagher.si4" />
+    <Content Remove="Data\base\joseph-g-gallagher.sn4" />
+    <Content Remove="Data\base\julian-m-hodgson.sg4" />
+    <Content Remove="Data\base\julian-m-hodgson.si4" />
+    <Content Remove="Data\base\julian-m-hodgson.sn4" />
+    <Content Remove="Data\base\LumbrasGigaBase_OTB.sg4" />
+    <Content Remove="Data\base\LumbrasGigaBase_OTB.si4" />
+    <Content Remove="Data\base\LumbrasGigaBase_OTB.sn4" />
+    <Content Remove="Data\base\michael-adams.sg4" />
+    <Content Remove="Data\base\michael-adams.si4" />
+    <Content Remove="Data\base\michael-adams.sn4" />
+    <Content Remove="Data\base\michael-f-stean.sg4" />
+    <Content Remove="Data\base\michael-f-stean.si4" />
+    <Content Remove="Data\base\michael-f-stean.sn4" />
+    <Content Remove="Data\base\murray-chandler.sg4" />
+    <Content Remove="Data\base\murray-chandler.si4" />
+    <Content Remove="Data\base\murray-chandler.sn4" />
+    <Content Remove="Data\base\nigel-short.sg4" />
+    <Content Remove="Data\base\nigel-short.si4" />
+    <Content Remove="Data\base\nigel-short.sn4" />
+    <Content Remove="Data\base\paul-littlewood.sg4" />
+    <Content Remove="Data\base\paul-littlewood.si4" />
+    <Content Remove="Data\base\paul-littlewood.sn4" />
+    <Content Remove="Data\base\raymond-d-keene.sg4" />
+    <Content Remove="Data\base\raymond-d-keene.si4" />
+    <Content Remove="Data\base\raymond-d-keene.sn4" />
+    <Content Remove="Data\base\william-n-watson.sg4" />
+    <Content Remove="Data\base\william-n-watson.si4" />
+    <Content Remove="Data\base\william-n-watson.sn4" />
+    <Content Remove="Data\pgn_init\chandlerm.pgn" />
+    <Content Remove="Data\pgn_init\littlewoodpaul.pgn" />
+    <Content Remove="Data\pgn_init\milestony.pgn" />
+    <Content Remove="Data\pgn_init\shortn.pgn" />
+    <Content Remove="Data\pgn_init\wells_ian.pgn" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\base\anthony-c-kosten.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\anthony-c-kosten.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\anthony-c-kosten.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\anthony-j-miles.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\anthony-j-miles.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\anthony-j-miles.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\daniel-j-king.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\daniel-j-king.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\daniel-j-king.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\david-r-norwood.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\david-r-norwood.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\david-r-norwood.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\glenn-c-flear.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\glenn-c-flear.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\glenn-c-flear.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\ian-d-wells.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\ian-d-wells.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\ian-d-wells.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\james-h-plaskett.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\james-h-plaskett.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\james-h-plaskett.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\john-d-m-nunn.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\john-d-m-nunn.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\john-d-m-nunn.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\jon-s-speelman.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\jon-s-speelman.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\jon-s-speelman.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\jonathan-a-mestel.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\jonathan-a-mestel.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\jonathan-a-mestel.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\joseph-g-gallagher.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\joseph-g-gallagher.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\joseph-g-gallagher.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\julian-m-hodgson.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\julian-m-hodgson.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\julian-m-hodgson.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\LumbrasGigaBase_OTB.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\LumbrasGigaBase_OTB.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\LumbrasGigaBase_OTB.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\michael-adams.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\michael-adams.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\michael-adams.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\michael-f-stean.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\michael-f-stean.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\michael-f-stean.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\murray-chandler.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\murray-chandler.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\murray-chandler.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\nigel-short.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\nigel-short.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\nigel-short.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\paul-littlewood.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\paul-littlewood.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\paul-littlewood.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\raymond-d-keene.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\raymond-d-keene.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\raymond-d-keene.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\william-n-watson.sg4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\william-n-watson.si4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\base\william-n-watson.sn4">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\pgn_init\chandlerm.pgn" />
+    <None Include="Data\pgn_init\littlewoodpaul.pgn" />
+    <None Include="Data\pgn_init\milestony.pgn" />
+    <None Include="Data\pgn_init\shortn.pgn" />
+    <None Include="Data\pgn_init\wells_ian.pgn" />
+  </ItemGroup>
 
 
 </Project>

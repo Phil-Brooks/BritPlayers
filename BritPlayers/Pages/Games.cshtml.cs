@@ -1,3 +1,4 @@
+using System.Text;
 using BritPlayers.Models;
 using BritPlayers.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -51,5 +52,40 @@ public class GamesModel : PageModel
         if (game == null) return NotFound();
 
         return Partial("_GameReplayerPartial", game);
+    }
+
+    public IActionResult OnGetDownloadGame(string sourceFile, string gameId)
+    {
+        var player = PlayerCatalog.All.FirstOrDefault(entry =>
+            entry.PgnFileName.Equals(sourceFile, StringComparison.OrdinalIgnoreCase));
+        if (player == null) return NotFound();
+
+        var game = _pgnService.GetGamesByFile(player.PgnFileName)
+            .FirstOrDefault(entry => entry.Id.Equals(gameId, StringComparison.Ordinal));
+        if (game == null) return NotFound();
+
+        var pgn = new StringBuilder();
+        AppendTag(pgn, "Event", game.Event);
+        AppendTag(pgn, "Site", game.Site);
+        AppendTag(pgn, "Date", game.Date);
+        AppendTag(pgn, "Round", game.Round);
+        AppendTag(pgn, "White", game.White);
+        AppendTag(pgn, "Black", game.Black);
+        AppendTag(pgn, "Result", game.Result);
+        AppendTag(pgn, "ECO", game.Eco);
+        pgn.AppendLine();
+        pgn.AppendLine(game.Moves);
+
+        return File(Encoding.UTF8.GetBytes(pgn.ToString()), "application/x-chess-pgn",
+            $"{player.Slug}-{game.Id[..8]}.pgn");
+    }
+
+    private static void AppendTag(StringBuilder pgn, string name, string value)
+    {
+        var escapedValue = value.Replace("\\", "\\\\", StringComparison.Ordinal)
+            .Replace("\"", "\\\"", StringComparison.Ordinal)
+            .Replace('\r', ' ')
+            .Replace('\n', ' ');
+        pgn.Append('[').Append(name).Append(" \"").Append(escapedValue).AppendLine("\"]");
     }
 }

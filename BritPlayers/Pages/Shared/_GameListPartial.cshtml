@@ -17,14 +17,24 @@ else
                     <th>Black</th>
                     <th>Result</th>
                     <th>Event / Site</th>
-                    <th>ECO</th>
+                    <th>Opening</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var game in Model)
                 {
-                    <tr>
+                    var year = System.Text.RegularExpressions.Regex.Match(game.Date, @"\b\d{4}\b").Value;
+                    var openingName = BritPlayers.Services.OpeningCatalog.GetName(game.Eco);
+                    <tr data-game-id="@game.Id"
+                        data-date="@game.Date"
+                        data-year="@year"
+                        data-result="@game.Result"
+                        data-eco="@game.Eco"
+                        data-opening="@openingName"
+                        data-opponent="@game.White / @game.Black"
+                        data-event="@game.Event"
+                        data-search="@($"{game.White} {game.Black} {game.Event} {game.Site} {game.Eco} {openingName}")">
                         <td class="text-nowrap"><small>@game.Date</small></td>
                         <td class="fw-semibold">@game.White</td>
                         <td class="fw-semibold">@game.Black</td>
@@ -35,7 +45,13 @@ else
                             <small class="d-block">@game.Event</small>
                             <small class="text-muted">@game.Site</small>
                         </td>
-                        <td><code>@game.Eco</code></td>
+                        <td>
+                            @if (!string.IsNullOrWhiteSpace(game.Eco))
+                            {
+                                <code class="d-block">@game.Eco</code>
+                            }
+                            <small>@openingName</small>
+                        </td>
                         <td>
                             <button class="btn btn-sm btn-outline-primary"
                                     hx-get="/Games?handler=GameViewer&gameId=@game.Id"

@@ -36,12 +36,264 @@
     <div class="card shadow-sm border-0">
         <div class="card-header bg-white d-flex justify-content-between align-items-center py-2">
             <h6 class="mb-0 fw-bold"><i class="bi bi-collection me-1"></i> Games Archive</h6>
-            <div id="loading-spinner" class="htmx-indicator spinner-border spinner-border-sm text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+            <span id="game-count" class="text-muted small" aria-live="polite"></span>
+        </div>
+        <div class="card-body border-bottom">
+            <div class="row g-2 align-items-end">
+                <div class="col-12 col-md-4">
+                    <label class="form-label small mb-1" for="game-search">Search games</label>
+                    <input id="game-search" class="form-control form-control-sm" type="search"
+                           placeholder="Opponent, event, site, or ECO" autocomplete="off" />
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small mb-1" for="game-year">Year</label>
+                    <select id="game-year" class="form-select form-select-sm">
+                        <option value="">All years</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small mb-1" for="game-result">Result</label>
+                    <select id="game-result" class="form-select form-select-sm">
+                        <option value="">All results</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small mb-1" for="game-eco">Opening / ECO</label>
+                    <input id="game-eco" class="form-control form-control-sm" type="search"
+                           placeholder="e.g. Sicilian or B90" autocomplete="off" />
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small mb-1" for="game-sort">Sort by</label>
+                    <select id="game-sort" class="form-select form-select-sm">
+                        <option value="newest">Newest date</option>
+                        <option value="oldest">Oldest date</option>
+                        <option value="opponent">Opponent</option>
+                        <option value="event">Event</option>
+                        <option value="opening">Opening</option>
+                        <option value="eco">ECO</option>
+                    </select>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button id="clear-game-filters" type="button" class="btn btn-sm btn-outline-secondary">Clear filters</button>
+                </div>
             </div>
         </div>
         <div class="card-body p-0" id="game-list-container">
             <partial name="_GameListPartial" model="Model.Games" />
         </div>
+        <div class="card-footer bg-white d-flex justify-content-between align-items-center" id="game-pagination" data-page-size="50" hidden>
+            <button id="game-page-previous" type="button" class="btn btn-sm btn-outline-secondary">Previous</button>
+            <span id="game-page-label" class="small text-muted" aria-live="polite"></span>
+            <button id="game-page-next" type="button" class="btn btn-sm btn-outline-secondary">Next</button>
+        </div>
+        <div id="game-empty-results" class="alert alert-info m-3" role="status" hidden>
+            No games match these filters. Try changing or clearing your filters.
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        (() => {
+            const list = document.getElementById('game-list-container');
+            const rows = Array.from(list.querySelectorAll('tbody tr[data-game-id]'));
+            const search = document.getElementById('game-search');
+            const year = document.getElementById('game-year');
+            const result = document.getElementById('game-result');
+            const eco = document.getElementById('game-eco');
+            const sort = document.getElementById('game-sort');
+            const count = document.getElementById('game-count');
+            const empty = document.getElementById('game-empty-results');
+            const pagination = document.getElementById('game-pagination');
+            const previousPage = document.getElementById('game-page-previous');
+            const nextPage = document.getElementById('game-page-next');
+            const pageLabel = document.getElementById('game-page-label');
+            const pageSize = Number(pagination.dataset.pageSize);
+            const initialPage = Number.parseInt(new URL(window.location.href).searchParams.get('p'), 10);
+            let currentPage = Number.isInteger(initialPage) && initialPage > 0 ? initialPage : 1;
+
+            function populateOptions(select, values) {
+                [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+                    .forEach(value => select.add(new Option(value, value)));
+            }
+
+            populateOptions(year, rows.map(row => row.dataset.year));
+            populateOptions(result, rows.map(row => row.dataset.result));
+
+            const filterControls = { q: search, year, result, eco, sort };
+            const validSorts = ['newest', 'oldest', 'opponent', 'event', 'opening', 'eco'];
+
+            function restoreFiltersFromUrl() {
+                const params = new URL(window.location.href).searchParams;
+                Object.entries(filterControls).forEach(([key, control]) => {
+                    const value = params.get(key) || '';
+                    if (control.tagName === 'SELECT') {
+                        control.value = Array.from(control.options).some(option => option.value === value)
+                            ? value
+                            : '';
+                    } else {
+                        control.value = value;
+                    }
+                });
+                if (!validSorts.includes(sort.value)) sort.value = 'newest';
+            }
+
+            function syncFiltersToUrl(method = 'replaceState') {
+                const url = new URL(window.location.href);
+                Object.entries(filterControls).forEach(([key, control]) => {
+                    const value = control.value.trim();
+                    if (value) {
+                        url.searchParams.set(key, value);
+                    } else {
+                        url.searchParams.delete(key);
+                    }
+                });
+                if (currentPage > 1) {
+                    url.searchParams.set('p', currentPage);
+                } else {
+                    url.searchParams.delete('p');
+                }
+                window.history[method](window.history.state, '', url);
+            }
+
+            function dateValue(value) {
+                const match = value.match(/^(\d{4})\.(\d{2}|\?{2})\.(\d{2}|\?{2})/);
+                if (!match) return 0;
+                return Number(match[1]) * 10000 + (Number(match[2]) || 0) * 100 + (Number(match[3]) || 0);
+            }
+
+            function applyFilters(updateUrl = true, resetPage = true, historyMethod = 'replaceState') {
+                if (resetPage) currentPage = 1;
+                const term = search.value.trim().toLocaleLowerCase();
+                const visibleRows = rows.filter(row => {
+                    const matchesSearch = !term || row.dataset.search.toLocaleLowerCase().includes(term);
+                    const ecoTerm = eco.value.trim().toLocaleLowerCase();
+                    return matchesSearch
+                        && (!year.value || row.dataset.year === year.value)
+                        && (!result.value || row.dataset.result === result.value)
+                        && (!ecoTerm || row.dataset.eco.toLocaleLowerCase().includes(ecoTerm)
+                            || row.dataset.opening.toLocaleLowerCase().includes(ecoTerm));
+                });
+
+                const sortKey = sort.value;
+                visibleRows.sort((a, b) => {
+                    if (sortKey === 'newest' || sortKey === 'oldest') {
+                        const aDate = dateValue(a.dataset.date);
+                        const bDate = dateValue(b.dataset.date);
+                        if (!aDate || !bDate) return aDate ? -1 : bDate ? 1 : 0;
+                        const difference = aDate - bDate;
+                        return sortKey === 'newest' ? -difference : difference;
+                    }
+                    const left = sortKey === 'opponent' ? a.dataset.opponent
+                        : sortKey === 'opening' ? a.dataset.opening : a.dataset[sortKey];
+                    const right = sortKey === 'opponent' ? b.dataset.opponent
+                        : sortKey === 'opening' ? b.dataset.opening : b.dataset[sortKey];
+                    return left.localeCompare(right, undefined, { numeric: true, sensitivity: 'base' });
+                });
+
+                const pageCount = Math.ceil(visibleRows.length / pageSize);
+                currentPage = Math.max(1, Math.min(currentPage, pageCount || 1));
+                if (updateUrl) syncFiltersToUrl(historyMethod);
+                const pageStart = (currentPage - 1) * pageSize;
+                const pageRows = new Set(visibleRows.slice(pageStart, pageStart + pageSize));
+
+                visibleRows.forEach(row => list.querySelector('tbody').appendChild(row));
+                rows.forEach(row => {
+                    const matchesFilters = visibleRows.includes(row);
+                    row.dataset.filtered = matchesFilters ? 'true' : 'false';
+                    row.hidden = !pageRows.has(row);
+                });
+                const rangeStart = visibleRows.length ? pageStart + 1 : 0;
+                const rangeEnd = Math.min(pageStart + pageSize, visibleRows.length);
+                count.textContent = `Showing ${rangeStart}–${rangeEnd} of ${visibleRows.length} matching games (${rows.length} total)`;
+                empty.hidden = visibleRows.length !== 0 || rows.length === 0;
+                pagination.hidden = pageCount <= 1;
+                pageLabel.textContent = `Page ${currentPage} of ${Math.max(pageCount, 1)}`;
+                previousPage.disabled = currentPage <= 1;
+                nextPage.disabled = currentPage >= pageCount;
+                document.dispatchEvent(new Event('britplayers:games-updated'));
+            }
+
+            restoreFiltersFromUrl();
+            [search, eco].forEach(control => control.addEventListener('input', () => applyFilters()));
+            [year, result, sort].forEach(control => control.addEventListener('change', () => applyFilters()));
+            previousPage.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    applyFilters(true, false, 'pushState');
+                }
+            });
+            nextPage.addEventListener('click', () => {
+                currentPage++;
+                applyFilters(true, false, 'pushState');
+            });
+            document.addEventListener('britplayers:select-page', event => {
+                const page = event.detail?.page;
+                if (Number.isInteger(page) && page >= 1) {
+                    currentPage = page;
+                    applyFilters(true, false);
+                }
+            });
+            document.getElementById('clear-game-filters').addEventListener('click', () => {
+                search.value = '';
+                year.value = '';
+                result.value = '';
+                eco.value = '';
+                sort.value = 'newest';
+                applyFilters();
+                search.focus();
+            });
+
+            applyFilters(true, false);
+
+            function currentGameId() {
+                return document.getElementById('current-game-id')?.textContent.trim();
+            }
+
+            function setGameInUrl(gameId, method = 'pushState') {
+                const url = new URL(window.location.href);
+                if (gameId) {
+                    url.searchParams.set('game', gameId);
+                } else {
+                    url.searchParams.delete('game');
+                }
+                window.history[method]({ game: gameId || null }, '', url);
+            }
+
+            const initiallySelectedGame = currentGameId();
+            if (initiallySelectedGame && !new URL(window.location.href).searchParams.has('game')) {
+                setGameInUrl(initiallySelectedGame, 'replaceState');
+            }
+
+            document.addEventListener('htmx:afterSwap', event => {
+                if (event.detail.target?.id !== 'game-viewer-panel') return;
+                const gameId = currentGameId();
+                if (gameId && new URL(window.location.href).searchParams.get('game') !== gameId) {
+                    setGameInUrl(gameId);
+                }
+            });
+
+            document.addEventListener('click', event => {
+                if (event.target instanceof Element && event.target.closest('#btn-close-game')) {
+                    setGameInUrl(null, 'replaceState');
+                }
+            });
+
+            window.addEventListener('popstate', () => {
+                restoreFiltersFromUrl();
+                const requestedPage = Number.parseInt(new URL(window.location.href).searchParams.get('p'), 10);
+                currentPage = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+                applyFilters(false, false);
+                const gameId = new URL(window.location.href).searchParams.get('game');
+                if (gameId) {
+                    htmx.ajax('GET', `/Games?handler=GameViewer&gameId=${encodeURIComponent(gameId)}`, {
+                        target: '#game-viewer-panel',
+                        swap: 'innerHTML'
+                    });
+                } else {
+                    document.getElementById('game-viewer-panel').innerHTML = '';
+                }
+            });
+        })();
+    </script>
+}

@@ -163,15 +163,21 @@
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-2">
         <div class="d-flex flex-wrap align-items-center gap-2">
             <h6 class="mb-0 fw-bold">@Model.White vs @Model.Black</h6>
-            <small class="opacity-75">(@Model.Date) &bull; @Model.Event &bull; <strong>@Model.Result</strong> &bull; ECO: @Model.Eco</small>
+            <small class="opacity-75">(@Model.Date) &bull; @Model.Event &bull; <strong>@Model.Result</strong> &bull; @Model.Eco: @BritPlayers.Services.OpeningCatalog.GetName(Model.Eco)</small>
         </div>
 
         <!-- Controls on right -->
         <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-sm btn-light text-primary fw-semibold shadow-sm"
+               asp-page="/Games" asp-page-handler="DownloadGame"
+               asp-route-sourceFile="@Model.SourceFile" asp-route-gameId="@Model.Id"
+               download title="Download this game as PGN">
+                <i class="bi bi-download me-1"></i> PGN
+            </a>
             <button id="btn-next-game" type="button" class="btn btn-sm btn-light text-primary fw-semibold shadow-sm" title="Load next game from archive">
                 Next Game <i class="bi bi-chevron-right"></i>
             </button>
-            <button type="button" class="btn-close btn-close-white btn-sm" onclick="document.getElementById('game-viewer-panel').innerHTML = ''" aria-label="Close"></button>
+            <button id="btn-close-game" type="button" class="btn-close btn-close-white btn-sm" onclick="document.getElementById('game-viewer-panel').innerHTML = ''" aria-label="Close"></button>
         </div>
     </div>
 
@@ -191,17 +197,28 @@
                     <button id="btn-next" class="btn btn-outline-secondary" title="Next move">&rsaquo;</button>
                     <button id="btn-end" class="btn btn-outline-secondary" title="Last move">&raquo;</button>
                 </div>
+                <div class="d-flex justify-content-center align-items-center gap-2 mt-2">
+                    <button id="btn-autoplay" type="button" class="btn btn-sm btn-outline-primary" aria-label="Play game" title="Play game">
+                        <i class="bi bi-play-fill" aria-hidden="true"></i> Play
+                    </button>
+                    <label class="small text-muted mb-0" for="autoplay-speed">Speed</label>
+                    <select id="autoplay-speed" class="form-select form-select-sm" style="width: auto;">
+                        <option value="1500">Slow</option>
+                        <option value="800" selected>Normal</option>
+                        <option value="400">Fast</option>
+                    </select>
+                </div>
                 <div class="text-muted small mt-1">Use Left / Right arrow keys to step moves</div>
             </div>
 
             <!-- 2. Narrower Moves Table Column -->
             <div class="col-xl-4 col-lg-3 col-md-6">
-                <div class="card h-100 shadow-none border">
+                <div class="card h-100 shadow-none border d-flex flex-column">
                     <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
                         <strong class="small text-dark"><i class="bi bi-list-ol me-1"></i> Moves</strong>
                         <span class="badge bg-secondary" style="font-size: 0.65rem;">SAN &bull; Eval</span>
                     </div>
-                    <div class="card-body p-0 overflow-auto" id="moves-container" style="max-height: 380px;">
+                    <div class="card-body p-0 overflow-auto flex-grow-1" id="moves-container" style="height: 380px; max-height: 380px; min-height: 0;">
                         <table class="chess-table">
                             <tbody id="moves-table-body">
                                 <!-- Populated dynamically -->
@@ -211,10 +228,24 @@
                 </div>
             </div>
 
-            <!-- 3. Stacked Comments and Better Column -->
+            <!-- 3. Evaluation, Comments, and Better Alternative Column -->
             <div class="col-xl-4 col-lg-4 col-md-6 d-flex flex-column gap-2">
+                <div class="card shadow-none border flex-shrink-0">
+                    <div class="card-header bg-light py-2">
+                        <strong class="small text-dark"><i class="bi bi-graph-up me-1"></i> Evaluation</strong>
+                        <span class="text-muted small ms-1">(White advantage)</span>
+                    </div>
+                    <div class="card-body p-2">
+                        <div id="evaluation-chart-empty" class="text-muted small text-center py-2" hidden>
+                            No evaluation data is available for this game.
+                        </div>
+                        <svg id="evaluation-chart" width="600" height="100" viewBox="0 0 600 100" role="group"
+                             aria-label="Evaluation by move. Click a point to jump to that position."
+                             style="display: block; width: 100%; height: auto;" hidden></svg>
+                    </div>
+                </div>
                 <!-- Top Box: Move Comments -->
-                <div class="card shadow-none border flex-fill" style="min-height: 185px; max-height: 190px;">
+                <div class="card shadow-none border flex-shrink-0" style="height: 100px;">
                     <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
                         <strong class="small text-dark"><i class="bi bi-chat-left-text me-1"></i> Comments</strong>
                         <span id="comment-move-badge" class="badge bg-primary-subtle text-primary" style="font-size: 0.7rem;">Start</span>
@@ -225,7 +256,7 @@
                 </div>
 
                 <!-- Bottom Box: Better(Playable) -->
-                <div class="card shadow-none border flex-fill" style="min-height: 185px; max-height: 190px;">
+                <div class="card shadow-none border flex-grow-1" style="min-height: 150px;">
                     <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
                         <strong class="small text-dark"><i class="bi bi-diagram-3 me-1"></i> Better Alternative</strong>
                         <div class="d-flex align-items-center gap-1">
@@ -250,6 +281,7 @@
 <script>
     (function () {
         try {
+            window._chessAutoplayStop?.();
             const rawPgn = document.getElementById('pgn-data').textContent.trim();
 
             const NAG_MAP = {
@@ -426,6 +458,10 @@
             }
 
             let currentMoveIndex = 0;
+            let autoplayTimer = null;
+            let isAutoplaying = false;
+            const autoplayButton = document.getElementById('btn-autoplay');
+            const autoplaySpeed = document.getElementById('autoplay-speed');
             // Tracks active variation exploration: { fens: [], currentIdx: 0, vIdx: 0 }
             let activeVarState = null;
 
@@ -535,6 +571,7 @@
 
             // Variation Interactive Player
             function playVariationMove(vIdx, stepIdx) {
+                stopAutoplay();
                 const varData = window._currentVariationsData?.[vIdx];
                 if (!varData || !varData.fens[stepIdx]) return;
 
@@ -699,7 +736,180 @@
                 board.position(fens[currentMoveIndex]);
                 highlightMainMove();
                 updateSidePanels(currentMoveIndex);
+                updateEvaluationChart();
             }
+
+            function updateAutoplayButton() {
+                if (!autoplayButton?.isConnected) return;
+                autoplayButton.innerHTML = isAutoplaying
+                    ? '<i class="bi bi-pause-fill" aria-hidden="true"></i> Pause'
+                    : '<i class="bi bi-play-fill" aria-hidden="true"></i> Play';
+                autoplayButton.setAttribute('aria-label', isAutoplaying ? 'Pause game' : 'Play game');
+                autoplayButton.title = isAutoplaying ? 'Pause game' : 'Play game';
+            }
+
+            function stopAutoplay() {
+                isAutoplaying = false;
+                if (autoplayTimer !== null) {
+                    window.clearTimeout(autoplayTimer);
+                    autoplayTimer = null;
+                }
+                updateAutoplayButton();
+            }
+
+            function scheduleAutoplayMove() {
+                if (!isAutoplaying) return;
+                autoplayTimer = window.setTimeout(() => {
+                    autoplayTimer = null;
+                    if (!isAutoplaying || activeVarState) {
+                        stopAutoplay();
+                        return;
+                    }
+                    if (currentMoveIndex >= fens.length - 1) {
+                        stopAutoplay();
+                        return;
+                    }
+                    goToMove(currentMoveIndex + 1);
+                    scheduleAutoplayMove();
+                }, Number(autoplaySpeed.value));
+            }
+
+            function startAutoplay() {
+                if (fens.length <= 1) {
+                    stopAutoplay();
+                    return;
+                }
+                if (currentMoveIndex >= fens.length - 1) goToMove(0);
+                isAutoplaying = true;
+                updateAutoplayButton();
+                scheduleAutoplayMove();
+            }
+
+            window._chessAutoplayStop = stopAutoplay;
+            autoplayButton.addEventListener('click', () => {
+                if (isAutoplaying) stopAutoplay();
+                else startAutoplay();
+            });
+            autoplaySpeed.addEventListener('change', () => {
+                if (isAutoplaying) {
+                    if (autoplayTimer !== null) window.clearTimeout(autoplayTimer);
+                    scheduleAutoplayMove();
+                }
+            });
+            document.getElementById('btn-close-game').addEventListener('click', stopAutoplay);
+
+            const chart = document.getElementById('evaluation-chart');
+            const chartEmpty = document.getElementById('evaluation-chart-empty');
+            const chartNamespace = 'http://www.w3.org/2000/svg';
+            const chartWidth = 600;
+            const chartHeight = 100;
+            const chartPadding = { left: 36, right: 12, top: 8, bottom: 20 };
+            const chartValues = history.map((_, index) => {
+                const value = annotations[index + 1]?.eval;
+                if (!value) return null;
+                const mateMatch = value.match(/#([+-]?\d+)/);
+                if (mateMatch) return mateMatch[1].startsWith('-') ? -5 : 5;
+                const score = Number.parseFloat(value);
+                return Number.isFinite(score) ? Math.max(-5, Math.min(5, score)) : null;
+            });
+
+            function createChartElement(name, attributes = {}) {
+                const element = document.createElementNS(chartNamespace, name);
+                Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+                return element;
+            }
+
+            function updateEvaluationChart() {
+                chart.replaceChildren();
+                const available = chartValues.some(value => value !== null);
+                if (available) {
+                    chart.removeAttribute('hidden');
+                } else {
+                    chart.setAttribute('hidden', '');
+                }
+                chartEmpty.hidden = available;
+                if (!available) return;
+
+                const plotWidth = chartWidth - chartPadding.left - chartPadding.right;
+                const plotHeight = chartHeight - chartPadding.top - chartPadding.bottom;
+                const x = index => chartPadding.left + (history.length > 1 ? index / (history.length - 1) : 0) * plotWidth;
+                const y = value => chartPadding.top + (5 - value) / 10 * plotHeight;
+
+                [-5, 0, 5].forEach(value => {
+                    const yPosition = y(value);
+                    chart.appendChild(createChartElement('line', {
+                        x1: chartPadding.left, y1: yPosition,
+                        x2: chartWidth - chartPadding.right, y2: yPosition,
+                        stroke: value === 0 ? '#6c757d' : '#dee2e6',
+                        'stroke-width': value === 0 ? '1.5' : '1'
+                    }));
+                    const label = createChartElement('text', {
+                        x: chartPadding.left - 5, y: yPosition + 4,
+                        'text-anchor': 'end', fill: '#6c757d', 'font-size': '11'
+                    });
+                    label.textContent = value > 0 ? `+${value}` : `${value}`;
+                    chart.appendChild(label);
+                });
+
+                let segment = [];
+                const segments = [];
+                chartValues.forEach((value, index) => {
+                    if (value === null) {
+                        if (segment.length) segments.push(segment);
+                        segment = [];
+                    } else {
+                        segment.push(`${x(index)},${y(value)}`);
+                    }
+                });
+                if (segment.length) segments.push(segment);
+                segments.forEach(points => {
+                    if (points.length > 1) {
+                        chart.appendChild(createChartElement('polyline', {
+                            points: points.join(' '), fill: 'none', stroke: '#0d6efd',
+                            'stroke-width': '2', 'stroke-linejoin': 'round', 'stroke-linecap': 'round'
+                        }));
+                    }
+                });
+
+                chartValues.forEach((value, index) => {
+                    if (value === null) return;
+                    const moveIndex = index + 1;
+                    const point = createChartElement('circle', {
+                        cx: x(index), cy: y(value), r: moveIndex === currentMoveIndex ? '5' : '3',
+                        fill: moveIndex === currentMoveIndex ? '#dc3545' : '#0d6efd',
+                        tabindex: '0', role: 'button', 'data-move-idx': moveIndex,
+                        'aria-label': `Move ${Math.floor(index / 2) + 1}${index % 2 === 0 ? ' White' : ' Black'}, evaluation ${annotations[moveIndex].eval}`,
+                        style: 'cursor: pointer'
+                    });
+                    chart.appendChild(point);
+                });
+
+                const startLabel = createChartElement('text', {
+                    x: chartPadding.left, y: chartHeight - 4, fill: '#6c757d', 'font-size': '11'
+                });
+                startLabel.textContent = 'Move 1';
+                chart.appendChild(startLabel);
+                const endLabel = createChartElement('text', {
+                    x: chartWidth - chartPadding.right, y: chartHeight - 4,
+                    'text-anchor': 'end', fill: '#6c757d', 'font-size': '11'
+                });
+                endLabel.textContent = `${Math.ceil(history.length / 2)} moves`;
+                chart.appendChild(endLabel);
+            }
+
+            chart.addEventListener('click', event => {
+                const point = event.target.closest('circle[data-move-idx]');
+                if (point) goToMove(Number(point.getAttribute('data-move-idx')));
+            });
+            chart.addEventListener('keydown', event => {
+                const point = event.target.closest('circle[data-move-idx]');
+                if (point && (event.key === 'Enter' || event.key === ' ')) {
+                    event.preventDefault();
+                    goToMove(Number(point.getAttribute('data-move-idx')));
+                }
+            });
+
+            updateEvaluationChart();
 
             // Navigation Handlers (Supports both Mainline and Variation stepping)
             document.getElementById('btn-start').onclick = () => {
@@ -797,9 +1007,11 @@
 
                 const currentGameId = document.getElementById('current-game-id')?.textContent.trim();
 
-                // Find all "Load & Play" links/buttons currently in the table
-                const gameButtons = Array.from(document.querySelectorAll('#game-list-container a, #game-list-container button, .table a, .table button'))
-                    .filter(el => el.textContent.toLowerCase().includes('load'));
+                // Follow all filtered and sorted results, including games on other pages.
+                const gameButtons = Array.from(document.querySelectorAll('#game-list-container tr[data-game-id]'))
+                    .filter(row => row.dataset.filtered === 'true')
+                    .map(row => row.querySelector('button[hx-get]'))
+                    .filter(Boolean);
 
                 if (gameButtons.length === 0) {
                     nextGameBtn.disabled = true;
@@ -833,6 +1045,15 @@
                     e.preventDefault();
                     const nextIndex = currentIndex + 1;
                     if (nextIndex < gameButtons.length) {
+                        const nextRow = gameButtons[nextIndex].closest('tr');
+                        const filteredIndex = Array.from(nextRow.parentElement.children)
+                            .filter(row => row.dataset.filtered === 'true')
+                            .indexOf(nextRow);
+                        const pageSize = Number(document.getElementById('game-pagination')?.dataset.pageSize) || 50;
+                        const nextPage = Math.floor(filteredIndex / pageSize) + 1;
+                        document.dispatchEvent(new CustomEvent('britplayers:select-page', {
+                            detail: { page: nextPage }
+                        }));
                         gameButtons[nextIndex].click();
                     }
                 };
@@ -847,6 +1068,7 @@
 
             // 2. If using HTMX when clicking or swapping content
             document.addEventListener('htmx:afterSettle', setupNextGameHandler);
+            document.addEventListener('britplayers:games-updated', setupNextGameHandler);
 
 
         } catch (err) {

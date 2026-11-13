@@ -21,9 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="add_grandmaster.py" />
     <Compile Include="rem_clk.py" />
     <Compile Include="score_pgns.py" />
     <Compile Include="fetch_twic_games.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="add_grandmaster.bat" />
+    <Content Include="README.md" />
+    <Content Include="score_grandmaster.bat" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

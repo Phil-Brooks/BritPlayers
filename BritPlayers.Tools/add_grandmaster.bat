@@ -1,15 +1,17 @@
 @echo off
 setlocal
 
-rem Edit these values before running. Add --match-name / --photo to the Python command below if needed.
+rem Edit these values before running. This starts from a Scid-exported PGN and skips the all.pgn scan.
+rem Add --match-name / --photo to the Python command below if needed.
 set "PYTHON=python"
-set "PLAYER_NAME=Example Name"
-set "PLAYER_SLUG=example-name"
-set "PLAYER_DATES=b. 19xx"
+set "PLAYER_NAME=Keith C Arkell"
+set "PLAYER_SLUG=keith-c-arkell"
+set "PLAYER_DATES=b. 1961"
+set "INPUT_PGN=%~dp0..\BritPlayers\Data\pgn_in\keith-c-arkell.pgn"
 set "STOCKFISH_PATH=D:\scid\stockfish-windows-x86-64-universal\stockfish\stockfish-windows-x86-64-universal.exe"
 
 pushd "%~dp0"
-"%PYTHON%" "%~dp0add_grandmaster.py" --name "%PLAYER_NAME%" --slug "%PLAYER_SLUG%" --dates "%PLAYER_DATES%" --stockfish "%STOCKFISH_PATH%"
+"%PYTHON%" "%~dp0add_grandmaster.py" --name "%PLAYER_NAME%" --slug "%PLAYER_SLUG%" --dates "%PLAYER_DATES%" --input-pgn "%INPUT_PGN%" --stockfish "%STOCKFISH_PATH%"
 set "RESULT=%ERRORLEVEL%"
 popd
 

@@ -1,0 +1,1120 @@
+﻿@model BritPlayers.Models.ChessGame
+
+<style>
+    .chess-table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 0.88rem;
+    }
+
+        .chess-table tbody tr {
+            border-bottom: 1px solid #f1f3f5;
+            height: 30px;
+        }
+
+            .chess-table tbody tr:hover {
+                background-color: #f8f9fa;
+            }
+
+    .move-num {
+        width: 42px;
+        text-align: right;
+        padding-right: 10px;
+        color: #adb5bd;
+        font-weight: 600;
+        font-size: 0.82rem;
+        user-select: none;
+    }
+
+    .move-cell {
+        width: calc((100% - 42px) / 2);
+        padding: 2px 8px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.1s ease;
+        vertical-align: middle;
+    }
+
+    .chess-table td:nth-child(2) {
+        border-right: 1px solid #edf2f7;
+    }
+
+    .move-cell:hover {
+        background-color: #e9ecef;
+    }
+
+    .move-cell-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        min-height: 24px;
+    }
+
+    .move-san {
+        display: inline-flex;
+        align-items: center;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .move-cell.active-move {
+        background-color: #0d6efd !important;
+        color: #ffffff !important;
+        font-weight: 600;
+    }
+
+        .move-cell.active-move .piece-glyph {
+            color: #ffffff !important;
+        }
+
+        .move-cell.active-move .eval-badge {
+            background-color: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+        }
+
+    .eval-badge {
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 1px 5px;
+        border-radius: 4px;
+        user-select: none;
+        white-space: nowrap;
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+
+        .eval-badge.eval-neg {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .eval-badge.eval-mate {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+    .piece-glyph {
+        font-size: 1.05rem;
+        font-weight: normal;
+        margin-right: 2px;
+    }
+
+    .board-controls {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.35rem;
+        width: min(100%, 340px);
+        margin: 0.75rem auto 0;
+    }
+
+        .board-controls .btn {
+            min-height: 40px;
+            padding: 0.4rem;
+            font-size: 1.4rem;
+            line-height: 1;
+            border-radius: 0.5rem;
+        }
+
+    /* Variation Interactive Styling */
+    .var-move-btn {
+        cursor: pointer;
+        padding: 1px 4px;
+        margin: 0 1px;
+        border-radius: 3px;
+        color: #0d6efd;
+        font-weight: 600;
+        display: inline-block;
+        user-select: none;
+        transition: all 0.1s ease;
+    }
+
+        .var-move-btn:hover {
+            background-color: #cfe2ff;
+            color: #084298;
+        }
+
+        .var-move-btn.active-var-move {
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+        }
+
+            .var-move-btn.active-var-move .piece-glyph {
+                color: #ffffff !important;
+            }
+
+    .move-san.bad-move,
+    .move-san.bad-move strong {
+        color: #dc3545 !important;
+        font-weight: 600;
+    }
+
+    /* When the move is selected/active, ensure text stays white on the blue background */
+    .move-cell.active-move .move-san.bad-move,
+    .move-cell.active-move .move-san.bad-move strong {
+        color: #ffffff !important;
+    }
+
+    </style>
+
+<div class="card shadow-sm border-primary">
+    <!-- Header -->
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-2 game-replayer-header">
+        <div class="d-flex flex-wrap align-items-center gap-2 game-replayer-title">
+            <h6 class="mb-0 fw-bold">@Model.White vs @Model.Black</h6>
+            <small class="opacity-75 game-replayer-meta">(@Model.Date) &bull; @Model.Event &bull; <strong>@Model.Result</strong> &bull; @Model.Eco: @BritPlayers.Services.OpeningCatalog.GetName(Model.Eco)</small>
+        </div>
+
+        <!-- Controls on right -->
+        <div class="d-flex align-items-center gap-2 game-replayer-actions">
+            <a class="btn btn-sm btn-light text-primary fw-semibold shadow-sm"
+               asp-page="/Games" asp-page-handler="DownloadGame"
+               asp-route-sourceFile="@Model.SourceFile" asp-route-gameId="@Model.Id"
+               download title="Download this game as PGN">
+                <i class="bi bi-download me-1"></i> PGN
+            </a>
+            <button id="btn-next-game" type="button" class="btn btn-sm btn-light text-primary fw-semibold shadow-sm" title="Load next game from archive">
+                Next Game <i class="bi bi-chevron-right"></i>
+            </button>
+            <button id="btn-close-game" type="button" class="btn-close btn-close-white btn-sm" onclick="document.getElementById('game-viewer-panel').innerHTML = ''" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <!-- Hidden container storing current Game ID -->
+    <div id="current-game-id" class="d-none">@Model.Id</div>
+
+    <div class="card-body p-3">
+        <div class="row g-3 game-replay-row">
+            <!-- 1. Chessboard Column -->
+            <div class="col-xl-4 col-lg-5 col-md-12 text-center game-replay-board-column">
+                <div id="board" style="width: 350px; max-width: 100%; margin: 0 auto;"></div>
+
+                <div class="board-controls" role="group" aria-label="Move controls">
+                    <button id="btn-start" class="btn btn-outline-secondary" title="First move">&laquo;</button>
+                    <button id="btn-prev" class="btn btn-outline-secondary" title="Previous move">&lsaquo;</button>
+                    <button id="btn-flip" class="btn btn-outline-secondary" title="Flip board">&#8645;</button>
+                    <button id="btn-next" class="btn btn-outline-secondary" title="Next move">&rsaquo;</button>
+                    <button id="btn-end" class="btn btn-outline-secondary" title="Last move">&raquo;</button>
+                </div>
+                <div class="d-flex justify-content-center align-items-center gap-2 mt-2">
+                    <button id="btn-autoplay" type="button" class="btn btn-sm btn-outline-primary" aria-label="Play game" title="Play game">
+                        <i class="bi bi-play-fill" aria-hidden="true"></i> Play
+                    </button>
+                    <label class="small text-muted mb-0" for="autoplay-speed">Speed</label>
+                    <select id="autoplay-speed" class="form-select form-select-sm" style="width: auto;">
+                        <option value="1500">Slow</option>
+                        <option value="800" selected>Normal</option>
+                        <option value="400">Fast</option>
+                    </select>
+                </div>
+                <button id="btn-show-analysis" type="button" class="btn btn-sm btn-outline-primary mt-2" aria-controls="game-analysis-details">
+                    <i class="bi bi-graph-up me-1" aria-hidden="true"></i>Show game analysis
+                </button>
+            </div>
+
+            <!-- 2. Narrower Moves Table Column -->
+            <div class="col-xl-4 col-lg-3 col-md-6 game-replay-moves-column">
+                <div class="card h-100 shadow-none border d-flex flex-column">
+                    <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
+                        <strong class="small text-dark"><i class="bi bi-list-ol me-1"></i> Moves</strong>
+                        <span class="badge bg-secondary" style="font-size: 0.65rem;">SAN &bull; Eval</span>
+                    </div>
+                    <div class="card-body p-0 overflow-auto flex-grow-1" id="moves-container" style="height: 380px; max-height: 380px; min-height: 0;">
+                        <table class="chess-table">
+                            <tbody id="moves-table-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Evaluation, Comments, and Better Alternative Column -->
+            <div class="col-xl-4 col-lg-4 col-md-6 game-replay-analysis-column">
+                <details id="game-analysis-details" class="game-analysis-details" open>
+                    <summary>Game analysis: evaluation, comments and alternatives</summary>
+                    <div class="game-analysis-panels d-flex flex-column gap-2">
+                        <div id="evaluation-panel" class="card shadow-none border flex-shrink-0">
+                            <div class="card-header bg-light py-2">
+                                <strong class="small text-dark"><i class="bi bi-graph-up me-1"></i> Evaluation</strong>
+                                <span class="text-muted small ms-1">(White advantage)</span>
+                            </div>
+                            <div class="card-body p-2">
+                                <div id="evaluation-chart-empty" class="text-muted small text-center py-2" hidden>
+                                    No evaluation data is available for this game.
+                                </div>
+                                <svg id="evaluation-chart" width="600" height="100" viewBox="0 0 600 100" role="group"
+                                     aria-label="Evaluation by move. Click a point to jump to that position."
+                                     style="display: block; width: 100%; height: auto;" hidden></svg>
+                            </div>
+                        </div>
+                        <!-- Top Box: Move Comments -->
+                        <div class="card shadow-none border flex-shrink-0" style="height: 100px;">
+                            <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
+                                <strong class="small text-dark"><i class="bi bi-chat-left-text me-1"></i> Comments</strong>
+                                <span id="comment-move-badge" class="badge bg-primary-subtle text-primary" style="font-size: 0.7rem;">Start</span>
+                            </div>
+                            <div class="card-body p-2 overflow-auto" id="move-comments-panel" style="font-size: 0.85rem; line-height: 1.4;">
+                                <span class="text-muted fst-italic">No comments for this move.</span>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Box: Better(Playable) -->
+                        <div class="card shadow-none border flex-grow-1" style="min-height: 150px;">
+                            <div class="card-header bg-light py-2 d-flex justify-content-between align-items-center">
+                                <strong class="small text-dark"><i class="bi bi-diagram-3 me-1"></i> Better Alternative</strong>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span id="variation-move-badge" class="badge bg-secondary-subtle text-secondary" style="font-size: 0.7rem;">Start</span>
+                                    <button id="btn-return-mainline" class="btn btn-xs btn-outline-primary py-0 px-2 d-none" style="font-size: 0.7rem;" title="Return to Mainline Game">
+                                        Resume Game
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-2 overflow-auto" id="move-variations-panel" style="font-size: 0.85rem; line-height: 1.6;">
+                                <span class="text-muted fst-italic">No better alternative recorded.</span>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Raw PGN moves -->
+<div id="pgn-data" class="d-none">@Model.Moves</div>
+
+<script>
+    (function () {
+        const analysisDetails = document.getElementById('game-analysis-details');
+        const desktopLayout = window.matchMedia('(min-width: 768px)');
+        const syncAnalysisDetails = () => { analysisDetails.open = desktopLayout.matches; };
+        syncAnalysisDetails();
+        desktopLayout.addEventListener('change', syncAnalysisDetails);
+
+        try {
+            window._chessAutoplayStop?.();
+            const rawPgn = document.getElementById('pgn-data').textContent.trim();
+
+            const NAG_MAP = {
+                '$1': '!', '$2': '?', '$3': '!!', '$4': '??', '$5': '!?', '$6': '?!',
+                '$10': '=', '$11': '=', '$13': '∞', '$14': '⩲', '$15': '⩱', '$16': '±',
+                '$17': '∓', '$18': '+-', '$19': '-+', '$201': ''
+            };
+            const MOVE_NAGS = { '$1': '!', '$2': '?', '$3': '!!', '$4': '??', '$5': '!?', '$6': '?!' };
+            const POS_NAGS = { '$10': '=', '$11': '=', '$13': '∞', '$14': '⩲', '$15': '⩱', '$16': '±', '$17': '∓', '$18': '+-', '$19': '-+' };
+
+            function formatNagsInText(text) {
+                return text.replace(/\$(\d+)/g, (match) => {
+                    return NAG_MAP[match] !== undefined ? NAG_MAP[match] : match;
+                }).replace(/\s+/g, ' ').trim();
+            }
+
+            function stripBalanced(str, openCh, closeCh) {
+                let res = '';
+                let depth = 0;
+                for (let i = 0; i < str.length; i++) {
+                    if (str[i] === openCh) depth++;
+                    else if (str[i] === closeCh) { if (depth > 0) depth--; }
+                    else if (depth === 0) res += str[i];
+                }
+                return res;
+            }
+
+            // 1. Parse PGN annotations
+            function parsePgnAnnotations(text) {
+                const annotations = { 0: { eval: null, comment: '', variations: [], moveNag: '', posNag: '' } };
+                let index = 0;
+                const n = text.length;
+                let currentPly = 0;
+
+                function skipWs() {
+                    while (index < n && /\s/.test(text[index])) index++;
+                }
+
+                while (index < n) {
+                    skipWs();
+                    if (index >= n) break;
+
+                    const ch = text[index];
+
+                    if (ch === '[' && index + 1 < n && text[index + 1] !== '%') {
+                        while (index < n && text[index] !== ']') index++;
+                        if (index < n) index++;
+                        continue;
+                    }
+
+                    // Comment Block { ... }
+                    if (ch === '{') {
+                        let start = index + 1;
+                        let depth = 1;
+                        index++;
+                        while (index < n && depth > 0) {
+                            if (text[index] === '{') depth++;
+                            else if (text[index] === '}') depth--;
+                            index++;
+                        }
+                        const rawComment = text.substring(start, index - 1).trim();
+
+                        // 1. Extract eval: [%eval ...] OR Stockfish "+6.37 / +1.35" OR leading "+6.37"
+                        let evalVal = null;
+                        const evalTagMatch = rawComment.match(/\[%eval\s+([^\]]+)\]/i);
+                        if (evalTagMatch) {
+                            evalVal = evalTagMatch[1].trim();
+                        } else {
+                            const sfSlashMatch = rawComment.match(/([+-]?\d+(?:\.\d+)?)\s*\/\s*[+-]?\d+(?:\.\d+)?/);
+                            if (sfSlashMatch) {
+                                evalVal = sfSlashMatch[1].trim();
+                            } else {
+                                const sfNumMatch = rawComment.match(/^[+-]\d+(?:\.\d+)?(?=\s|$)/);
+                                if (sfNumMatch) evalVal = sfNumMatch[0].trim();
+                            }
+                        }
+
+                        // 2. Clean out all eval numbers and separators from the comment text
+                        const cleanComment = rawComment
+                            .replace(/\[%eval\s+[^\]]+\]/gi, '')
+                            .replace(/[+-]?\d+(?:\.\d+)?\s*\/\s*[+-]?\d+(?:\.\d+)?/g, '') // Strips "+6.37 / +1.35"
+                            .replace(/^[+-]\d+(?:\.\d+)?(?=\s|$)/, '')                     // Strips leading standalone score
+                            .replace(/^[\s,;:\-]+/, '')                                     // Strips leftover leading dashes/colons/spaces
+                            .trim();
+
+                        if (!annotations[currentPly]) {
+                            annotations[currentPly] = { eval: null, comment: '', variations: [], moveNag: '', posNag: '' };
+                        }
+                        if (evalVal) annotations[currentPly].eval = evalVal;
+                        if (cleanComment) {
+                            annotations[currentPly].comment = annotations[currentPly].comment
+                                ? annotations[currentPly].comment + ' ' + cleanComment
+                                : cleanComment;
+                        }
+                        continue;
+                    }
+
+                    if (ch === '(') {
+                        let start = index + 1;
+                        let depth = 1;
+                        index++;
+                        while (index < n && depth > 0) {
+                            if (text[index] === '(') depth++;
+                            else if (text[index] === ')') depth--;
+                            index++;
+                        }
+                        const varText = text.substring(start, index - 1).replace(/\s+/g, ' ').trim();
+                        if (!annotations[currentPly]) {
+                            annotations[currentPly] = { eval: null, comment: '', variations: [], moveNag: '', posNag: '' };
+                        }
+                        annotations[currentPly].variations.push(varText);
+                        continue;
+                    }
+
+                    if (ch === '$') {
+                        let nagToken = '';
+                        while (index < n && /[\$\d]/.test(text[index])) {
+                            nagToken += text[index];
+                            index++;
+                        }
+                        if (currentPly > 0) {
+                            if (!annotations[currentPly]) {
+                                annotations[currentPly] = { eval: null, comment: '', variations: [], moveNag: '', posNag: '' };
+                            }
+                            if (MOVE_NAGS[nagToken]) {
+                                annotations[currentPly].moveNag = (annotations[currentPly].moveNag || '') + MOVE_NAGS[nagToken];
+                            } else if (POS_NAGS[nagToken]) {
+                                annotations[currentPly].posNag = POS_NAGS[nagToken];
+                            }
+                        }
+                        continue;
+                    }
+
+                    let token = '';
+                    while (index < n && !/\s/.test(text[index]) && text[index] !== '{' && text[index] !== '(' && text[index] !== '[') {
+                        token += text[index];
+                        index++;
+                    }
+
+                    if (!token) continue;
+                    if (/^(\d+\.+|\.+)$/.test(token)) continue;
+                    if (/^(1-0|0-1|1\/2-1\/2|\*)$/.test(token)) continue;
+
+                    const moveSan = token.replace(/^(\d+\.+|\.+)/, '').trim();
+                    if (!moveSan) continue;
+
+                    currentPly++;
+                    if (!annotations[currentPly]) {
+                        annotations[currentPly] = { eval: null, comment: '', variations: [], moveNag: '', posNag: '' };
+                    }
+                }
+                return annotations;
+            }
+
+            const annotations = parsePgnAnnotations(rawPgn);
+
+            // Clean moves for chess.js
+            let cleanMoves = stripBalanced(stripBalanced(rawPgn, '{', '}'), '(', ')')
+                .replace(/^\s*\[[a-zA-Z][^\]]*\]\s*$/gm, ' ')
+                .replace(/\$\d+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            const chess = new Chess();
+            chess.load_pgn(cleanMoves, { sloppy: true });
+
+            const history = chess.history({ verbose: true });
+            chess.reset();
+            const fens = [chess.fen()];
+
+            for (let i = 0; i < history.length; i++) {
+                chess.move(history[i]);
+                fens.push(chess.fen());
+            }
+
+            let currentMoveIndex = 0;
+            let autoplayTimer = null;
+            let isAutoplaying = false;
+            const autoplayButton = document.getElementById('btn-autoplay');
+            const autoplaySpeed = document.getElementById('autoplay-speed');
+            // Tracks active variation exploration: { fens: [], currentIdx: 0, vIdx: 0 }
+            let activeVarState = null;
+
+            const board = Chessboard('board', {
+                position: 'start',
+                showNotation: true,
+                pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
+            });
+
+            setTimeout(() => { board.resize(); }, 50);
+
+            function toFigurine(san) {
+                if (!san) return '';
+                const glyphs = { 'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘' };
+                const first = san.charAt(0);
+                return glyphs[first] ? `<span class="piece-glyph">${glyphs[first]}</span>${san.substring(1)}` : san;
+            }
+
+            function formatEvalBadge(evalVal) {
+                if (!evalVal) return '';
+                let display = evalVal;
+                let cssClass = 'eval-badge';
+
+                const num = parseFloat(evalVal);
+                if (!isNaN(num)) {
+                    if (num > 0) {
+                        cssClass += ' eval-pos';
+                        if (!display.startsWith('+')) display = '+' + display;
+                    } else if (num < 0) {
+                        cssClass += ' eval-neg';
+                    }
+                } else if (evalVal.includes('#')) {
+                    cssClass += evalVal.includes('-') ? ' eval-mate eval-neg' : ' eval-mate';
+                }
+
+                return `<span class="${cssClass}">${display}</span>`;
+            }
+            
+            // Helper to check for doubtful / bad moves (?, ??, ?!, !?)
+            const isBadMove = (san, nag) => (nag && nag.includes('?')) || (san && san.includes('?'));
+
+            // Build 2-column moves table
+            const tbody = document.getElementById('moves-table-body');
+            tbody.innerHTML = '';
+
+            for (let i = 0; i < history.length; i += 2) {
+                const moveNum = Math.floor(i / 2) + 1;
+                const whiteMove = history[i];
+                const blackMove = history[i + 1];
+
+                const whitePly = i + 1;
+                const blackPly = i + 2;
+
+                const whiteAnno = annotations[whitePly] || {};
+                const blackAnno = annotations[blackPly] || {};
+
+                const tr = document.createElement('tr');
+
+                const tdNum = document.createElement('td');
+                tdNum.className = 'move-num';
+                tdNum.textContent = moveNum;
+                tr.appendChild(tdNum);
+
+                // White move
+                const whiteBad = isBadMove(whiteMove.san, whiteAnno.moveNag);
+                const tdWhite = document.createElement('td');
+                tdWhite.className = 'move-cell';
+                tdWhite.setAttribute('data-move-idx', whitePly.toString());
+                tdWhite.innerHTML = `
+                            <div class="move-cell-inner">
+                                <span class="move-san ${whiteBad ? 'bad-move' : ''}">
+                                    ${toFigurine(whiteMove.san)}<strong>${whiteAnno.moveNag || ''}</strong>
+                                </span>
+                                ${formatEvalBadge(whiteAnno.eval)}
+                            </div>
+                        `;
+                tr.appendChild(tdWhite);
+
+                // Black move
+                const tdBlack = document.createElement('td');
+                tdBlack.className = 'move-cell';
+                if (blackMove) {
+                    const blackBad = isBadMove(blackMove.san, blackAnno.moveNag);
+                    tdBlack.setAttribute('data-move-idx', blackPly.toString());
+                    tdBlack.innerHTML = `
+                                <div class="move-cell-inner">
+                                    <span class="move-san ${blackBad ? 'bad-move' : ''}">
+                                        ${toFigurine(blackMove.san)}<strong>${blackAnno.moveNag || ''}</strong>
+                                    </span>
+                                    ${formatEvalBadge(blackAnno.eval)}
+                                </div>
+                            `;
+                } else {
+                    tdBlack.innerHTML = `<div class="move-cell-inner"></div>`;
+                }
+                tr.appendChild(tdBlack);
+
+                tbody.appendChild(tr);
+            }
+            
+
+            function escapeHtml(str) {
+                return str.replace(/[&<>"']/g, m => ({
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+                }[m]));
+            }
+
+            // Variation Interactive Player
+            function playVariationMove(vIdx, stepIdx) {
+                stopAutoplay();
+                const varData = window._currentVariationsData?.[vIdx];
+                if (!varData || !varData.fens[stepIdx]) return;
+
+                activeVarState = {
+                    vIdx: vIdx,
+                    fens: varData.fens,
+                    currentIdx: stepIdx,
+                    totalMoves: varData.totalMoves
+                };
+
+                board.position(varData.fens[stepIdx]);
+
+                // Highlight active move in variation panel
+                document.querySelectorAll(`.var-move-btn[data-vidx="${vIdx}"]`).forEach(el => {
+                    const idx = parseInt(el.getAttribute('data-step-idx') || '0');
+                    if (idx === stepIdx) {
+                        el.classList.add('active-var-move');
+                    } else {
+                        el.classList.remove('active-var-move');
+                    }
+                });
+
+                // Show "Resume Game" button
+                const returnBtn = document.getElementById('btn-return-mainline');
+                if (returnBtn) returnBtn.classList.remove('d-none');
+
+                // Dim mainline highlight while exploring variation
+                document.querySelectorAll('.move-cell.active-move').forEach(el => el.classList.remove('active-move'));
+            }
+
+            function updateSidePanels(index) {
+                activeVarState = null;
+                const returnBtn = document.getElementById('btn-return-mainline');
+                if (returnBtn) returnBtn.classList.add('d-none');
+
+                const commentEl = document.getElementById('move-comments-panel');
+                const commentBadge = document.getElementById('comment-move-badge');
+                const variationEl = document.getElementById('move-variations-panel');
+                const variationBadge = document.getElementById('variation-move-badge');
+
+                const anno = annotations[index] || {};
+                const moveInfo = index > 0 && history[index - 1] ? history[index - 1] : null;
+
+                let moveLabel = 'Start';
+                if (moveInfo) {
+                    const moveNum = Math.floor((index - 1) / 2) + 1;
+                    const isWhite = (index % 2 === 1);
+                    const nag = anno.moveNag || '';
+                    moveLabel = isWhite ? `${moveNum}. ${moveInfo.san}${nag}` : `${moveNum}... ${moveInfo.san}${nag}`;
+                }
+
+                if (commentBadge) commentBadge.textContent = moveLabel;
+                if (variationBadge) variationBadge.textContent = moveLabel;
+
+                // Update Comment
+                if (anno.comment && anno.comment.trim()) {
+                    commentEl.innerHTML = `<div class="text-dark">${escapeHtml(formatNagsInText(anno.comment))}</div>`;
+                } else {
+                    commentEl.innerHTML = '<span class="text-muted fst-italic">No comments for this move.</span>';
+                }
+
+                // Render Playable Variations
+                window._currentVariationsData = [];
+                if (anno.variations && anno.variations.length > 0) {
+                    let containerHtml = '';
+                    // The variation branches from the position prior to the current mainline move
+                    const branchFen = (index > 0 && fens[index - 1]) ? fens[index - 1] : fens[0];
+
+                    anno.variations.forEach((vText, vIdx) => {
+                        const formatted = formatNagsInText(vText);
+                        const tokens = formatted.split(/\s+/);
+
+                        const branchChess = new Chess(branchFen);
+                        const varFens = [branchFen]; // index 0 is branch start
+                        let varHtml = '';
+                        let pendingNum = '';
+                        let moveCounter = 0;
+
+                        tokens.forEach(token => {
+                            if (!token) return;
+
+                            // Move numbers like 4. or ... or 4...
+                            if (/^(\d+\.+|\.+)$/.test(token)) {
+                                pendingNum = pendingNum ? (pendingNum + ' ' + token) : token;
+                                return;
+                            }
+
+                            // Positional symbols: ⩲, ±, +-, =, etc.
+                            if (/^[=\u2260\u2A72\u2A71\u00B1\u2213\u221E\u2A80\+\-]+$/.test(token)) {
+                                varHtml += `<span class="fw-bold text-secondary ms-1">${escapeHtml(token)}</span> `;
+                                return;
+                            }
+
+                            let m = token.match(/^(\d+\.+|\.+)(.*)$/);
+                            let numPart = '';
+                            let san = token;
+                            if (m && m[2]) {
+                                numPart = m[1];
+                                san = m[2];
+                            }
+
+                            if (pendingNum || numPart) {
+                                varHtml += `<span class="text-muted small">${escapeHtml((pendingNum ? pendingNum + ' ' : '') + numPart)} </span>`;
+                                pendingNum = '';
+                            }
+
+                            // Clean SAN and attempt move
+                            const cleanSan = san.replace(/[!?]+$/, '');
+                            const moveRes = branchChess.move(cleanSan, { sloppy: true });
+
+                            if (moveRes) {
+                                moveCounter++;
+                                varFens.push(branchChess.fen());
+                                varHtml += `<span class="var-move-btn" data-vidx="${vIdx}" data-step-idx="${moveCounter}">${toFigurine(san)}</span> `;
+                            } else {
+                                varHtml += `<span class="text-dark">${escapeHtml(san)}</span> `;
+                            }
+                        });
+
+                        window._currentVariationsData[vIdx] = {
+                            fens: varFens,
+                            totalMoves: moveCounter
+                        };
+
+                        containerHtml += `<div class="p-2 mb-2 rounded bg-light border" style="font-family: inherit;">${varHtml}</div>`;
+                    });
+
+                    variationEl.innerHTML = containerHtml;
+
+                    // Bind click handlers to variation moves
+                    variationEl.querySelectorAll('.var-move-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const vIdx = parseInt(btn.getAttribute('data-vidx') || '0');
+                            const stepIdx = parseInt(btn.getAttribute('data-step-idx') || '0');
+                            playVariationMove(vIdx, stepIdx);
+                        });
+                    });
+
+                } else {
+                    variationEl.innerHTML = '<span class="text-muted fst-italic">No variations recorded.</span>';
+                }
+            }
+
+            function highlightMainMove() {
+                const movesContainer = document.getElementById('moves-container');
+                const activeMove = document.querySelector(`#moves-table-body .move-cell[data-move-idx="${currentMoveIndex}"]`);
+                document.querySelectorAll('#moves-table-body .move-cell.active-move')
+                    .forEach(el => el.classList.remove('active-move'));
+                if (!activeMove) return;
+
+                activeMove.classList.add('active-move');
+                const scrollActiveMove = () => {
+                    if (!activeMove.isConnected) return;
+
+                    const containerRect = movesContainer.getBoundingClientRect();
+                    const moveRow = activeMove.closest('tr');
+                    const rowRect = moveRow.getBoundingClientRect();
+                    const visibleTop = containerRect.top + movesContainer.clientTop;
+                    const rowCenter = rowRect.top + rowRect.height / 2;
+                    const mobileLayout = window.matchMedia('(max-width: 767.98px)').matches;
+                    if (mobileLayout || rowRect.top < visibleTop || rowRect.bottom > visibleTop + movesContainer.clientHeight) {
+                        const targetCenter = visibleTop + movesContainer.clientHeight * (mobileLayout ? 0.4 : 0.5);
+                        movesContainer.scrollTop += rowCenter - targetCenter;
+                    }
+                };
+
+                scrollActiveMove();
+                window.requestAnimationFrame(scrollActiveMove);
+            }
+
+            function goToMove(index) {
+                if (index < 0) index = 0;
+                if (index >= fens.length) index = fens.length - 1;
+                currentMoveIndex = index;
+                activeVarState = null;
+                board.position(fens[currentMoveIndex]);
+                highlightMainMove();
+                updateSidePanels(currentMoveIndex);
+                updateEvaluationChart();
+            }
+
+            function updateAutoplayButton() {
+                if (!autoplayButton?.isConnected) return;
+                autoplayButton.innerHTML = isAutoplaying
+                    ? '<i class="bi bi-pause-fill" aria-hidden="true"></i> Pause'
+                    : '<i class="bi bi-play-fill" aria-hidden="true"></i> Play';
+                autoplayButton.setAttribute('aria-label', isAutoplaying ? 'Pause game' : 'Play game');
+                autoplayButton.title = isAutoplaying ? 'Pause game' : 'Play game';
+            }
+
+            function stopAutoplay() {
+                isAutoplaying = false;
+                if (autoplayTimer !== null) {
+                    window.clearTimeout(autoplayTimer);
+                    autoplayTimer = null;
+                }
+                updateAutoplayButton();
+            }
+
+            function scheduleAutoplayMove() {
+                if (!isAutoplaying) return;
+                autoplayTimer = window.setTimeout(() => {
+                    autoplayTimer = null;
+                    if (!isAutoplaying || activeVarState) {
+                        stopAutoplay();
+                        return;
+                    }
+                    if (currentMoveIndex >= fens.length - 1) {
+                        stopAutoplay();
+                        return;
+                    }
+                    goToMove(currentMoveIndex + 1);
+                    scheduleAutoplayMove();
+                }, Number(autoplaySpeed.value));
+            }
+
+            function startAutoplay() {
+                if (fens.length <= 1) {
+                    stopAutoplay();
+                    return;
+                }
+                if (currentMoveIndex >= fens.length - 1) goToMove(0);
+                isAutoplaying = true;
+                updateAutoplayButton();
+                scheduleAutoplayMove();
+            }
+
+            window._chessAutoplayStop = stopAutoplay;
+            autoplayButton.addEventListener('click', () => {
+                if (isAutoplaying) stopAutoplay();
+                else startAutoplay();
+            });
+            autoplaySpeed.addEventListener('change', () => {
+                if (isAutoplaying) {
+                    if (autoplayTimer !== null) window.clearTimeout(autoplayTimer);
+                    scheduleAutoplayMove();
+                }
+            });
+            document.getElementById('btn-close-game').addEventListener('click', stopAutoplay);
+
+            const chart = document.getElementById('evaluation-chart');
+            const chartEmpty = document.getElementById('evaluation-chart-empty');
+            document.getElementById('btn-show-analysis').addEventListener('click', () => {
+                analysisDetails.open = true;
+                document.getElementById('evaluation-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            const chartNamespace = 'http://www.w3.org/2000/svg';
+            const chartWidth = 600;
+            const chartHeight = 100;
+            const chartPadding = { left: 36, right: 12, top: 8, bottom: 20 };
+            const chartValues = history.map((_, index) => {
+                const value = annotations[index + 1]?.eval;
+                if (!value) return null;
+                const mateMatch = value.match(/#([+-]?\d+)/);
+                if (mateMatch) return mateMatch[1].startsWith('-') ? -5 : 5;
+                const score = Number.parseFloat(value);
+                return Number.isFinite(score) ? Math.max(-5, Math.min(5, score)) : null;
+            });
+
+            function createChartElement(name, attributes = {}) {
+                const element = document.createElementNS(chartNamespace, name);
+                Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+                return element;
+            }
+
+            function updateEvaluationChart() {
+                chart.replaceChildren();
+                const available = chartValues.some(value => value !== null);
+                if (available) {
+                    chart.removeAttribute('hidden');
+                } else {
+                    chart.setAttribute('hidden', '');
+                }
+                chartEmpty.hidden = available;
+                if (!available) return;
+
+                const plotWidth = chartWidth - chartPadding.left - chartPadding.right;
+                const plotHeight = chartHeight - chartPadding.top - chartPadding.bottom;
+                const x = index => chartPadding.left + (history.length > 1 ? index / (history.length - 1) : 0) * plotWidth;
+                const y = value => chartPadding.top + (5 - value) / 10 * plotHeight;
+
+                [-5, 0, 5].forEach(value => {
+                    const yPosition = y(value);
+                    chart.appendChild(createChartElement('line', {
+                        x1: chartPadding.left, y1: yPosition,
+                        x2: chartWidth - chartPadding.right, y2: yPosition,
+                        stroke: value === 0 ? '#6c757d' : '#dee2e6',
+                        'stroke-width': value === 0 ? '1.5' : '1'
+                    }));
+                    const label = createChartElement('text', {
+                        x: chartPadding.left - 5, y: yPosition + 4,
+                        'text-anchor': 'end', fill: '#6c757d', 'font-size': '11'
+                    });
+                    label.textContent = value > 0 ? `+${value}` : `${value}`;
+                    chart.appendChild(label);
+                });
+
+                let segment = [];
+                const segments = [];
+                chartValues.forEach((value, index) => {
+                    if (value === null) {
+                        if (segment.length) segments.push(segment);
+                        segment = [];
+                    } else {
+                        segment.push(`${x(index)},${y(value)}`);
+                    }
+                });
+                if (segment.length) segments.push(segment);
+                segments.forEach(points => {
+                    if (points.length > 1) {
+                        chart.appendChild(createChartElement('polyline', {
+                            points: points.join(' '), fill: 'none', stroke: '#0d6efd',
+                            'stroke-width': '2', 'stroke-linejoin': 'round', 'stroke-linecap': 'round'
+                        }));
+                    }
+                });
+
+                chartValues.forEach((value, index) => {
+                    if (value === null) return;
+                    const moveIndex = index + 1;
+                    const point = createChartElement('circle', {
+                        cx: x(index), cy: y(value), r: moveIndex === currentMoveIndex ? '5' : '3',
+                        fill: moveIndex === currentMoveIndex ? '#dc3545' : '#0d6efd',
+                        tabindex: '0', role: 'button', 'data-move-idx': moveIndex,
+                        'aria-label': `Move ${Math.floor(index / 2) + 1}${index % 2 === 0 ? ' White' : ' Black'}, evaluation ${annotations[moveIndex].eval}`,
+                        style: 'cursor: pointer'
+                    });
+                    chart.appendChild(point);
+                });
+
+                const startLabel = createChartElement('text', {
+                    x: chartPadding.left, y: chartHeight - 4, fill: '#6c757d', 'font-size': '11'
+                });
+                startLabel.textContent = 'Move 1';
+                chart.appendChild(startLabel);
+                const endLabel = createChartElement('text', {
+                    x: chartWidth - chartPadding.right, y: chartHeight - 4,
+                    'text-anchor': 'end', fill: '#6c757d', 'font-size': '11'
+                });
+                endLabel.textContent = `${Math.ceil(history.length / 2)} moves`;
+                chart.appendChild(endLabel);
+            }
+
+            function selectChartMove(point) {
+                goToMove(Number(point.getAttribute('data-move-idx')));
+                if (window.matchMedia('(max-width: 767.98px)').matches) {
+                    document.getElementById('board').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            chart.addEventListener('click', event => {
+                const point = event.target.closest('circle[data-move-idx]');
+                if (point) selectChartMove(point);
+            });
+            chart.addEventListener('keydown', event => {
+                const point = event.target.closest('circle[data-move-idx]');
+                if (point && (event.key === 'Enter' || event.key === ' ')) {
+                    event.preventDefault();
+                    selectChartMove(point);
+                }
+            });
+
+            updateEvaluationChart();
+
+            // Navigation Handlers (Supports both Mainline and Variation stepping)
+            document.getElementById('btn-start').onclick = () => {
+                if (activeVarState) {
+                    playVariationMove(activeVarState.vIdx, 1);
+                } else {
+                    goToMove(0);
+                }
+            };
+
+            document.getElementById('btn-prev').onclick = () => {
+                if (activeVarState) {
+                    if (activeVarState.currentIdx > 1) {
+                        playVariationMove(activeVarState.vIdx, activeVarState.currentIdx - 1);
+                    } else {
+                        // Return to branch start position
+                        board.position(activeVarState.fens[0]);
+                        document.querySelectorAll('.var-move-btn').forEach(el => el.classList.remove('active-var-move'));
+                        activeVarState.currentIdx = 0;
+                    }
+                } else {
+                    goToMove(currentMoveIndex - 1);
+                }
+            };
+
+            document.getElementById('btn-next').onclick = () => {
+                if (activeVarState) {
+                    if (activeVarState.currentIdx < activeVarState.totalMoves) {
+                        playVariationMove(activeVarState.vIdx, activeVarState.currentIdx + 1);
+                    }
+                } else {
+                    goToMove(currentMoveIndex + 1);
+                }
+            };
+
+            document.getElementById('btn-end').onclick = () => {
+                if (activeVarState) {
+                    playVariationMove(activeVarState.vIdx, activeVarState.totalMoves);
+                } else {
+                    goToMove(fens.length - 1);
+                }
+            };
+
+            document.getElementById('btn-flip').onclick = () => board.flip();
+
+            // Resume Mainline Game button
+            document.getElementById('btn-return-mainline').onclick = () => {
+                goToMove(currentMoveIndex);
+            };
+
+            // Mainline table click
+            tbody.addEventListener('click', (e) => {
+                const target = e.target.closest('.move-cell');
+                if (target && target.hasAttribute('data-move-idx')) {
+                    const moveIdx = parseInt(target.getAttribute('data-move-idx'));
+                    goToMove(moveIdx);
+                }
+            });
+
+            // Keyboard navigation (Left / Right Arrow)
+            const keyHandler = (e) => {
+                if (e.key === 'ArrowRight') {
+                    if (activeVarState) {
+                        if (activeVarState.currentIdx < activeVarState.totalMoves) {
+                            playVariationMove(activeVarState.vIdx, activeVarState.currentIdx + 1);
+                        }
+                    } else {
+                        goToMove(currentMoveIndex + 1);
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (activeVarState) {
+                        if (activeVarState.currentIdx > 1) {
+                            playVariationMove(activeVarState.vIdx, activeVarState.currentIdx - 1);
+                        } else {
+                            board.position(activeVarState.fens[0]);
+                            document.querySelectorAll('.var-move-btn').forEach(el => el.classList.remove('active-var-move'));
+                            activeVarState.currentIdx = 0;
+                        }
+                    } else {
+                        goToMove(currentMoveIndex - 1);
+                    }
+                }
+            };
+            window.removeEventListener('keydown', window._chessKeyHandler);
+            window._chessKeyHandler = keyHandler;
+            window.addEventListener('keydown', keyHandler);
+
+            // Initialize on start position
+            updateSidePanels(0);
+
+            // --- Next Game in Archive Handler ---
+            function setupNextGameHandler() {
+                const nextGameBtn = document.getElementById('btn-next-game');
+                if (!nextGameBtn) return;
+
+                const currentGameId = document.getElementById('current-game-id')?.textContent.trim();
+
+                // Follow all filtered and sorted results, including games on other pages.
+                const gameButtons = Array.from(document.querySelectorAll('#game-list-container tr[data-game-id]'))
+                    .filter(row => row.dataset.filtered === 'true')
+                    .map(row => row.querySelector('button[hx-get]'))
+                    .filter(Boolean);
+
+                if (gameButtons.length === 0) {
+                    nextGameBtn.disabled = true;
+                    return;
+                }
+
+                // Enable button by default if games exist
+                nextGameBtn.disabled = false;
+                nextGameBtn.classList.remove('opacity-50');
+
+                // Find index of the currently loaded game
+                let currentIndex = -1;
+                if (currentGameId) {
+                    currentIndex = gameButtons.findIndex(el =>
+                        (el.getAttribute('href') || '').includes(currentGameId) ||
+                        (el.getAttribute('hx-get') || '').includes(currentGameId) ||
+                        (el.closest('tr')?.getAttribute('data-game-id') === currentGameId)
+                    );
+                }
+
+                // If currently on the last game of the list
+                if (currentIndex >= 0 && currentIndex >= gameButtons.length - 1) {
+                    nextGameBtn.disabled = true;
+                    nextGameBtn.classList.add('opacity-50');
+                    nextGameBtn.title = "At the last game in archive";
+                } else {
+                    nextGameBtn.title = "Load next game from archive";
+                }
+
+                nextGameBtn.onclick = function (e) {
+                    e.preventDefault();
+                    const nextIndex = currentIndex + 1;
+                    if (nextIndex < gameButtons.length) {
+                        const nextRow = gameButtons[nextIndex].closest('tr');
+                        const filteredIndex = Array.from(nextRow.parentElement.children)
+                            .filter(row => row.dataset.filtered === 'true')
+                            .indexOf(nextRow);
+                        const pageSize = Number(document.getElementById('game-pagination')?.dataset.pageSize) || 50;
+                        const nextPage = Math.floor(filteredIndex / pageSize) + 1;
+                        document.dispatchEvent(new CustomEvent('britplayers:select-page', {
+                            detail: { page: nextPage }
+                        }));
+                        gameButtons[nextIndex].click();
+                    }
+                };
+            }
+            // 1. Wait until DOM is fully parsed on initial page load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupNextGameHandler);
+            } else {
+                // If DOM is already ready (e.g. loaded via partial view swap)
+                setTimeout(setupNextGameHandler, 0);
+            }
+
+            // 2. If using HTMX when clicking or swapping content
+            document.addEventListener('htmx:afterSettle', setupNextGameHandler);
+            document.addEventListener('britplayers:games-updated', setupNextGameHandler);
+
+
+        } catch (err) {
+            console.error("Chess replayer error:", err);
+            document.getElementById('moves-table-body').innerHTML =
+                `<tr><td colspan="3" class="text-danger p-2">Error rendering moves: ${err.message}</td></tr>`;
+        }
+    })();
+</script>

@@ -1,0 +1,288 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .game-advanced-filters > summary,
+  .game-analysis-details > summary {
+    display: none;
+  }
+}
+
+.game-advanced-filters > summary,
+.game-analysis-details > summary {
+  cursor: pointer;
+}
+
+.game-mobile-players {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .navbar-brand .text-secondary {
+    display: none;
+  }
+
+  .game-page-nav {
+    position: static !important;
+  }
+
+  .game-advanced-filters > summary,
+  .game-analysis-details > summary {
+    padding: 0.35rem 0;
+    color: #0d6efd;
+    font-weight: 600;
+  }
+
+  #game-search {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .game-list-table {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+
+  .game-list-table thead {
+    display: none;
+  }
+
+  .game-list-table tbody {
+    display: block;
+  }
+
+  .game-list-table tbody tr:not([hidden]) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "date result"
+      "players action";
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .game-list-table tbody td {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .game-list-table .game-list-extra,
+  .game-list-table .game-list-player-column {
+    display: none !important;
+  }
+
+  .game-list-table .game-list-date {
+    grid-area: date;
+    color: #6c757d;
+  }
+
+  .game-list-table .game-list-result {
+    grid-area: result;
+    text-align: right;
+  }
+
+  .game-list-table .game-mobile-players {
+    display: flex;
+    grid-area: players;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .game-list-table .game-list-action {
+    grid-area: action;
+  }
+
+  .game-list-action .btn {
+    min-height: 40px;
+    white-space: nowrap;
+  }
+
+  .game-replayer-header {
+    align-items: flex-start !important;
+    gap: 0.5rem;
+  }
+
+  .game-replayer-title {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+
+  .game-replayer-meta {
+    display: none;
+  }
+
+  .game-replayer-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  #btn-show-analysis {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .game-page-content {
+    padding-right: 0.5rem !important;
+    padding-left: 0.5rem !important;
+  }
+
+  #game-viewer-panel .card-body {
+    padding: 0.5rem !important;
+  }
+
+  .game-replay-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .game-replay-row > .game-replay-board-column,
+  .game-replay-row > .game-replay-moves-column {
+    width: auto;
+    min-width: 0;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  #board {
+    width: 100% !important;
+  }
+
+  .game-replay-row > .game-replay-analysis-column {
+    grid-column: 1 / -1;
+    width: auto;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  #board {
+    scroll-margin-top: 0;
+  }
+
+  #moves-container {
+    height: min(55vh, 420px) !important;
+    max-height: min(55vh, 420px) !important;
+    overflow-anchor: none;
+    scroll-behavior: auto !important;
+  }
+
+  .chess-table {
+    font-size: 0.78rem !important;
+  }
+
+  .chess-table tbody tr {
+    height: 20px !important;
+  }
+
+  .chess-table .move-cell-inner {
+    min-height: 16px !important;
+  }
+
+  .chess-table .move-num {
+    width: 26px !important;
+    padding: 0 4px 0 0 !important;
+  }
+
+  .chess-table .move-cell {
+    padding: 0 3px !important;
+  }
+
+  .eval-badge {
+    display: none;
+  }
+
+  .move-cell.active-move {
+    border-radius: 0;
+  }
+
+  .game-replay-analysis-column {
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .updates-log-table thead {
+    display: none;
+  }
+
+  .updates-log-table tbody {
+    display: block;
+    padding: 0.5rem;
+  }
+
+  .updates-log-table tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.65rem 0.75rem;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    background: #fff;
+  }
+
+  .updates-log-table tbody td {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow-wrap: anywhere;
+  }
+
+  .updates-log-table tbody td::before {
+    margin-bottom: 0.15rem;
+    color: #6c757d;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    content: attr(data-label);
+  }
+
+  .updates-log-table tbody td[data-label="Details"] {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) {
+  #btn-show-analysis {
+    display: none;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}

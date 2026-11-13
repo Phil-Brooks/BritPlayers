@@ -1,0 +1,39 @@
+﻿@page
+@model ContactModel
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="container py-4" style="max-width: 680px;">
+    <h1 class="display-6 fw-bold mb-3">Contact Us</h1>
+    <p class="text-muted">Have a question or suggestion regarding the BritPlayers archive? Submit the form below to open a ticket directly on our GitHub project.</p>
+
+    <div id="contact-response"></div>
+
+    <form hx-post="/Contact?handler=Submit"
+          hx-target="#contact-response"
+          hx-swap="innerHTML"
+          hx-indicator="#loading-spinner">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label for="Name" class="form-label">Your Name / Handle</label>
+            <input type="text" class="form-control" id="Name" name="Name" placeholder="e.g. Phil" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Subject" class="form-label">Subject</label>
+            <input type="text" class="form-control" id="Subject" name="Subject" placeholder="Correction / Inquiry / Suggestion" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Message" class="form-label">Message</label>
+            <textarea class="form-control" id="Message" name="Message" rows="5" placeholder="Enter your comments or suggestions..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary d-inline-flex align-items-center gap-2">
+            <span>Send Message</span>
+            <span id="loading-spinner" class="spinner-border spinner-border-sm htmx-indicator" role="status" aria-hidden="true"></span>
+        </button>
+    </form>
+</div>

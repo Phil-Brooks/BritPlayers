@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BritPlayers.Models.ChessGame>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning my-3">
+        No games found matching your search.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle game-list-table">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th class="game-list-player-column">White</th>
+                    <th class="game-list-player-column">Black</th>
+                    <th>Result</th>
+                    <th class="game-list-extra">Event / Site</th>
+                    <th class="game-list-extra">Opening</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var game in Model)
+                {
+                    var year = System.Text.RegularExpressions.Regex.Match(game.Date, @"\b\d{4}\b").Value;
+                    var openingName = BritPlayers.Services.OpeningCatalog.GetName(game.Eco);
+                    <tr data-game-id="@game.Id"
+                        data-date="@game.Date"
+                        data-year="@year"
+                        data-result="@game.Result"
+                        data-eco="@game.Eco"
+                        data-opening="@openingName"
+                        data-opponent="@game.White / @game.Black"
+                        data-event="@game.Event"
+                        data-search="@($"{game.White} {game.Black} {game.Event} {game.Site} {game.Eco} {openingName}")">
+                        <td class="text-nowrap game-list-date"><small>@game.Date</small></td>
+                        <td class="fw-semibold game-list-player-column">@game.White</td>
+                        <td class="fw-semibold game-list-player-column">@game.Black</td>
+                        <td class="game-list-result">
+                            <span class="badge bg-secondary">@game.Result</span>
+                        </td>
+                        <td class="game-list-extra">
+                            <small class="d-block">@game.Event</small>
+                            <small class="text-muted">@game.Site</small>
+                        </td>
+                        <td class="game-list-extra">
+                            @if (!string.IsNullOrWhiteSpace(game.Eco))
+                            {
+                                <code class="d-block">@game.Eco</code>
+                            }
+                            <small>@openingName</small>
+                        </td>
+                        <td class="game-mobile-players">
+                            <strong>@game.White</strong>
+                            <span class="text-muted">vs @game.Black</span>
+                        </td>
+                        <td class="game-list-action">
+                            <button class="btn btn-sm btn-outline-primary"
+                                    hx-get="/Games?handler=GameViewer&gameId=@game.Id"
+                                    hx-target="#game-viewer-panel"
+                                    hx-swap="innerHTML">
+                                Load &amp; Play
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

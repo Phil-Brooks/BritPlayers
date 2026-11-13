@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @Html.AntiForgeryToken()
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+
+    <style>
+            body {
+                background-color: #f8f9fa;
+            }
+
+            /* Nav links hover effect on dark navbar */
+            .navbar-dark .nav-link {
+                color: #ced4da;
+                transition: color 0.15s ease-in-out;
+            }
+
+                .navbar-dark .nav-link:hover,
+                .navbar-dark .nav-link.active {
+                    color: #ffffff !important;
+                }
+
+            /* Optional tag badge */
+            .decade-badge {
+                font-size: 0.78rem;
+                padding: 0.28rem 0.55rem;
+                border-radius: 4px;
+                background-color: #2b3035;
+                color: #adb5bd;
+                text-decoration: none;
+                display: inline-block;
+                margin: 2px;
+                transition: all 0.15s;
+            }
+
+                .decade-badge:hover {
+                    background-color: #0d6efd;
+                    color: #fff;
+                }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Top Navigation Bar (Desktop & Mobile) -->
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+            <div class="container-fluid px-3 px-md-4">
+                <!-- Brand / Logo -->
+                <a href="/" class="navbar-brand d-flex align-items-center gap-2 text-decoration-none py-1">
+                    <img src="~/images/dog.jpg"
+                         alt="BritPlayers"
+                         style="height: 40px; width: 40px; border-radius: 6px; object-fit: cover; border: 1px solid rgba(255,255,255,0.2);"
+                         onerror="this.style.display='none'" />
+                    <div class="d-flex flex-column text-start">
+                        <span class="fw-bold fs-6 text-white lh-1">BritPlayers</span>
+                        <span class="text-secondary" style="font-size: 0.68rem;">British Players Archive</span>
+                    </div>
+                </a>
+
+                <!-- Mobile Hamburger Toggle Button -->
+                <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navigation Links from Partial -->
+                <div class="collapse navbar-collapse justify-content-end" id="topNav">
+                    @await Html.PartialAsync("_NavigationMenuPartial")
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area (Full screen width, no side column restriction) -->
+    <main class="flex-grow-1 p-3 p-md-4">
+        @RenderBody()
+    </main>
+
+    <!-- Footer for quick access at the bottom of long player lists -->
+    <footer class="mt-auto bg-white border-top py-3 text-muted">
+        <div class="container-fluid px-3 px-md-4 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+            <span class="small">&copy; @DateTime.Now.Year BritPlayers Archive</span>
+            <ul class="nav small">
+                <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href="/Links" class="nav-link px-2 text-muted">Links</a></li>
+                <li class="nav-item"><a href="/Updates" class="nav-link px-2 text-muted">Updates</a></li>
+                <li class="nav-item"><a href="/Faq" class="nav-link px-2 text-muted">FAQ</a></li>
+                <li class="nav-item"><a href="/Contact" class="nav-link px-2 text-muted">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+            document.addEventListener('htmx:configRequest', (evt) => {
+                let token = document.querySelector('input[name="__RequestVerificationToken"]');
+                if (token) {
+                    evt.detail.headers['RequestVerificationToken'] = token.value;
+                }
+            });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

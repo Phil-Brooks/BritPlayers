@@ -1,0 +1,79 @@
+﻿@page
+@model BritPlayers.Pages.UpdatesModel
+@using BritPlayers.Models
+@{
+    ViewData["Title"] = "Updates - BritPlayers";
+}
+
+<div class="container py-4">
+    <!-- Header Card -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-pencil-square fs-3 text-primary"></i>
+                <h1 class="display-6 fw-bold mb-0">Updates</h1>
+            </div>
+            <p class="text-muted mb-0">
+                Log of additions, corrections, score adjustments, and game removals applied to the player archives.
+            </p>
+        </div>
+    </div>
+
+    <!-- Updates Table Card -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-semibold"><i class="bi bi-clock-history me-2"></i>Change Log</h5>
+            <!-- Dynamic count -->
+            <span class="badge bg-primary">@Model.Updates.Count entries</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 updates-log-table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width: 130px;">Date</th>
+                            <th style="width: 170px;">Player</th>
+                            <th style="width: 150px;">Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Updates)
+                        {
+                            var u = item.Entry;
+                            <tr>
+                                <td class="text-nowrap fw-semibold text-secondary" data-label="Date">
+                                    @u.Date.ToString("yyyy-MM-dd")
+                                </td>
+                                <td data-label="Player">
+                                    @if (!string.IsNullOrEmpty(item.PlayerSlug))
+                                    {
+                                        <a href="/Player?player=@item.PlayerSlug" class="fw-semibold text-primary text-decoration-none">
+                                            @u.PlayerName
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-semibold text-dark">@u.PlayerName</span>
+                                    }
+                                </td>
+                                <td data-label="Type">
+                                    <span class="badge @u.Type.BadgeClass()">
+                                        <i class="bi @u.Type.IconClass() me-1"></i>@u.Type.DisplayName()
+                                    </span>
+                                </td>
+                                <td data-label="Details">
+                                    <div>@u.Details</div>
+                                    @if (!string.IsNullOrWhiteSpace(u.SubDetails))
+                                    {
+                                        <small class="text-muted d-block mt-1">@u.SubDetails</small>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

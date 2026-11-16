@@ -6,6 +6,7 @@ public static class UpdateCatalog
 {
     public static readonly IReadOnlyList<UpdateEntry> All =
     [
+        new(new DateOnly(2026, 11, 16), "Keith C Arkell", UpdateType.AddedPlayer, "Player added with 3428 games"),
         new(new DateOnly(2026, 11, 13), "Peter K Wells", UpdateType.AddedPlayer, "Player added with 2823 games"),
         new(new DateOnly(2026, 11, 12), "Matthew D Sadler", UpdateType.AddedPlayer, "Player added with 1071 games"),
         new(new DateOnly(2026, 11, 11), "Nigel R Davies", UpdateType.AddedPlayer, "Player added with 1619 games"),

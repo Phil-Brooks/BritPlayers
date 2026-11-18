@@ -11,7 +11,6 @@ from pathlib import Path
 import chess.pgn
 
 ROOT_DIR = Path(__file__).resolve().parents[1] / "BritPlayers"
-SOURCE_PGN = ROOT_DIR / "Data" / "pgn" / "all.pgn"
 INPUT_DIR = ROOT_DIR / "Data" / "pgn_in"
 SCORED_DIR = ROOT_DIR / "Data" / "pgn_out"
 PUBLISHED_DIR = ROOT_DIR / "Data" / "pgn"
@@ -49,11 +48,10 @@ def is_player(game_name: str, profile_name: str) -> bool:
     )
 
 
-def matches_any_player(game: chess.pgn.Game, names: list[str]) -> bool:
+def matches_player(game: chess.pgn.Game, player_name: str) -> bool:
     return any(
-        is_player(game.headers.get(side, ""), name)
+        is_player(game.headers.get(side, ""), player_name)
         for side in ("White", "Black")
-        for name in names
     )
 
 
@@ -65,9 +63,9 @@ def count_games(pgn_file: Path) -> int:
     return count
 
 
-def validate_player_pgn(pgn_file: Path, names: list[str]) -> int:
+def validate_player_pgn(pgn_file: Path, player_name: str) -> int:
     if not pgn_file.is_file():
-        raise FileNotFoundError(f"Pre-extracted PGN does not exist: {pgn_file}")
+        raise FileNotFoundError(f"Player PGN does not exist: {pgn_file}")
 
     count = 0
     unmatched = []
@@ -77,7 +75,7 @@ def validate_player_pgn(pgn_file: Path, names: list[str]) -> int:
             if game is None:
                 break
             count += 1
-            if not matches_any_player(game, names) and len(unmatched) < 3:
+            if not matches_player(game, player_name) and len(unmatched) < 3:
                 unmatched.append(
                     f"{game.headers.get('White', '?')} vs {game.headers.get('Black', '?')}"
                 )
@@ -87,45 +85,9 @@ def validate_player_pgn(pgn_file: Path, names: list[str]) -> int:
     if unmatched:
         examples = "; ".join(unmatched)
         raise ValueError(
-            f"PGN contains games that do not match {', '.join(names)}: {examples}"
+            f"PGN contains games that do not match {player_name}: {examples}"
         )
     return count
-
-
-def extract_games(source_file: Path, output_file: Path, names: list[str]) -> int:
-    if not source_file.is_file():
-        raise FileNotFoundError(f"Source PGN does not exist: {source_file}")
-
-    output_file.parent.mkdir(parents=True, exist_ok=True)
-    temp_file = None
-    games_found = 0
-    try:
-        with tempfile.NamedTemporaryFile(
-            mode="w", encoding="utf-8", newline="\n", dir=output_file.parent,
-            suffix=".tmp", delete=False,
-        ) as destination:
-            temp_file = Path(destination.name)
-            with open(source_file, encoding="utf-8", errors="replace") as source:
-                games_read = 0
-                while True:
-                    game = chess.pgn.read_game(source)
-                    if game is None:
-                        break
-                    games_read += 1
-                    if matches_any_player(game, names):
-                        destination.write(str(game))
-                        destination.write("\n\n")
-                        games_found += 1
-                    if games_read % 10000 == 0:
-                        print(f"Scanned {games_read:,} games; found {games_found:,}...", flush=True)
-
-        if games_found == 0:
-            raise ValueError(f"No games found for {', '.join(names)} in {source_file}")
-        os.replace(temp_file, output_file)
-        return games_found
-    finally:
-        if temp_file is not None and temp_file.exists():
-            temp_file.unlink()
 
 
 def csharp_string(value: str) -> str:
@@ -226,12 +188,11 @@ def publish_file(source: Path, destination: Path, overwrite: bool) -> None:
 
 
 def run_workflow(args: argparse.Namespace) -> int:
-    input_pgn = args.input_pgn or INPUT_DIR / f"{args.slug}.pgn"
+    input_pgn = INPUT_DIR / f"{args.slug}.pgn"
     scored_pgn = SCORED_DIR / f"{args.slug}.pgn"
     published_pgn = PUBLISHED_DIR / f"{args.slug}.pgn"
     bio_file = BIOS_DIR / f"{args.slug}.md"
     photo_file = PHOTOS_DIR / f"{args.slug}.jpg"
-    match_names = [args.name, *args.match_name]
 
     if args.photo:
         if not args.photo.is_file():
@@ -246,19 +207,8 @@ def run_workflow(args: argparse.Namespace) -> int:
                 f"Refusing to overwrite existing photo: {photo_file} (use --overwrite-photo)"
             )
 
-    if args.input_pgn:
-        extracted_count = validate_player_pgn(input_pgn, match_names)
-        print(
-            f"Using pre-extracted PGN ({extracted_count:,} games); "
-            f"skipping the all.pgn scan: {input_pgn}"
-        )
-    elif input_pgn.exists() and not args.re_extract:
-        extracted_count = validate_player_pgn(input_pgn, match_names)
-        print(f"Reusing extracted PGN ({extracted_count:,} games): {input_pgn}")
-    else:
-        print(f"Extracting matching games from {args.source_pgn} to {input_pgn}...")
-        extracted_count = extract_games(args.source_pgn, input_pgn, match_names)
-        print(f"Extracted {extracted_count:,} games.")
+    extracted_count = validate_player_pgn(input_pgn, args.name)
+    print(f"Using player PGN ({extracted_count:,} games): {input_pgn}")
 
     scorer = [
         sys.executable,
@@ -300,22 +250,14 @@ def run_workflow(args: argparse.Namespace) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Extract, score, and register a British chess grandmaster."
+        description="Score a staged player PGN and register a British chess grandmaster."
     )
     parser.add_argument("--name", required=True, help="Display name, e.g. 'John A Smith'")
     parser.add_argument("--slug", required=True, help="Lowercase URL/file slug, e.g. john-a-smith")
     parser.add_argument("--dates", required=True, help="Catalog dates, e.g. 'b. 1970'")
     parser.add_argument("--title", default="Grandmaster")
-    parser.add_argument("--match-name", action="append", default=[], help="Additional PGN name/alias; may be repeated")
-    parser.add_argument("--source-pgn", type=Path, default=SOURCE_PGN)
-    parser.add_argument(
-        "--input-pgn",
-        type=Path,
-        help="Use an already-extracted player PGN and skip scanning all.pgn",
-    )
     parser.add_argument("--stockfish", type=Path, help="Stockfish executable; otherwise the scorer's default is used")
     parser.add_argument("--photo", type=Path, help="Optional JPEG portrait to copy into wwwroot/photos")
-    parser.add_argument("--re-extract", action="store_true", help="Rescan all.pgn and replace the staged extracted PGN")
     parser.add_argument("--restart-score", action="store_true", help="Discard scoring checkpoint and start scoring again")
     parser.add_argument("--overwrite-pgn", action="store_true", help="Allow replacing an existing published player PGN")
     parser.add_argument("--overwrite-photo", action="store_true", help="Allow replacing an existing player JPEG")
@@ -329,8 +271,6 @@ def main() -> int:
         parser.error("--name, --title, and --dates must each be a single line")
     if not args.dates.strip() or '"' in args.dates:
         parser.error("--dates must be a single non-empty catalog value without quotes")
-    if args.input_pgn and args.re_extract:
-        parser.error("--input-pgn cannot be used with --re-extract")
 
     try:
         return run_workflow(args)

@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\pgn_out\**" />
+    <Content Remove="Data\pgn_out\**" />
+    <EmbeddedResource Remove="Data\pgn_out\**" />
     <None Remove="Data\**" />
     <Content Include="Data\pgn\*.pgn">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

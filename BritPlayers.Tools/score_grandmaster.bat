@@ -1,9 +1,9 @@
 @echo off
 setlocal
 
-rem Set this to the slug used for the staged PGN in Data\pgn_in.
+rem Generate Data\pgn_in\<slug>.pgn with Scid vs PC before running.
 set "PYTHON=python"
-set "PLAYER_SLUG=example-name"
+set "PLAYER_SLUG=john-m-emms"
 set "STOCKFISH_PATH=D:\scid\stockfish-windows-x86-64-universal\stockfish\stockfish-windows-x86-64-universal.exe"
 
 pushd "%~dp0"

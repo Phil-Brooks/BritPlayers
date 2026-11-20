@@ -1,31 +1,33 @@
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 using BritPlayers.Models;
 using BritPlayers.Services;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BritPlayers.Pages;
 
 public class IndexModel : PageModel
 {
-    public IReadOnlyList<PlayerEntry> Grandmasters { get; private set; } = new List<PlayerEntry>();
-    public IReadOnlyList<PlayerEntry> OtherNotablePlayers { get; private set; } = new List<PlayerEntry>();
+    private readonly IWebHostEnvironment _environment;
+
+    public IndexModel(IWebHostEnvironment environment)
+    {
+        _environment = environment;
+    }
+
+    public IReadOnlyList<PlayerEntry> Players { get; private set; } = Array.Empty<PlayerEntry>();
+    public FideRatingData FideRatings { get; private set; } = new();
 
     public void OnGet()
     {
-        Grandmasters = PlayerCatalog.All
-            .Where(p => p.Title.Equals("Grandmaster", StringComparison.OrdinalIgnoreCase))
-            .OrderBy(p => ExtractYear(p.Dates))
+        Players = PlayerCatalog.All
+            .OrderBy(player => player.Name.Split(' ').Last(), StringComparer.OrdinalIgnoreCase)
+            .ThenBy(player => player.Name, StringComparer.OrdinalIgnoreCase)
             .ToList();
 
-        OtherNotablePlayers = PlayerCatalog.All
-            .Where(p => !p.Title.Equals("Grandmaster", StringComparison.OrdinalIgnoreCase))
-            .OrderBy(p => ExtractYear(p.Dates))
-            .ToList();
-    }
-
-    private static int ExtractYear(string dates)
-    {
-        var match = Regex.Match(dates, @"\b\d{4}\b");
-        return match.Success && int.TryParse(match.Value, out var year) ? year : int.MaxValue;
+        var ratingsPath = Path.Combine(_environment.ContentRootPath, "Data", "fide-ratings.json");
+        FideRatings = JsonSerializer.Deserialize<FideRatingData>(
+            System.IO.File.ReadAllText(ratingsPath),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+            ?? throw new InvalidDataException($"FIDE ratings data at '{ratingsPath}' is empty or invalid.");
     }
 }

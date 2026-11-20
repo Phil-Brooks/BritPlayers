@@ -4,9 +4,9 @@ setlocal
 rem Generate Data\pgn_in\<slug>.pgn with Scid vs PC before running.
 rem Edit these values for the player. Add --photo "C:\path\to\licensed-photo.jpg" if needed.
 set "PYTHON=python"
-set "PLAYER_NAME=JChis G Ward"
-set "PLAYER_SLUG=chris-g-ward"
-set "PLAYER_DATES=b. 1968"
+set "PLAYER_NAME=Neil McDonald"
+set "PLAYER_SLUG=neil-mcdonald"
+set "PLAYER_DATES=b. 1967"
 set "STOCKFISH_PATH=D:\scid\stockfish-windows-x86-64-universal\stockfish\stockfish-windows-x86-64-universal.exe"
 
 pushd "%~dp0"
